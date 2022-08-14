@@ -173,7 +173,8 @@
             user.nickName = data.entity.sUserName
             user.avatar = data.entity.sAvatarUrl
 
-            userStore.saveUser(data as UserState).then(() => {
+
+            userStore.saveUser(user as UserState).then(() => {
               console.log(router.getRoutes())
               router
                 .replace({

@@ -7,8 +7,8 @@ export default function (config: AxiosRequestConfig) {
     if (!config.headers) {
       config.headers = {}
     }
-    if (!config.headers['Auth']) {
-      config.headers['Auth'] = useStore.token
+    if (!config.headers['authorization']) {
+      config.headers['authorization'] = useStore.token
     }
   }
   return config

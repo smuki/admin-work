@@ -18,7 +18,7 @@ interface Table<T = any> {
   tableHeaderRef: Ref<TableHeaderType | null>
   tableFooterRef: Ref<TableFooterType | null>
   tableHeight: Ref<number>
-  handleSuccess: ({ data }: { data: T[] }) => Promise<T[]>
+  handleSuccess: ({ items }: { items: T[] }) => Promise<T[]>
   handleSelectionChange: (tempSelectRows: Array<string | number>) => void
   useTableColumn: (columns: DataTableColumn[], options: DataTableColumn) => Array<DataTableColumn>
   selectionColumn: { type: 'selection' }
@@ -57,10 +57,11 @@ export const useTable = function <T = any>(): Table<T> {
   const tableHeight = ref(200)
   const bordered = ref(false)
   const tableLoading = ref(true)
-  const handleSuccess = ({ data = [] }: { data: T[] }): Promise<T[]> => {
+  const handleSuccess = ({ items = [] }: { items: T[] }): Promise<T[]> => {
     tableLoading.value = false
-    dataList.value = data
-    return Promise.resolve(data)
+    dataList.value = items
+    console.log(items)
+    return Promise.resolve(items)
   }
   const handleSelectionChange = (tempSelectRows: Array<string | number>) => {
     selectRows.value = tempSelectRows
@@ -120,7 +121,7 @@ export const useTableIndexColumn = function () {
   return {
     title: '序号',
     key: 'index',
-    width: 80,
+    width: 40,
     render: (rowData: any, rowIndex: number) => {
       return h('div', null, { default: () => rowIndex + 1 })
     },

@@ -7,10 +7,10 @@
           <div class="logo-wrapper">
             <img src="../../assets/logo.png" />
           </div>
-          <div class="title">Admin Work</div>
-          <div class="sub-title">Vue3 + Vite2 + Typescript + Naive UI</div>
+          <div class="title">集成中台</div>
+          <div class="sub-title">集成中台.......</div>
           <div class="flex items-center justify-center flex-1 ttppii"> 生活，应该还有诗和远方 </div>
-          <div class="bottom-wrapper">Admin Work {{ version }} · Made by qingqingxuan</div>
+          <div class="bottom-wrapper">集成中台{{ version }}</div>
         </div>
       </div>
       <div class="right">

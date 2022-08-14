@@ -134,7 +134,8 @@ export default defineComponent({
                 return h(
                   NFormItem,
                   {
-                    label: it.label,
+                    disabled: it.disabled,
+                    label: it.label+'...xxx',
                     path: it.path || (it.key as string),
                   },
                   {

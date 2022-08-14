@@ -11,7 +11,7 @@
       <template #default>
         <n-data-table
           :loading="tableLoading"
-          :data="roledata"
+          :data="dataList"
           :columns="tableColumns"
           :row-key="rowKey"
         />
@@ -52,32 +52,46 @@
   import { defineComponent, h, nextTick, onMounted, ref, shallowReactive } from 'vue'
   
   interface RoleModeType {
-    roleName: string
-    roleCode: string
-    description: string
+    sName: string
+    sRole: string
+    sDescription: string
+    dAddDate: string
   }
-  const ROLE_CODE_FLAG = 'ROLE_'
-  const roledata= ref([
-    {
-      id: 1,
-      name: '超级管理员',
-      roleCode: 'ROLE_admin',
-      description: '超级管理员',
-      createTime: "2022-01-03"
-    },
-    {
-      id: 2,
-      name: '编辑员',
-      roleCode: 'ROLE_editor',
-      description: '编辑员',
-      createTime: "2022-01-02"
-    },
-  ])
+  
   const formItems = [
+    {
+      label: '角色编号',
+      key: 'sRole',
+      value: ref(null),
+      maxLength: 20,
+      validator: (formItem, message) => {
+        if (!formItem.value.value) {
+          message.error('请输入角色编码')
+          return false
+        }
+        return true
+      },
+      render: (formItem) => {
+        return h(
+          NInput,
+          {
+            value: formItem.value.value,
+            disabled: formItem.disabled,
+            onUpdateValue: (val) => {
+              formItem.value.value = val
+            },
+            placeholder: '请输入角色描述',
+          }
+          // {
+          //   prefix: () => h('div', ROLE_CODE_FLAG),
+          // }
+        )
+      },
+    },
     {
       label: '角色名称',
       type: 'input',
-      key: 'name',
+      key: 'sName',
       value: ref(null),
       validator: (formItem, message) => {
         if (!formItem.value.value) {
@@ -97,36 +111,8 @@
       },
     },
     {
-      label: '角色编号',
-      key: 'roleCode',
-      value: ref(null),
-      maxLength: 20,
-      validator: (formItem, message) => {
-        if (!formItem.value.value) {
-          message.error('请输入角色编码')
-          return false
-        }
-        return true
-      },
-      render: (formItem) => {
-        return h(
-          NInput,
-          {
-            value: formItem.value.value,
-            onUpdateValue: (val) => {
-              formItem.value.value = val
-            },
-            placeholder: '请输入角色描述',
-          },
-          {
-            prefix: () => h('div', ROLE_CODE_FLAG),
-          }
-        )
-      },
-    },
-    {
       label: '角色描述',
-      key: 'description',
+      key: 'sDescription',
       value: ref(null),
       maxLength: 50,
       inputType: 'text',
@@ -185,20 +171,20 @@
           table.selectionColumn,
           table.indexColumn,
           {
-            title: '角色名称',
-            key: 'name',
+            title: '角色编码',
+            key: 'sRole',
           },
           {
-            title: '角色编号',
-            key: 'roleCode',
+            title: '角色名称',
+            key: 'sName',
           },
           {
             title: '角色描述',
-            key: 'description',
+            key: 'sDescription',
           },
           {
-            title: '创建时间',
-            key: 'createTime',
+            title: '创建日期',
+            key: 'dAddDate',
           },
           {
             title: '操作',
@@ -213,11 +199,11 @@
                   label: '删除',
                   type: 'error',
                   onClick: onDeleteItem.bind(null, rowData),
-                },
-                {
-                  label: '菜单权限',
-                  type: 'success',
-                  onClick: onShowMenu.bind(null, rowData),
+                // },
+                // {
+                //   label: '菜单权限',
+                //   type: 'success',
+                //   onClick: onShowMenu.bind(null, rowData),
                 },
               ] as TableActionModel[])
             },
@@ -230,20 +216,31 @@
       const defaultCheckedKeys = shallowReactive([] as Array<string>)
       const defaultExpandedKeys = shallowReactive([] as Array<string>)
       function doRefresh() {
-        /*
-        post<Array<RoleModeType>>({
-          url: getRoleList,
+        post<any>({
+          url: '/ADM01301A/list',
           data: {},
         })
           .then((res) => {
             table.handleSuccess(res)
           })
           .catch(console.log)
-          */
+
       }
       function onAddItem() {
         modalDialogRef.value?.toggle()
         nextTick(() => {
+
+          formItems.forEach((it) => {
+            const key = it.key
+            const propName = item[key]
+            
+            if (propName) {
+              if (it.key === 'sRole') {
+                it.disabled=false;
+              }
+            }
+          })
+          
           dataFormRef.value?.reset()
         })
       }
@@ -253,29 +250,51 @@
           formItems.forEach((it) => {
             const key = it.key
             const propName = item[key]
+            console.log(key)
+            console.log(propName)
+            
             if (propName) {
-              if (it.key === 'roleCode') {
-                it.value.value = propName.replace(ROLE_CODE_FLAG, '')
-              } else {
-                it.value.value = propName
+              if (it.key === 'sRole') {
+                it.disabled=true;
               }
+              it.value.value = propName
             }
+            console.log(it);
           })
         })
       }
       function onDeleteItem(data: any) {
+                    console.log(data)
+
         naiveDialog.warning({
           title: '提示',
           content: '是否要删除此菜单？',
           positiveText: '删除',
           onPositiveClick: () => {
-            message.success('模拟菜单删除成功，参数为' + JSON.stringify(data))
+            console.log(data)
+          let formArray={}
+          formArray.sRole=data.sRole
+          post<any>({
+            url: '/ADM01301A/xdelete',
+            data: formArray,
+          })
+          .then((res) => {
+            if (res.sCode=='SUCCESS'){
+              doRefresh()
+              message.success(data.sName+'删除成功！')
+
+            }
+          })
+          .catch(console.log)
+                      
           },
         })
       }
       function onDataFormConfirm() {
         if (dataFormRef.value?.validator()) {
           modalDialogRef.value?.toggle()
+
+          
           naiveDialog.success({
             title: '提示',
             positiveText: '确定',

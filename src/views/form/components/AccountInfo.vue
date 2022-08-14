@@ -54,14 +54,14 @@
 </template>
 
 <script lang="ts">
-  import { NForm } from 'naive-ui'
-  import { defineComponent, reactive, ref } from 'vue'
+  import { NForm } from 'naive-ui';
+  import { defineComponent, reactive, ref } from 'vue';
 
   export default defineComponent({
     name: 'AccountInfo',
     emits: ['next-step'],
     setup(props, { emit }) {
-      const stepOneForm = ref<typeof NForm | null>(null)
+      const stepOneForm = ref<typeof NForm | null>(null);
       const accountInfo = reactive({
         account: 'vue-admin-work@work.com',
         otherAccount: 'qingqingxuanzhaowen',
@@ -78,24 +78,24 @@
             value: 1,
           },
         ],
-      })
+      });
       const accountInfoRule = {
         otherAccount: [{ required: true, message: '请输入收款账户', trigger: 'blur' }],
         receiveName: [{ required: true, message: '请输入收款人姓名', trigger: 'blur' }],
         money: [{ required: true, message: '请输入金额', trigger: 'blur' }],
-      }
+      };
       function clearStepOneInfo() {
-        accountInfo.otherAccount = ''
-        accountInfo.type = 0
-        accountInfo.receiveName = ''
-        accountInfo.money = ''
+        accountInfo.otherAccount = '';
+        accountInfo.type = 0;
+        accountInfo.receiveName = '';
+        accountInfo.money = '';
       }
       function nextStep() {
         stepOneForm.value?.validate((error: any) => {
           if (!error) {
-            emit('next-step', accountInfo)
+            emit('next-step', accountInfo);
           }
-        })
+        });
       }
       return {
         stepOneForm,
@@ -103,9 +103,9 @@
         accountInfoRule,
         clearStepOneInfo,
         nextStep,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

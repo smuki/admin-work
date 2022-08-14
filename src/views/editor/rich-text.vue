@@ -34,8 +34,8 @@
 </template>
 
 <script lang="ts">
-  import RichTextEditor from '../../components/common/RichTextEditor.vue'
-  import { defineComponent } from 'vue'
+  import RichTextEditor from '../../components/common/RichTextEditor.vue';
+  import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'RichText',
     components: { RichTextEditor },
@@ -44,13 +44,13 @@
         title: '',
         htmlContent: '',
         jsonContent: '',
-      }
+      };
     },
     methods: {
       getHtmlContent() {
         this.htmlContent = (
           this.$refs.richTextEditor as InstanceType<typeof RichTextEditor>
-        ).getHtmlContent()
+        ).getHtmlContent();
       },
       setHtmlContent() {
         const delta = {
@@ -59,16 +59,16 @@
             { insert: 'World', attributes: { bold: true } },
             { insert: '\n' },
           ],
-        }
-        ;(this.$refs.richTextEditor as InstanceType<typeof RichTextEditor>).setContents(delta)
+        };
+        (this.$refs.richTextEditor as InstanceType<typeof RichTextEditor>).setContents(delta);
       },
       getJsonContent() {
         this.jsonContent = (
           this.$refs.richTextEditor as InstanceType<typeof RichTextEditor>
-        ).getJsonContent()
+        ).getJsonContent();
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

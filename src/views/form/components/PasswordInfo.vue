@@ -39,8 +39,8 @@
 </template>
 
 <script lang="ts">
-  import { NForm } from 'naive-ui'
-  import { defineComponent } from 'vue'
+  import { NForm } from 'naive-ui';
+  import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'PasswordInfo',
@@ -48,7 +48,7 @@
       accountInfo: {
         type: Object,
         default: () => {
-          return {}
+          return {};
         },
       },
     },
@@ -62,27 +62,27 @@
           payPassword: [{ required: true, message: '请输入支付密码', trigger: 'blur' }],
         },
         loadingStatus: false,
-      }
+      };
     },
     methods: {
       preStep() {
-        this.loadingStatus = false
-        this.passwordModel.payPassword = ''
-        this.$emit('pre-step')
+        this.loadingStatus = false;
+        this.passwordModel.payPassword = '';
+        this.$emit('pre-step');
       },
       nextStep() {
-        ;(this.$refs.stepTwoForm as InstanceType<typeof NForm>).validate((error) => {
+        (this.$refs.stepTwoForm as InstanceType<typeof NForm>).validate((error) => {
           if (!error) {
-            this.loadingStatus = true
+            this.loadingStatus = true;
             setTimeout(() => {
-              this.$emit('next-step')
-              this.loadingStatus = false
-            }, 3000)
+              this.$emit('next-step');
+              this.loadingStatus = false;
+            }, 3000);
           }
-        })
+        });
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

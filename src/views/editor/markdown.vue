@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-  import MarkdownEditor from '../../components/common/MarkdownEditor.vue'
-  import { defineComponent } from 'vue'
-  import SimpleMDE from 'simplemde'
+  import MarkdownEditor from '../../components/common/MarkdownEditor.vue';
+  import { defineComponent } from 'vue';
+  import SimpleMDE from 'simplemde';
 
   export default defineComponent({
     name: 'Markdown',
@@ -33,24 +33,24 @@
       return {
         editorText: '',
         priviewContent: '',
-      }
+      };
     },
     methods: {
       addText() {
-        ;(this.$refs.markdownEditor as InstanceType<typeof MarkdownEditor>).addText(
-          '\n### 新增内容'
-        )
+        (this.$refs.markdownEditor as InstanceType<typeof MarkdownEditor>).addText(
+          '\n### 新增内容',
+        );
       },
       addImage() {
-        ;(this.$refs.markdownEditor as InstanceType<typeof MarkdownEditor>).addImage(
-          '\n![](https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png)'
-        )
+        (this.$refs.markdownEditor as InstanceType<typeof MarkdownEditor>).addImage(
+          '\n![](https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png)',
+        );
       },
       getHTML() {
-        this.priviewContent = (SimpleMDE.prototype as any).markdown(this.editorText)
+        this.priviewContent = (SimpleMDE.prototype as any).markdown(this.editorText);
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

@@ -13,17 +13,17 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config'
-  import { defineComponent } from 'vue'
+  import useAppConfigStore from '@/store/modules/app-config';
+  import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'NavBar',
     setup() {
-      const appConfig = useAppConfigStore()
+      const appConfig = useAppConfigStore();
       return {
         appConfig,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style scoped lang="scss">

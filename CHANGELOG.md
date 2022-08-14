@@ -65,9 +65,9 @@
 
   ```ts
   // 在有接口的时候，要配置成真实的接口
-  export const getMenuListByRoleId = '/getMenusByRoleId'
+  export const getMenuListByRoleId = '/getMenusByRoleId';
   // 在没有接口时候，可以先配置成 '' ，等后台人员提供了接口再进行修改成真实的接口
-  export const getMenuListByRoleId = ''
+  export const getMenuListByRoleId = '';
   ```
 
   - 系统在获取 `getMenuListByRoleId` 地址的时候，发现不是真实的地址，就会加载 `defaultRoutes` 中的路由，以能进入系统的主页面，进行其它的开发工作

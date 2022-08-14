@@ -3,15 +3,15 @@
 </template>
 
 <script lang="ts">
-  import useEcharts from '@/hooks/useEcharts'
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-  import { dispose, graphic } from 'echarts'
+  import useEcharts from '@/hooks/useEcharts';
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+  import { dispose, graphic } from 'echarts';
 
   export default defineComponent({
     name: 'OrderChart',
     setup() {
-      const loading = ref(true)
-      const orderChartWrapper = ref<HTMLDivElement | null>(null)
+      const loading = ref(true);
+      const orderChartWrapper = ref<HTMLDivElement | null>(null);
       const init = () => {
         const option = {
           tooltip: {
@@ -63,26 +63,26 @@
               },
             },
           ],
-        }
+        };
         setTimeout(() => {
-          loading.value = false
+          loading.value = false;
           nextTick(() => {
-            useEcharts(orderChartWrapper.value as HTMLDivElement).setOption(option)
-          })
-        }, 100)
-      }
+            useEcharts(orderChartWrapper.value as HTMLDivElement).setOption(option);
+          });
+        }, 100);
+      };
       const updateChart = () => {
-        useEcharts(orderChartWrapper.value as HTMLDivElement).resize()
-      }
-      onMounted(init)
+        useEcharts(orderChartWrapper.value as HTMLDivElement).resize();
+      };
+      onMounted(init);
       onBeforeUnmount(() => {
-        dispose(orderChartWrapper.value as HTMLDivElement)
-      })
+        dispose(orderChartWrapper.value as HTMLDivElement);
+      });
       return {
         loading,
         orderChartWrapper,
         updateChart,
-      }
+      };
     },
-  })
+  });
 </script>

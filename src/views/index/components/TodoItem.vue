@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from '@vue/runtime-core'
+  import { computed, defineComponent } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'TodoItem',
@@ -22,16 +22,16 @@
     },
     setup(props) {
       const firstChar = computed(() => {
-        return (props.item as any).name.substring(0, 1)
-      })
+        return (props.item as any).name.substring(0, 1);
+      });
       return {
         firstChar,
         headerStyle: {
           backgroundColor: (props.item as any).bgColor,
         },
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

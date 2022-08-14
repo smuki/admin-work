@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia'
-import { UserState } from '../types'
-import store from '../pinia'
+import { defineStore } from 'pinia';
+import { UserState } from '../types';
+import store from '../pinia';
 
-import Avatar from '@/assets/img_avatar.gif'
+import Avatar from '@/assets/img_avatar.gif';
 
-const defaultAvatar = Avatar
+const defaultAvatar = Avatar;
 
 const useUserStore = defineStore('user-info', {
   state: () => {
@@ -15,34 +15,34 @@ const useUserStore = defineStore('user-info', {
       userName: '',
       nickName: '',
       avatar: defaultAvatar,
-    }
+    };
   },
   actions: {
     saveUser(userInfo: UserState) {
-      console.log(userInfo)
+      console.log(userInfo);
       return new Promise<UserState>((resolve) => {
-        this.userId = userInfo.userId
-        this.roleId = userInfo.roleId
-        this.token = userInfo.token
-        this.userName = userInfo.userName
-        this.nickName = userInfo.nickName
-        this.avatar = userInfo.avatar || defaultAvatar
-        resolve(userInfo)
-      })
+        this.userId = userInfo.userId;
+        this.roleId = userInfo.roleId;
+        this.token = userInfo.token;
+        this.userName = userInfo.userName;
+        this.nickName = userInfo.nickName;
+        this.avatar = userInfo.avatar || defaultAvatar;
+        resolve(userInfo);
+      });
     },
     isTokenExpire() {
-      return !this.token
+      return !this.token;
     },
     changeNickName(newNickName: string) {
-      this.nickName = newNickName
+      this.nickName = newNickName;
     },
     logout() {
       return new Promise<void>((resolve) => {
-        this.$reset()
-        localStorage.clear()
-        sessionStorage.clear()
-        resolve()
-      })
+        this.$reset();
+        localStorage.clear();
+        sessionStorage.clear();
+        resolve();
+      });
     },
   },
   presist: {
@@ -52,10 +52,10 @@ const useUserStore = defineStore('user-info', {
       exclude: ['userName'],
     },
   },
-})
+});
 
-export default useUserStore
+export default useUserStore;
 
 export function useUserStoreContext() {
-  return useUserStore(store)
+  return useUserStore(store);
 }

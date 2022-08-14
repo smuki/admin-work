@@ -1,8 +1,8 @@
-import { App } from 'vue'
-import pinia from './pinia'
+import { App } from 'vue';
+import pinia from './pinia';
 
 function useAppPinia(app: App) {
-  app.use(pinia)
+  app.use(pinia);
 }
 
-export default useAppPinia
+export default useAppPinia;

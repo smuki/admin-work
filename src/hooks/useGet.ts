@@ -1,4 +1,4 @@
-import { get } from '../api/http'
+import { get } from '../api/http';
 export default function usePost() {
-  return get
+  return get;
 }

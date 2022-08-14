@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, ref } from 'vue';
 
   export default defineComponent({
     name: 'DataItem',
@@ -37,20 +37,20 @@
       dataModel: {
         type: Object,
         default: () => {
-          return {}
+          return {};
         },
       },
     },
     setup() {
-      const loading = ref(true)
+      const loading = ref(true);
       setTimeout(() => {
-        loading.value = false
-      }, 1000)
+        loading.value = false;
+      }, 1000);
       return {
         loading,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

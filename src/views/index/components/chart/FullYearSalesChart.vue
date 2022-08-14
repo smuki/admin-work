@@ -19,24 +19,24 @@
   </n-card>
 </template>
 <script lang="ts">
-  import useEcharts from '@/hooks/useEcharts'
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-  import { dispose, graphic } from 'echarts'
-  import { random } from 'lodash'
+  import useEcharts from '@/hooks/useEcharts';
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+  import { dispose, graphic } from 'echarts';
+  import { random } from 'lodash';
   function getData() {
-    const data: number[] = []
+    const data: number[] = [];
     while (data.length < 6) {
-      data.push(random(80, 150))
+      data.push(random(80, 150));
     }
-    return data
+    return data;
   }
-  const months = ['一月', '二月', '三月', '四月', '五月', '六月']
+  const months = ['一月', '二月', '三月', '四月', '五月', '六月'];
   export default defineComponent({
     name: 'FullYearSalesChart',
     setup() {
-      const loading = ref(true)
-      const fullYearSalesChart = ref<HTMLDivElement | null>(null)
-      let interval: any = null
+      const loading = ref(true);
+      const fullYearSalesChart = ref<HTMLDivElement | null>(null);
+      let interval: any = null;
       const init = () => {
         const option = {
           color: ['rgba(64, 58, 255)', 'rgba(136, 188, 241)'],
@@ -75,9 +75,9 @@
                 show: true,
                 formatter(val: any) {
                   if (val.dataIndex === 0) {
-                    return ''
+                    return '';
                   } else {
-                    return val.data
+                    return val.data;
                   }
                 },
               },
@@ -108,9 +108,9 @@
                 show: true,
                 formatter(val: any) {
                   if (val.dataIndex === 0) {
-                    return ''
+                    return '';
                   } else {
-                    return val.data
+                    return val.data;
                   }
                 },
               },
@@ -129,11 +129,13 @@
               },
             },
           ],
-        }
+        };
         setTimeout(() => {
-          loading.value = false
+          loading.value = false;
           setTimeout(() => {
-            nextTick(() => useEcharts(fullYearSalesChart.value as HTMLDivElement).setOption(option))
+            nextTick(() =>
+              useEcharts(fullYearSalesChart.value as HTMLDivElement).setOption(option),
+            );
             interval = setInterval(() => {
               const option = {
                 series: [
@@ -144,27 +146,27 @@
                     data: getData(),
                   },
                 ],
-              }
-              useEcharts(fullYearSalesChart.value as HTMLDivElement).setOption(option)
-            }, 5000)
-          }, 100)
-        }, 1000)
-      }
+              };
+              useEcharts(fullYearSalesChart.value as HTMLDivElement).setOption(option);
+            }, 5000);
+          }, 100);
+        }, 1000);
+      };
       const updateChart = () => {
-        useEcharts(fullYearSalesChart.value as HTMLDivElement).resize()
-      }
-      onMounted(init)
+        useEcharts(fullYearSalesChart.value as HTMLDivElement).resize();
+      };
+      onMounted(init);
       onBeforeUnmount(() => {
-        dispose(fullYearSalesChart.value as HTMLDivElement)
-        clearInterval(interval)
-      })
+        dispose(fullYearSalesChart.value as HTMLDivElement);
+        clearInterval(interval);
+      });
       return {
         loading,
         fullYearSalesChart,
         updateChart,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

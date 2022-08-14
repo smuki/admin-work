@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRef } from 'vue'
-  import { Refresh as RefreshIcon } from '@vicons/ionicons5'
+  import { defineComponent, toRef } from 'vue';
+  import { Refresh as RefreshIcon } from '@vicons/ionicons5';
 
   export default defineComponent({
     name: 'TableFooter',
@@ -46,26 +46,26 @@
       },
     },
     setup(props) {
-      const pagination = toRef(props, 'pagination')
+      const pagination = toRef(props, 'pagination');
       function onChange(page: number) {
-        ;(pagination as any).value.page = page
-        ;(pagination as any).value.onChange()
+        (pagination as any).value.page = page;
+        (pagination as any).value.onChange();
       }
       function onPageSizeChange(pageSize: number) {
-        ;(pagination as any).value.page = 1
-        ;(pagination as any).value.pageSize = pageSize
-        ;(pagination as any).value.onPageSizeChange()
+        (pagination as any).value.page = 1;
+        (pagination as any).value.pageSize = pageSize;
+        (pagination as any).value.onPageSizeChange();
       }
       function refresh() {
-        ;(pagination as any).value.onChange()
+        (pagination as any).value.onChange();
       }
       return {
         onChange,
         onPageSizeChange,
         refresh,
-      }
+      };
     },
-  })
+  });
 </script>
 <style lang="scss" scoped>
   .table-footer-container {

@@ -42,9 +42,9 @@
 </template>
 
 <script lang="ts">
-  import { DataFormType, FormItem } from '@/types/components'
-  import { FormProps, SelectOption, useMessage } from 'naive-ui'
-  import { defineComponent, ref } from 'vue'
+  import { DataFormType, FormItem } from '@/types/components';
+  import { FormProps, SelectOption, useMessage } from 'naive-ui';
+  import { defineComponent, ref } from 'vue';
   import {
     renderCheckbox,
     renderCheckboxGroup,
@@ -53,21 +53,21 @@
     renderPopSelect,
     renderSelect,
     renderTimePicker,
-  } from '@/hooks/form'
+  } from '@/hooks/form';
   export default defineComponent({
     name: 'BaseFormView',
     setup() {
-      const message = useMessage()
-      const dataForm = ref<DataFormType | null>(null)
+      const message = useMessage();
+      const dataForm = ref<DataFormType | null>(null);
       function submit() {
         if (dataForm.value?.validator()) {
-          submitLoading.value = true
+          submitLoading.value = true;
           setTimeout(() => {
-            submitLoading.value = false
+            submitLoading.value = false;
             message.success(
-              '提交成功，参数为：' + JSON.stringify(dataForm.value?.generatorParams())
-            )
-          }, 3000)
+              '提交成功，参数为：' + JSON.stringify(dataForm.value?.generatorParams()),
+            );
+          }, 3000);
         }
       }
       const formItems = [
@@ -80,10 +80,10 @@
             renderInput(formItem.value, { placeholder: '请输入会议名称', clearable: true }),
           validator: (formItem, message) => {
             if (!formItem.value.value) {
-              message.error('请输入会议名称')
-              return false
+              message.error('请输入会议名称');
+              return false;
             }
-            return true
+            return true;
           },
         },
         {
@@ -243,14 +243,14 @@
               rows: 3,
             }),
         },
-      ] as FormItem[]
+      ] as FormItem[];
       const formConfig = {
         labelWidth: 100,
         size: 'medium',
         labelAlign: 'right',
-      } as FormProps
-      const submitLoading = ref(false)
-      const show = ref(true)
+      } as FormProps;
+      const submitLoading = ref(false);
+      const show = ref(true);
       return {
         dataForm,
         formConfig,
@@ -258,9 +258,9 @@
         submitLoading,
         submit,
         show,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

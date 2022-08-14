@@ -117,42 +117,42 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import ImageBg1 from '@/assets/img_login_bg.png'
-  import { post, Response } from '@/api/http'
-  import { login } from '@/api/url'
-  import { DeviceType, UserState } from '@/store/types'
-  import { useMessage } from 'naive-ui'
+  import { computed, defineComponent, ref } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import ImageBg1 from '@/assets/img_login_bg.png';
+  import { post, Response } from '@/api/http';
+  import { login } from '@/api/url';
+  import { DeviceType, UserState } from '@/store/types';
+  import { useMessage } from 'naive-ui';
   import {
     PhonePortraitOutline as PhoneIcon,
     LockClosedOutline as PasswordIcon,
     LogoGithub,
     LogoAlipay,
     LogoWechat,
-  } from '@vicons/ionicons5'
-  import useAppInfo from '@/hooks/useAppInfo'
-  import useUserStore from '@/store/modules/user'
-  import useAppConfigStore from '@/store/modules/app-config'
+  } from '@vicons/ionicons5';
+  import useAppInfo from '@/hooks/useAppInfo';
+  import useUserStore from '@/store/modules/user';
+  import useAppConfigStore from '@/store/modules/app-config';
   export default defineComponent({
     name: 'Login',
     components: { PhoneIcon, PasswordIcon, LogoGithub, LogoAlipay, LogoWechat },
     setup() {
-      const { version } = useAppInfo()
-      const username = ref('yjy')
-      const password = ref('123456')
-      const autoLogin = ref(true)
-      const loading = ref(false)
-      const router = useRouter()
-      const route = useRoute()
-      const userStore = useUserStore()
-      const message = useMessage()
-      const appConfig = useAppConfigStore()
+      const { version } = useAppInfo();
+      const username = ref('yjy');
+      const password = ref('123456');
+      const autoLogin = ref(true);
+      const loading = ref(false);
+      const router = useRouter();
+      const route = useRoute();
+      const userStore = useUserStore();
+      const message = useMessage();
+      const appConfig = useAppConfigStore();
       const isMobileScreen = computed(() => {
-        return appConfig.deviceType === DeviceType.MOBILE
-      })
+        return appConfig.deviceType === DeviceType.MOBILE;
+      });
       const onLogin = () => {
-        loading.value = true
+        loading.value = true;
         post({
           url: login,
           data: {
@@ -161,35 +161,34 @@
           },
         })
           .then((data: Response) => {
-            console.log('data.............')
-            console.log(data)
-            console.log(data.entity)
-            let user = {}
-            user.userId = data.entity.sUserId
-            user.token = data.Token
-            user.roleId = data.entity.sRole
-            user.roles = []
-            user.userName = data.entity.sUserName
-            user.nickName = data.entity.sUserName
-            user.avatar = data.entity.sAvatarUrl
-
+            console.log('data.............');
+            console.log(data);
+            console.log(data.entity);
+            let user = {};
+            user.userId = data.entity.sUserId;
+            user.token = data.Token;
+            user.roleId = data.entity.sRole;
+            user.roles = [];
+            user.userName = data.entity.sUserName;
+            user.nickName = data.entity.sUserName;
+            user.avatar = data.entity.sAvatarUrl;
 
             userStore.saveUser(user as UserState).then(() => {
-              console.log(router.getRoutes())
+              console.log(router.getRoutes());
               router
                 .replace({
                   path: route.query.redirect ? (route.query.redirect as string) : '/',
                 })
                 .then(() => {
-                  loading.value = false
-                })
-            })
+                  loading.value = false;
+                });
+            });
           })
           .catch((error) => {
-            loading.value = false
-            message.error(error.message)
-          })
-      }
+            loading.value = false;
+            message.error(error.message);
+          });
+      };
       return {
         isMobileScreen,
         username,
@@ -199,9 +198,9 @@
         onLogin,
         ImageBg1,
         version,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

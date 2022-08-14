@@ -109,26 +109,26 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  import { CameraOutline } from '@vicons/ionicons5'
-  import useUserStore from '@/store/modules/user'
+  import { defineComponent, ref } from 'vue';
+  import { CameraOutline } from '@vicons/ionicons5';
+  import useUserStore from '@/store/modules/user';
   export default defineComponent({
     name: 'Personal',
     components: { CameraOutline },
     setup() {
-      const touched = ref(false)
-      const uploaded = ref(false)
-      const userStore = useUserStore()
+      const touched = ref(false);
+      const uploaded = ref(false);
+      const userStore = useUserStore();
       const avatarTouchStart = () => {
-        touched.value = true
-      }
+        touched.value = true;
+      };
       const uploadAvatar = () => {
-        uploaded.value = true
+        uploaded.value = true;
         setTimeout(() => {
-          touched.value = false
-          uploaded.value = false
-        }, 1000)
-      }
+          touched.value = false;
+          uploaded.value = false;
+        }, 1000);
+      };
       return {
         touched,
         uploaded,
@@ -210,9 +210,9 @@
         nickName: userStore.nickName,
         avatarTouchStart,
         uploadAvatar,
-      }
+      };
     },
-  })
+  });
 </script>
 <style lang="scss" scoped>
   .el-tag--dark + .el-tag--dark {

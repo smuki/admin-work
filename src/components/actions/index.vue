@@ -41,20 +41,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  import { useMessage } from 'naive-ui'
-  import screenfull from 'screenfull'
-  import { useRoute, useRouter } from 'vue-router'
-  import { SearchContentType } from '@/types/components'
+  import { defineComponent, ref } from 'vue';
+  import { useMessage } from 'naive-ui';
+  import screenfull from 'screenfull';
+  import { useRoute, useRouter } from 'vue-router';
+  import { SearchContentType } from '@/types/components';
   import {
     SettingsOutline as SettingIcon,
     SearchOutline as SearchIcon,
     Expand as ExpandIcon,
     NotificationsOutline as NotificationsIcon,
     RefreshOutline as RefreshIcon,
-  } from '@vicons/ionicons5'
-  import useAppConfigStore from '@/store/modules/app-config'
-  import { useDebounceFn } from '@vueuse/core'
+  } from '@vicons/ionicons5';
+  import useAppConfigStore from '@/store/modules/app-config';
+  import { useDebounceFn } from '@vueuse/core';
   export default defineComponent({
     name: 'ActionItems',
     components: {
@@ -65,33 +65,33 @@
       RefreshIcon,
     },
     setup() {
-      const searchContentRef = ref<SearchContentType>()
-      const showSearchContent = ref(false)
-      const searchContent = ref('')
-      const settingRef = ref()
-      const badgeValue = ref(3)
-      const appConfig = useAppConfigStore()
-      const message = useMessage()
-      const router = useRouter()
-      const route = useRoute()
+      const searchContentRef = ref<SearchContentType>();
+      const showSearchContent = ref(false);
+      const searchContent = ref('');
+      const settingRef = ref();
+      const badgeValue = ref(3);
+      const appConfig = useAppConfigStore();
+      const message = useMessage();
+      const router = useRouter();
+      const route = useRoute();
       function onShowSearch() {
-        searchContentRef.value?.onShow()
+        searchContentRef.value?.onShow();
       }
       function onScreenFull() {
         if (!screenfull.isEnabled) {
-          message.error('当前浏览器不支持全屏操作')
-          return false
+          message.error('当前浏览器不支持全屏操作');
+          return false;
         }
-        screenfull.toggle()
+        screenfull.toggle();
       }
       const fn = useDebounceFn(() => {
-        router.replace({ path: '/redirect' + route.path })
-      })
+        router.replace({ path: '/redirect' + route.path });
+      });
       function onRefrehRoute() {
-        fn()
+        fn();
       }
       function onShowSetting() {
-        settingRef.value.openDrawer()
+        settingRef.value.openDrawer();
       }
       return {
         searchContentRef,
@@ -104,9 +104,9 @@
         onScreenFull,
         onRefrehRoute,
         onShowSetting,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

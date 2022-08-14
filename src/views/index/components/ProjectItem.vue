@@ -16,12 +16,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, toRef } from 'vue'
+  import { defineComponent, PropType, toRef } from 'vue';
   interface ItemData {
-    title: string
-    gitee: string
-    target?: string
-    ui?: string
+    title: string;
+    gitee: string;
+    target?: string;
+    ui?: string;
   }
 
   export default defineComponent({
@@ -30,22 +30,22 @@
       item: {
         type: Object as PropType<ItemData>,
         default: () => {
-          return {}
+          return {};
         },
       },
     },
     setup(props) {
-      const item = toRef(props, 'item')
+      const item = toRef(props, 'item');
       return {
         gitee: function () {
-          window.open(item.value.gitee)
+          window.open(item.value.gitee);
         },
         preView: function () {
-          window.open(item.value.target)
+          window.open(item.value.target);
         },
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

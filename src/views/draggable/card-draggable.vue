@@ -29,22 +29,22 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, reactive } from 'vue'
-  import draggable from 'vuedraggable'
-  import Iconfonts from '@/icons/iconfont/iconfont.json'
+  import { defineComponent, onMounted, reactive } from 'vue';
+  import draggable from 'vuedraggable';
+  import Iconfonts from '@/icons/iconfont/iconfont.json';
   interface IconItemType {
-    label: string
-    icon: string
-    id: string
-    color: string
+    label: string;
+    icon: string;
+    id: string;
+    color: string;
   }
   export default defineComponent({
     name: 'CardDraggable',
     components: { draggable },
     setup() {
-      const iconList = Iconfonts.glyphs.slice(0, 100)
-      const list: Array<IconItemType> = reactive([])
-      const drag = false
+      const iconList = Iconfonts.glyphs.slice(0, 100);
+      const list: Array<IconItemType> = reactive([]);
+      const drag = false;
       const colors = [
         '#e54d42',
         '#f37b1d',
@@ -58,12 +58,12 @@
         '#e03997',
         '#a5673f',
         '#8799a3',
-      ]
+      ];
       const getRandomColor = (): string => {
-        return colors[Math.floor(Math.random() * colors.length)]
-      }
+        return colors[Math.floor(Math.random() * colors.length)];
+      };
       const resetElements = (): void => {
-        list.length = 0
+        list.length = 0;
         list.push(
           ...iconList.map((it, index: number): IconItemType => {
             return {
@@ -71,10 +71,10 @@
               icon: it.font_class,
               id: it.icon_id,
               color: getRandomColor(),
-            }
-          })
-        )
-      }
+            };
+          }),
+        );
+      };
       onMounted(() => {
         list.push(
           ...iconList.map((it, index: number): IconItemType => {
@@ -83,17 +83,17 @@
               icon: it.font_class,
               id: it.icon_id,
               color: getRandomColor(),
-            }
-          })
-        )
-      })
+            };
+          }),
+        );
+      });
       return {
         drag,
         list,
         resetElements,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

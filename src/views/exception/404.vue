@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import ExceptionStatus from './components/ExceptionStatus.vue'
+  import { defineComponent } from 'vue';
+  import ExceptionStatus from './components/ExceptionStatus.vue';
   export default defineComponent({
     name: 'Page404',
     components: {
       ExceptionStatus,
     },
-  })
+  });
 </script>

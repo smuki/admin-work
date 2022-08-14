@@ -29,13 +29,13 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { CloseCircle } from '@vicons/ionicons5'
+  import { defineComponent } from 'vue';
+  import { CloseCircle } from '@vicons/ionicons5';
 
   export default defineComponent({
     name: 'Fail',
     components: { CloseCircle },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-  import { dispose, graphic } from 'echarts'
-  import useEcharts from '@/hooks/useEcharts'
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { dispose, graphic } from 'echarts';
+  import useEcharts from '@/hooks/useEcharts';
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
   export default defineComponent({
     name: 'SalesChart',
     setup() {
-      const loading = ref(true)
-      const salesChart = ref<HTMLDivElement | null>(null)
+      const loading = ref(true);
+      const salesChart = ref<HTMLDivElement | null>(null);
       const init = () => {
         const option = {
           grid: {
@@ -75,28 +75,28 @@
               },
             },
           ],
-        }
+        };
         setTimeout(() => {
-          loading.value = false
+          loading.value = false;
           nextTick(() => {
-            useEcharts(salesChart.value as HTMLDivElement).setOption(option)
-          })
-        }, 1000)
-      }
+            useEcharts(salesChart.value as HTMLDivElement).setOption(option);
+          });
+        }, 1000);
+      };
       const updateChart = () => {
-        useEcharts(salesChart.value as HTMLDivElement).resize()
-      }
-      onMounted(init)
+        useEcharts(salesChart.value as HTMLDivElement).resize();
+      };
+      onMounted(init);
       onBeforeUnmount(() => {
-        dispose(salesChart.value as HTMLDivElement)
-      })
+        dispose(salesChart.value as HTMLDivElement);
+      });
       return {
         loading,
         salesChart,
         updateChart,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

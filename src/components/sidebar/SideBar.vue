@@ -20,10 +20,10 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config'
-  import { computed, defineComponent } from 'vue'
-  import { SideTheme, ThemeMode } from '@/store/types'
-  import usePermissionStore from '@/store/modules/permission'
+  import useAppConfigStore from '@/store/modules/app-config';
+  import { computed, defineComponent } from 'vue';
+  import { SideTheme, ThemeMode } from '@/store/types';
+  import usePermissionStore from '@/store/modules/permission';
   export default defineComponent({
     name: 'SideBar',
     props: {
@@ -33,11 +33,11 @@
       },
     },
     setup() {
-      const appConfig = useAppConfigStore()
-      const permissionStore = usePermissionStore()
+      const appConfig = useAppConfigStore();
+      const permissionStore = usePermissionStore();
       const themeOverThemes = computed(() => {
         if (appConfig.theme === ThemeMode.DARK) {
-          return {}
+          return {};
         }
         if (appConfig.sideTheme === SideTheme.DARK)
           return {
@@ -64,8 +64,8 @@
 
               itemColorActive: 'var(--primary-color)',
             },
-          }
-        if (appConfig.sideTheme === SideTheme.WHITE) return { common: { cardColor: '#ffffff' } }
+          };
+        if (appConfig.sideTheme === SideTheme.WHITE) return { common: { cardColor: '#ffffff' } };
         if (appConfig.sideTheme === SideTheme.IMAGE)
           return {
             common: {
@@ -74,16 +74,16 @@
               hoverColor: 'rgba(255, 255, 255, 0.09)',
               popoverColor: 'rgb(72, 72, 78)',
             },
-          }
-        return {}
-      })
+          };
+        return {};
+      });
       return {
         appConfig,
         permissionStore,
         themeOverThemes,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style scoped lang="scss">

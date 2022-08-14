@@ -26,10 +26,10 @@
 </template>
 
 <script lang="ts">
-  import { getDepartmentList } from '@/api/url'
-  import { TableActionModel, useTable, useRenderAction, useTableColumn } from '@/hooks/table'
-  import { defineComponent, h, nextTick, onMounted, ref, shallowReactive } from 'vue'
-  import _ from 'lodash'
+  import { getDepartmentList } from '@/api/url';
+  import { TableActionModel, useTable, useRenderAction, useTableColumn } from '@/hooks/table';
+  import { defineComponent, h, nextTick, onMounted, ref, shallowReactive } from 'vue';
+  import _ from 'lodash';
   import {
     DataTableColumn,
     NInput,
@@ -37,21 +37,21 @@
     TreeSelectOption,
     useDialog,
     useMessage,
-  } from 'naive-ui'
-  import { DataFormType, ModalDialogType, FormItem } from '@/types/components'
-  import usePost from '@/hooks/usePost'
-  import { renderRadioButtonGroup, renderTag, renderTreeSelect } from '@/hooks/form'
-  import { transformTreeSelect } from '@/utils'
+  } from 'naive-ui';
+  import { DataFormType, ModalDialogType, FormItem } from '@/types/components';
+  import usePost from '@/hooks/usePost';
+  import { renderRadioButtonGroup, renderTag, renderTreeSelect } from '@/hooks/form';
+  import { transformTreeSelect } from '@/utils';
   interface Department {
-    parentId: number
-    id: number
-    name: string
-    depCode: string
-    order: number
-    status: number
-    children: Array<Department>
+    parentId: number;
+    id: number;
+    name: string;
+    depCode: string;
+    order: number;
+    status: number;
+    children: Array<Department>;
   }
-  const DP_CODE_FLAG = 'dp_code_'
+  const DP_CODE_FLAG = 'dp_code_';
   const itemFormOptions = [
     {
       key: 'parentId',
@@ -59,7 +59,7 @@
       value: ref(null),
       optionItems: shallowReactive([] as Array<TreeSelectOption>),
       render: (formItem) => {
-        return renderTreeSelect(formItem.value, formItem.optionItems as Array<TreeSelectOption>)
+        return renderTreeSelect(formItem.value, formItem.optionItems as Array<TreeSelectOption>);
       },
     },
     {
@@ -71,18 +71,18 @@
         return h(NInput, {
           value: formItem.value.value,
           onUpdateValue: (newVal) => {
-            formItem.value.value = newVal
+            formItem.value.value = newVal;
           },
           maxlength: 50,
           placeholder: '请输入部门名称',
-        })
+        });
       },
       validator: (formItem, message) => {
         if (!formItem.value.value) {
-          message.error('请输入部门名称')
-          return false
+          message.error('请输入部门名称');
+          return false;
         }
-        return true
+        return true;
       },
     },
     {
@@ -95,21 +95,21 @@
           {
             value: formItem.value.value,
             onUpdateValue: (val) => {
-              formItem.value.value = val
+              formItem.value.value = val;
             },
             placeholder: '请输入部门编号',
           },
           {
             prefix: () => DP_CODE_FLAG,
-          }
-        )
+          },
+        );
       },
       validator: (formItem, message) => {
         if (!formItem.value.value) {
-          message.error('请输入部门编号')
-          return false
+          message.error('请输入部门编号');
+          return false;
         }
-        return true
+        return true;
       },
     },
     {
@@ -126,16 +126,16 @@
             label: '禁用',
             value: 0,
           },
-        ])
+        ]);
       },
     },
-  ] as Array<FormItem>
+  ] as Array<FormItem>;
   export default defineComponent({
     name: 'MyDepartment',
     setup() {
-      const table = useTable<Department>()
-      const message = useMessage()
-      const naiveDailog = useDialog()
+      const table = useTable<Department>();
+      const message = useMessage();
+      const naiveDailog = useDialog();
       const tableColumns = useTableColumn(
         [
           {
@@ -168,45 +168,45 @@
                   label: '删除',
                   type: 'error',
                   onClick() {
-                    onDeleteItem(rowData)
+                    onDeleteItem(rowData);
                   },
                 },
-              ] as TableActionModel[])
+              ] as TableActionModel[]);
             },
           },
         ],
         {
           align: 'center',
-        } as DataTableColumn
-      )
-      const itemDataFormRef = ref<DataFormType | null>(null)
-      const searchDataFormRef = ref<DataFormType | null>(null)
-      const modalDialog = ref<ModalDialogType | null>(null)
-      const post = usePost()
+        } as DataTableColumn,
+      );
+      const itemDataFormRef = ref<DataFormType | null>(null);
+      const searchDataFormRef = ref<DataFormType | null>(null);
+      const modalDialog = ref<ModalDialogType | null>(null);
+      const post = usePost();
       function doRefresh() {
         post<Array<Department>>({
           url: getDepartmentList,
         })
           .then(table.handleSuccess)
           .then((res) => {
-            const parentFormItem = itemFormOptions.find((it) => it.key === 'parentId') as FormItem
-            ;(parentFormItem.optionItems as Array<SelectOption>).length = 0
-            parentFormItem?.optionItems?.push(...transformTreeSelect(res, 'name', 'id'))
-          })
+            const parentFormItem = itemFormOptions.find((it) => it.key === 'parentId') as FormItem;
+            (parentFormItem.optionItems as Array<SelectOption>).length = 0;
+            parentFormItem?.optionItems?.push(...transformTreeSelect(res, 'name', 'id'));
+          });
       }
       function filterItems(srcArray: Array<Department>, filterItem: Department) {
         for (let index = 0; index < srcArray.length; index++) {
-          const element = srcArray[index]
+          const element = srcArray[index];
           if (element.id === filterItem.id) {
             if (!_.isEmpty(element.children)) {
-              message.error('当前部门下有子部门，不能删除')
-              return
+              message.error('当前部门下有子部门，不能删除');
+              return;
             }
-            srcArray.splice(index, 1)
-            return
+            srcArray.splice(index, 1);
+            return;
           } else {
             if (!_.isEmpty(element.children)) {
-              filterItems(element.children, filterItem)
+              filterItems(element.children, filterItem);
             }
           }
         }
@@ -218,46 +218,46 @@
           positiveText: '删除',
           negativeText: '再想想',
           onPositiveClick: () => {
-            filterItems(table.dataList.value!, item)
+            filterItems(table.dataList.value!, item);
           },
-        })
-      }
+        });
+      };
       function onAddItem() {
-        modalDialog.value?.toggle()
+        modalDialog.value?.toggle();
         nextTick(() => {
-          itemDataFormRef.value?.reset()
-        })
+          itemDataFormRef.value?.reset();
+        });
       }
       function onDataFormConfirm() {
         if (itemDataFormRef.value?.validator()) {
-          modalDialog.value?.toggle()
+          modalDialog.value?.toggle();
           naiveDailog.success({
             title: '提示',
             positiveText: '确定',
             content:
               '模拟部门添加/编辑成功，数据为：' +
               JSON.stringify(itemDataFormRef.value.generatorParams()),
-          })
+          });
         }
       }
       function onUpdateItem(item: any) {
-        modalDialog.value?.toggle()
+        modalDialog.value?.toggle();
         nextTick(() => {
           itemFormOptions.forEach((it) => {
-            const key = it.key
-            const propName = item[key]
+            const key = it.key;
+            const propName = item[key];
             if (it.key === 'depCode') {
-              it.value.value = propName.replace(DP_CODE_FLAG, '')
+              it.value.value = propName.replace(DP_CODE_FLAG, '');
             } else {
-              it.value.value = propName
+              it.value.value = propName;
             }
-          })
-        })
+          });
+        });
       }
       function rowKey(rowData: any) {
-        return rowData.id
+        return rowData.id;
       }
-      onMounted(doRefresh)
+      onMounted(doRefresh);
       return {
         itemDataFormRef,
         searchDataFormRef,
@@ -270,7 +270,7 @@
         itemFormOptions,
         rowKey,
         modalDialog,
-      }
+      };
     },
-  })
+  });
 </script>

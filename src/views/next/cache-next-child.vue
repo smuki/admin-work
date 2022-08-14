@@ -5,24 +5,24 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, ref } from 'vue';
 
   export default defineComponent({
     name: 'CacheNextChild',
     setup() {
-      const content = ref('')
+      const content = ref('');
       return {
         content,
-      }
+      };
     },
     mounted() {
-      console.log('mounted')
+      console.log('mounted');
     },
     activated() {
-      console.log('activated')
+      console.log('activated');
     },
     deactivated() {
-      console.log('deactivated')
+      console.log('deactivated');
     },
-  })
+  });
 </script>

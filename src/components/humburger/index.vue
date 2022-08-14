@@ -9,21 +9,21 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config'
-  import { defineComponent } from 'vue'
+  import useAppConfigStore from '@/store/modules/app-config';
+  import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'Humburger',
     setup() {
-      const appConfig = useAppConfigStore()
+      const appConfig = useAppConfigStore();
       function toggleFold() {
-        appConfig.toggleCollapse(!appConfig.isCollapse)
+        appConfig.toggleCollapse(!appConfig.isCollapse);
       }
       return {
         appConfig,
         toggleFold,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

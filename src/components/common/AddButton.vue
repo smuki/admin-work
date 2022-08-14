@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { Add as AddIcon } from '@vicons/ionicons5'
+  import { defineComponent } from 'vue';
+  import { Add as AddIcon } from '@vicons/ionicons5';
 
   export default defineComponent({
     name: 'AddButton',
@@ -21,11 +21,11 @@
     emits: ['add'],
     setup(props, { emit }) {
       function onAdd() {
-        emit('add')
+        emit('add');
       }
       return {
         onAdd,
-      }
+      };
     },
-  })
+  });
 </script>

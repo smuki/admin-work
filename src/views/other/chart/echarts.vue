@@ -48,8 +48,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import Chart from './components/Chart.vue'
+  import { defineComponent } from 'vue';
+  import Chart from './components/Chart.vue';
 
   export default defineComponent({
     name: 'Echarts',
@@ -78,7 +78,7 @@
             type: 'line',
           },
         ],
-      }
+      };
       const options2 = {
         grid: {
           x: '10%',
@@ -101,7 +101,7 @@
             areaStyle: {},
           },
         ],
-      }
+      };
       const options3 = {
         tooltip: {
           trigger: 'axis',
@@ -152,7 +152,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options4 = {
         xAxis: {
           type: 'category',
@@ -177,7 +177,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options5 = {
         xAxis: {
           type: 'category',
@@ -211,7 +211,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options6 = {
         xAxis: {
           type: 'value',
@@ -245,7 +245,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options7 = {
         series: [
           {
@@ -274,7 +274,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options8 = {
         series: [
           {
@@ -316,7 +316,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       const options9 = {
         series: [
           {
@@ -346,7 +346,7 @@
           x2: '1%',
           y2: '15%',
         },
-      }
+      };
       return {
         options1,
         options2,
@@ -357,7 +357,7 @@
         options7,
         options8,
         options9,
-      }
+      };
     },
-  })
+  });
 </script>

@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMessage } from 'naive-ui'
+  import { useMessage } from 'naive-ui';
 
-  const message = useMessage()
+  const message = useMessage();
   function onSelectedIcon(item: any) {
-    message.success('已选择：' + item.name + ' 图标')
+    message.success('已选择：' + item.name + ' 图标');
   }
 </script>

@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, shallowReactive } from 'vue'
-  import { NotificationsCircle } from '@vicons/ionicons5'
+  import { defineComponent, shallowReactive } from 'vue';
+  import { NotificationsCircle } from '@vicons/ionicons5';
   export default defineComponent({
     name: 'PopoverMessage',
     components: { NotificationsCircle },
@@ -65,15 +65,15 @@
           title: '您收到一个消息',
           desc: '来自好友张三的生日祝福',
         },
-      ])
+      ]);
       function onClearMessage() {
-        messages.length = 0
-        emit('clear')
+        messages.length = 0;
+        emit('clear');
       }
       return {
         onClearMessage,
         messages,
-      }
+      };
     },
-  })
+  });
 </script>

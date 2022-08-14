@@ -41,8 +41,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { CheckmarkCircle } from '@vicons/ionicons5'
+  import { defineComponent } from 'vue';
+  import { CheckmarkCircle } from '@vicons/ionicons5';
 
   export default defineComponent({
     name: 'ResultInfo',
@@ -51,17 +51,17 @@
       accountInfo: {
         type: Object,
         default: () => {
-          return {}
+          return {};
         },
       },
     },
     emits: ['pre-step'],
     methods: {
       preStep() {
-        this.$emit('pre-step')
+        this.$emit('pre-step');
       },
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

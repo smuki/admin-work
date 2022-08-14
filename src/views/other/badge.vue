@@ -74,17 +74,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { Desktop } from '@vicons/ionicons5'
-  import { useDialog, useMessage, useNotification } from 'naive-ui'
+  import { defineComponent } from 'vue';
+  import { Desktop } from '@vicons/ionicons5';
+  import { useDialog, useMessage, useNotification } from 'naive-ui';
 
   export default defineComponent({
     name: 'Badge',
     components: { Desktop },
     setup() {
-      const dialog = useDialog()
-      const message = useMessage()
-      const notification = useNotification()
+      const dialog = useDialog();
+      const message = useMessage();
+      const notification = useNotification();
       function openConfirm(type: string) {
         switch (type) {
           case 'warning':
@@ -94,49 +94,49 @@
               positiveText: '确定',
               negativeText: '不确定',
               onPositiveClick: () => {
-                message.success('确定')
+                message.success('确定');
               },
               onNegativeClick: () => {
-                message.error('不确定')
+                message.error('不确定');
               },
-            })
-            break
+            });
+            break;
           case 'success':
             dialog.success({
               title: '成功',
               content: '小哥哥你太棒了~~',
               positiveText: '哇哦~',
-            })
-            break
+            });
+            break;
           case 'error':
             dialog.error({
               title: '错误',
               content: '知道错了吗，下次改了',
               positiveText: '快哭了',
               onPositiveClick: () => {
-                message.success('我知道了')
+                message.success('我知道了');
               },
-            })
-            break
+            });
+            break;
         }
       }
       function openMessage(type: string) {
         switch (type) {
           case 'info':
-            message.info('在心碎中认清遗憾 生命漫长也短暂跳动心脏长出藤蔓')
-            break
+            message.info('在心碎中认清遗憾 生命漫长也短暂跳动心脏长出藤蔓');
+            break;
           case 'error':
-            message.error('愿为险而战 跌入灰暗坠入深渊')
-            break
+            message.error('愿为险而战 跌入灰暗坠入深渊');
+            break;
           case 'warning':
-            message.warning('沾满泥土的脸 没有神的光环')
-            break
+            message.warning('沾满泥土的脸 没有神的光环');
+            break;
           case 'success':
-            message.success('握紧手中的平凡 此心自称无憾生命的火已点燃')
-            break
+            message.success('握紧手中的平凡 此心自称无憾生命的火已点燃');
+            break;
           case 'loading':
-            message.loading('有一天也许会走远 也许还能再相见')
-            break
+            message.loading('有一天也许会走远 也许还能再相见');
+            break;
         }
       }
       function openNotification(type: string) {
@@ -145,33 +145,33 @@
             notification.info({
               content: '在心碎中认清遗憾 生命漫长也短暂跳动心脏长出藤蔓',
               meta: '只要平凡',
-            })
-            break
+            });
+            break;
           case 'error':
             notification.error({
               content: '愿为险而战 跌入灰暗坠入深渊',
               meta: '只要平凡',
-            })
-            break
+            });
+            break;
           case 'warning':
             notification.warning({
               content: '沾满泥土的脸 没有神的光环',
               meta: '只要平凡',
-            })
-            break
+            });
+            break;
           case 'success':
             notification.success({
               content: '握紧手中的平凡 此心自称无憾生命的火已点燃',
               meta: '只要平凡',
-            })
-            break
+            });
+            break;
         }
       }
       return {
         openConfirm,
         openMessage,
         openNotification,
-      }
+      };
     },
-  })
+  });
 </script>

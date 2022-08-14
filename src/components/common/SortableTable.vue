@@ -48,11 +48,11 @@
 </template>
 
 <script lang="ts">
-  import { TablePropsType } from '@/types/components'
-  import { defineComponent, PropType, reactive, ref, toRef } from 'vue'
-  import draggable from 'vuedraggable'
-  import { SettingsOutline as SettingsIcon } from '@vicons/ionicons5'
-  import { Menu as MenuIcon } from '@vicons/ionicons5'
+  import { TablePropsType } from '@/types/components';
+  import { defineComponent, PropType, reactive, ref, toRef } from 'vue';
+  import draggable from 'vuedraggable';
+  import { SettingsOutline as SettingsIcon } from '@vicons/ionicons5';
+  import { Menu as MenuIcon } from '@vicons/ionicons5';
   export default defineComponent({
     name: 'SortableTable',
     components: { draggable, SettingsIcon, MenuIcon },
@@ -64,7 +64,7 @@
     },
     emits: ['update'],
     setup(props, { emit }) {
-      const tempTableProps = toRef(props, 'columns')
+      const tempTableProps = toRef(props, 'columns');
       const tempArray =
         tempTableProps.value
           ?.filter((it) => !!it.key)
@@ -72,33 +72,33 @@
             return {
               ...it,
               checked: ref(true),
-            } as TablePropsType
-          }) || []
-      const innerTableProps = reactive(tempArray)
+            } as TablePropsType;
+          }) || [];
+      const innerTableProps = reactive(tempArray);
       const isIndeterminate = ref(
-        innerTableProps.filter((it) => it.checked).length !== innerTableProps.length
-      )
-      const allChecked = ref(innerTableProps.every((it) => it.checked))
+        innerTableProps.filter((it) => it.checked).length !== innerTableProps.length,
+      );
+      const allChecked = ref(innerTableProps.every((it) => it.checked));
       const onAllChange = (value: boolean) => {
-        innerTableProps.forEach((it) => (it.checked = value))
+        innerTableProps.forEach((it) => (it.checked = value));
         emit(
           'update',
-          innerTableProps.filter((it) => it.checked)
-        )
-      }
+          innerTableProps.filter((it) => it.checked),
+        );
+      };
       const onChange = () => {
-        const checkedItems = innerTableProps.filter((it) => it.checked)
-        allChecked.value = checkedItems.length === innerTableProps.length
+        const checkedItems = innerTableProps.filter((it) => it.checked);
+        allChecked.value = checkedItems.length === innerTableProps.length;
         isIndeterminate.value =
-          checkedItems.length > 0 && checkedItems.length !== innerTableProps.length
-        emit('update', checkedItems)
-      }
+          checkedItems.length > 0 && checkedItems.length !== innerTableProps.length;
+        emit('update', checkedItems);
+      };
       const onReset = () => {
-        innerTableProps.forEach((it) => (it.checked = true))
-        onChange()
-      }
+        innerTableProps.forEach((it) => (it.checked = true));
+        onChange();
+      };
       function onUpdateValue() {
-        emit('update', innerTableProps)
+        emit('update', innerTableProps);
       }
       return {
         innerTableProps,
@@ -108,7 +108,7 @@
         onChange,
         onReset,
         onUpdateValue,
-      }
+      };
     },
-  })
+  });
 </script>

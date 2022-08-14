@@ -10,25 +10,25 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  import Clipboard from 'clipboard'
-  import { useMessage } from 'naive-ui'
+  import { defineComponent, ref } from 'vue';
+  import Clipboard from 'clipboard';
+  import { useMessage } from 'naive-ui';
 
   export default defineComponent({
     name: 'Clipboard',
     setup() {
-      const content = ref('')
-      const message = useMessage()
+      const content = ref('');
+      const message = useMessage();
       const onCopy = () => {
-        const clipboard = new Clipboard('.copy')
+        const clipboard = new Clipboard('.copy');
         clipboard.on('success', (e) => {
-          message.success('复制成功，内容为：' + e.text)
-        })
-      }
+          message.success('复制成功，内容为：' + e.text);
+        });
+      };
       return {
         content,
         onCopy,
-      }
+      };
     },
-  })
+  });
 </script>

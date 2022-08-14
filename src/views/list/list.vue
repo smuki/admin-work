@@ -40,16 +40,16 @@
 </template>
 
 <script lang="ts">
-  import { post } from '@/api/http'
-  import { getCommentList } from '@/api/url'
-  import { usePagination, useTable } from '@/hooks/table'
-  import { defineComponent, onMounted } from 'vue'
+  import { post } from '@/api/http';
+  import { getCommentList } from '@/api/url';
+  import { usePagination, useTable } from '@/hooks/table';
+  import { defineComponent, onMounted } from 'vue';
 
   export default defineComponent({
     name: 'List',
     setup() {
-      const table = useTable()
-      const pagination = usePagination(doRefresh)
+      const table = useTable();
+      const pagination = usePagination(doRefresh);
       function doRefresh() {
         post({
           url: getCommentList,
@@ -57,22 +57,22 @@
             return {
               page: pagination.page,
               pageSize: pagination.pageSize,
-            }
+            };
           },
         })
           .then((res) => {
-            table.handleSuccess(res)
-            pagination.setTotalSize(res.totalSize || 10)
+            table.handleSuccess(res);
+            pagination.setTotalSize(res.totalSize || 10);
           })
-          .catch(console.log)
+          .catch(console.log);
       }
-      onMounted(doRefresh)
+      onMounted(doRefresh);
       return {
         ...table,
         pagination,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style lang="scss" scoped>

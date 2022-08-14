@@ -73,15 +73,15 @@ export interface CachedRouteState {
 export interface OriginRoute {
   parentPath?: string
   menuUrl: string
-  menuName?: string
+  sName?: string
   routeName?: string
-  hidden?: boolean
+  bHidden?: boolean
   outLink?: string
   affix?: boolean
   cacheable?: boolean
   isRootPath?: boolean
   iconPrefix?: string
-  icon?: string
+  sIcon?: string
   badge?: string | number
   isSingle?: boolean
   localFilePath?: string

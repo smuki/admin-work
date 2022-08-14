@@ -104,7 +104,7 @@ export function generatorRoutes(res: Array<OriginRoute>) {
         name: it.routeName || getNameByUrl(it.menuUrl),
         component: isMenuFlag ? LAYOUT : getComponent(it),
         meta: {
-          hidden: !!it.hidden,
+          hidden: !!it.bHidden,
           title: it.sName,
           affix: !!it.affix,
           cacheable: !!it.cacheable,

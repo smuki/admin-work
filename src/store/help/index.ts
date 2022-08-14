@@ -105,10 +105,10 @@ export function generatorRoutes(res: Array<OriginRoute>) {
         component: isMenuFlag ? LAYOUT : getComponent(it),
         meta: {
           hidden: !!it.hidden,
-          title: it.menuName,
+          title: it.sName,
           affix: !!it.affix,
           cacheable: !!it.cacheable,
-          icon: it.icon || 'menu',
+          icon: it.sIcon || 'menu',
           iconPrefix: it.iconPrefix || 'iconfont',
           badge: it.badge,
           isRootPath: !!it.isRootPath,

@@ -11,7 +11,7 @@
       <template #default>
         <n-data-table
           :loading="tableLoading"
-          :data="dataList"
+          :data="roledata"
           :columns="tableColumns"
           :row-key="rowKey"
         />
@@ -50,12 +50,29 @@
   import { DataFormType, ModalDialogType, FormItem } from '@/types/components'
   import { DataTableColumn, NInput, TreeOption, useDialog, useMessage } from 'naive-ui'
   import { defineComponent, h, nextTick, onMounted, ref, shallowReactive } from 'vue'
+  
   interface RoleModeType {
     roleName: string
     roleCode: string
     description: string
   }
   const ROLE_CODE_FLAG = 'ROLE_'
+  const roledata= ref([
+    {
+      id: 1,
+      name: '超级管理员',
+      roleCode: 'ROLE_admin',
+      description: '超级管理员',
+      createTime: "2022-01-03"
+    },
+    {
+      id: 2,
+      name: '编辑员',
+      roleCode: 'ROLE_editor',
+      description: '编辑员',
+      createTime: "2022-01-02"
+    },
+  ])
   const formItems = [
     {
       label: '角色名称',
@@ -213,6 +230,7 @@
       const defaultCheckedKeys = shallowReactive([] as Array<string>)
       const defaultExpandedKeys = shallowReactive([] as Array<string>)
       function doRefresh() {
+        /*
         post<Array<RoleModeType>>({
           url: getRoleList,
           data: {},
@@ -221,6 +239,7 @@
             table.handleSuccess(res)
           })
           .catch(console.log)
+          */
       }
       function onAddItem() {
         modalDialogRef.value?.toggle()

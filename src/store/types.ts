@@ -33,7 +33,7 @@ export enum PageAnim {
 }
 
 export interface UserState {
-  userId: number
+  sUserId: number
   token: string
   roleId: number
   roles: string[] | null

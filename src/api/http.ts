@@ -13,14 +13,15 @@ export interface HttpOption {
 
 export interface Response<T = any> {
   totalSize: number | 0
-  code: number
+  sCode: string
   msg: string
   data: T
 }
 
 function http<T = any>({ url, data, method, headers, beforeRequest, afterRequest }: HttpOption) {
   const successHandler = (res: AxiosResponse<Response<T>>) => {
-    if (res.data.code === 200) {
+    if (res.data.sCode === 'SUCCESS') {
+      console.log(res.data)
       return res.data
     }
     throw new Error(res.data.msg || '请求失败，未知异常')

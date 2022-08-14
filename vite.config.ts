@@ -40,7 +40,24 @@ export default () => {
       ],
     },
     server: {
-      open: true,
+      host: '0.0.0.0',
+      // https: true,
+      port: 8082,
+      proxy: {
+        '/risk': {
+          //target: 'https://nest-api.buqiyuan.site/api/',
+          target: 'http://invoice.dev.ekuaibao.com.cn/risk/',
+          // target: 'http://localhost:7001',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/risk/, ''),
+        },
+        '/ws-api': {
+          target: 'wss://nest-api.buqiyuan.site',
+          // target: 'http://localhost:7002',
+          changeOrigin: true, //�Ƿ���������
+          ws: true,
+        },
+      },
     },
   }
 }

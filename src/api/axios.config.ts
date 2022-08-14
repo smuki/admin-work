@@ -1,13 +1,13 @@
 import Axios, { AxiosResponse } from 'axios'
 import qs from 'qs'
 
-export const baseURL = 'http://localhost:8080/'
+export const baseURL = '/risk/activity'
 
 export const CONTENT_TYPE = 'Content-Type'
 
 export const FORM_URLENCODED = 'application/x-www-form-urlencoded; charset=UTF-8'
 
-export const APPLICATION_JSON = 'application/json; charset=UTF-8'
+export const APPLICATION_JSON = 'application/json'
 
 export const TEXT_PLAIN = 'text/plain; charset=UTF-8'
 
@@ -25,6 +25,7 @@ service.interceptors.request.use(
     if (config.headers[CONTENT_TYPE] === FORM_URLENCODED) {
       config.data = qs.stringify(config.data)
     }
+    console.log(config)
     return config
   },
   (error) => {
@@ -34,6 +35,8 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response: AxiosResponse): AxiosResponse => {
+    console.log(response.status)
+    console.log(response)
     if (response.status === 200) {
       return response
     } else {

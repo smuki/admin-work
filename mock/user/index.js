@@ -7,7 +7,7 @@ import { adminRoutes, editorRoutes } from '../router'
 Mock.mock(RegExp(login), 'post', function (options) {
   const username = JSON.parse(options.body).username
   const data = {}
-  if (username === 'admin') {
+  if (username === 'yjy') {
     baseData.code = 200
     baseData.msg = '登录成功'
     data.nickName = '超级管理员'

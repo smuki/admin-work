@@ -9,7 +9,7 @@
           </div>
           <div class="title">Admin Work</div>
           <div class="sub-title">Vue3 + Vite2 + Typescript + Naive UI</div>
-          <div class="flex-1 flex justify-center items-center ttppii"> 生活，应该还有诗和远方 </div>
+          <div class="flex items-center justify-center flex-1 ttppii"> 生活，应该还有诗和远方 </div>
           <div class="bottom-wrapper">Admin Work {{ version }} · Made by qingqingxuan</div>
         </div>
       </div>
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="third-login">
+        <div v-if="false" class="third-login">
           <n-divider dashed>第三方登录</n-divider>
           <n-space justify="center">
             <n-icon color="var(--primary-color)" size="20">
@@ -139,7 +139,7 @@
     components: { PhoneIcon, PasswordIcon, LogoGithub, LogoAlipay, LogoWechat },
     setup() {
       const { version } = useAppInfo()
-      const username = ref('admin')
+      const username = ref('yjy')
       const password = ref('123456')
       const autoLogin = ref(true)
       const loading = ref(false)
@@ -156,12 +156,25 @@
         post({
           url: login,
           data: {
-            username: username.value,
-            password: password.value,
+            sUserId: username.value,
+            sHash: password.value,
           },
         })
-          .then(({ data }: Response) => {
+          .then((data: Response) => {
+            console.log('data.............')
+            console.log(data)
+            console.log(data.entity)
+            let user = {}
+            user.userId = data.entity.sUserId
+            user.token = data.Token
+            user.roleId = data.entity.sRole
+            user.roles = []
+            user.userName = data.entity.sUserName
+            user.nickName = data.entity.sUserName
+            user.avatar = data.entity.sAvatarUrl
+
             userStore.saveUser(data as UserState).then(() => {
+              console.log(router.getRoutes())
               router
                 .replace({
                   path: route.query.redirect ? (route.query.redirect as string) : '/',

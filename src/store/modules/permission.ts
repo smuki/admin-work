@@ -28,7 +28,7 @@ const usePermissionStore = defineStore('permission-route', {
     },
   },
   actions: {
-    async getRoutes(data: { sUserId: string; roleId: number }) {
+    async getRoutes(data: { sUserId: string }) {
       try {
         return generatorRoutes(adminRoutes);
         /*
@@ -55,7 +55,6 @@ const usePermissionStore = defineStore('permission-route', {
       const userStore = useUserStore();
       // 加载路由
       const accessRoutes = await this.getRoutes({
-        roleId: userStore.roleId,
         sUserId: userStore.sUserId,
       });
       const mapRoutes = mapTwoLevelRouter(accessRoutes);

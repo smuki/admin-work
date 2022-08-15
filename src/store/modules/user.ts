@@ -10,7 +10,6 @@ const useUserStore = defineStore('user-info', {
   state: () => {
     return {
       sUserId: '',
-      roleId: 0,
       sToken: '',
       sUserName: '',
       sAvatar: defaultAvatar,
@@ -21,7 +20,6 @@ const useUserStore = defineStore('user-info', {
       console.log(userInfo);
       return new Promise<UserState>((resolve) => {
         this.sUserId = userInfo.sUserId;
-        this.roleId = userInfo.roleId;
         this.sToken = userInfo.sToken;
         this.sUserName = userInfo.sUserName;
         this.sAvatar = userInfo.sAvatar || defaultAvatar;

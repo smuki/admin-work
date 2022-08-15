@@ -28,14 +28,14 @@ const usePermissionStore = defineStore('permission-route', {
     },
   },
   actions: {
-    async getRoutes(data: { userId: number; roleId: number }) {
+    async getRoutes(data: { sUserId: string; roleId: number }) {
       try {
         return generatorRoutes(adminRoutes);
         /*
         if (getMenuListByRoleId) {
           const res = await post({
             url: baseAddress + getMenuListByRoleId,
-            // 在实际的开发中，这个地方可以换成 token，让后端解析用户信息获取 userId 和 roleId，前端可以不用传 userId 和 roleId。
+            // 在实际的开发中，这个地方可以换成 token，让后端解析用户信息获取 sUserId 和 roleId，前端可以不用传 sUserId 和 roleId。
             // 这样可以增加安全性
             data,
           })
@@ -56,7 +56,7 @@ const usePermissionStore = defineStore('permission-route', {
       // 加载路由
       const accessRoutes = await this.getRoutes({
         roleId: userStore.roleId,
-        userId: userStore.userId,
+        sUserId: userStore.sUserId,
       });
       const mapRoutes = mapTwoLevelRouter(accessRoutes);
       mapRoutes.forEach((it: any) => {

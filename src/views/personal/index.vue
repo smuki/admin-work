@@ -10,7 +10,7 @@
                 :class="{ 'avatar-touch': touched, 'avatar-end': uploaded }"
                 @mouseenter="avatarTouchStart"
               >
-                <img :src="avatar" />
+                <img :src="sAvatar" />
               </div>
               <div class="flex items-center justify-center camera-layer" @click="uploadAvatar">
                 <n-icon size="40" color="#ffffff">
@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="text-xl">
-              {{ nickName }}
+              {{ sUserName }}
             </div>
             <div class="des-wrapper">
               <i class="el-icon-edit"></i>
@@ -206,8 +206,8 @@
             status: 0, // 0未完成，1已完成
           },
         ],
-        avatar: userStore.avatar,
-        nickName: userStore.nickName,
+        sAvatar: userStore.sAvatar,
+        sUserName: userStore.sUserName,
         avatarTouchStart,
         uploadAvatar,
       };

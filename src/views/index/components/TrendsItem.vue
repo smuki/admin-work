@@ -1,6 +1,6 @@
 <template>
   <div class="flex mt-4 ml-4 item-container">
-    <n-avatar circle :src="item.avatar" />
+    <n-avatar circle :src="item.sAvatar" />
     <div class="flex flex-col justify-between ml-4">
       <div class="text-sm">
         <slot name="title" :title="item.title"></slot>

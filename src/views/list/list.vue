@@ -5,11 +5,11 @@
         <n-grid-item>
           <div class="header-wrapper">
             <div class="avatar-wrapper">
-              <img class="avatar" :src="item.avatar" />
+              <img class="avatar" :src="item.sAvatar" />
               <img class="vip" src="/src/assets/img_vip_icon.png" />
             </div>
             <div class="nick-wrapper">
-              <span class="nick-name">{{ item.nickName }}</span>
+              <span class="nick-name">{{ item.sUserName }}</span>
               <n-rate :default-value="item.rate" readonly size="small" />
               <div class="content">
                 {{ item.content }}

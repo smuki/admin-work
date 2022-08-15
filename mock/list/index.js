@@ -117,10 +117,10 @@ Mock.mock(RegExp(getTableList), 'post', function ({ body }) {
     [`data|${size}`]: [
       {
         'id|+1': 1,
-        nickName: function () {
+        sUserName: function () {
           return Random.name();
         },
-        avatar: (isDev ? '' : '/admin-work') + '/static/images/img_avatar_01.jpeg',
+        sAvatar: (isDev ? '' : '/admin-work') + '/static/images/img_avatar_01.jpeg',
         'gender|0-1': 0, // 0男 1女
         'vip|0-1': 0, // 0不是 1是
         address: function () {
@@ -173,8 +173,8 @@ Mock.mock(RegExp(getCommentList), 'post', function ({ body }) {
         id: function () {
           return Random.string(10);
         },
-        avatar: Random.image('100x100', '#50B347', '#FFF', 'vue-admin-work'),
-        nickName: function () {
+        sAvatar: Random.image('100x100', '#50B347', '#FFF', 'vue-admin-work'),
+        sUserName: function () {
           return Random.cname();
         },
         content: function () {

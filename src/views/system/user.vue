@@ -177,7 +177,7 @@
           table.indexColumn,
           {
             title: '名称',
-            key: 'nickName',
+            key: 'sUserName',
           },
           {
             title: '性别',
@@ -189,7 +189,7 @@
           },
           {
             title: '头像',
-            key: 'avatar',
+            key: 'sAvatar',
             render: (rowData: any) => {
               return h(
                 NAvatar,
@@ -197,7 +197,7 @@
                   circle: true,
                   size: 'small',
                 },
-                { default: () => rowData.nickName.substring(0, 1) },
+                { default: () => rowData.sUserName.substring(0, 1) },
               );
             },
           },

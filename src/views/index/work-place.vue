@@ -4,7 +4,7 @@
       <n-grid :cols="4" :y-gap="15" item-responsive responsive="screen">
         <n-grid-item class="flex" span="4 s:2 m:2 l:2 xl:2 2xl:2">
           <div class="avatar-wrapper">
-            <img :src="avatar" />
+            <img :src="sAvatar" />
           </div>
           <div class="flex flex-col justify-around ml-3.5 flex-1">
             <div class="text-lg">早上好，Andy，青春只有一次，别让自己过得不精彩</div>
@@ -182,7 +182,7 @@
         },
       ];
       const userStore = useUserStore();
-      const avatar = computed(() => userStore.avatar);
+      const sAvatar = computed(() => userStore.sAvatar);
       const router = useRouter();
       const fastActionClick = ({ path = '/' }) => {
         router.push(path);
@@ -190,7 +190,7 @@
       return {
         isMobileScreen,
         waitingItmes,
-        avatar,
+        sAvatar,
         currentDate: date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate(),
         dataItems: [
           {

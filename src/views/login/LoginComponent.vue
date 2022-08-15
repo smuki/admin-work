@@ -163,17 +163,8 @@
           .then((data: Response) => {
             console.log('data.............');
             console.log(data);
-            console.log(data.entity);
-            let user = {};
-            user.userId = data.entity.sUserId;
-            user.token = data.Token;
-            user.roleId = data.entity.sRole;
-            user.roles = [];
-            user.userName = data.entity.sUserName;
-            user.nickName = data.entity.sUserName;
-            user.avatar = data.entity.sAvatarUrl;
 
-            userStore.saveUser(user as UserState).then(() => {
+            userStore.saveUser(data as UserState).then(() => {
               console.log(router.getRoutes());
               router
                 .replace({

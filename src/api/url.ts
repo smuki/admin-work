@@ -4,7 +4,7 @@ export const baseAddress = baseURL;
 
 export const test = '/test';
 
-export const login = '/ADM01300A';
+export const login = '/ADM08001A';
 
 export const updateUserInfo = '/updateUser';
 

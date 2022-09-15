@@ -44,12 +44,12 @@ export default () => {
       // https: true,
       port: 8082,
       proxy: {
-        '/risk': {
+        '/report': {
           //target: 'https://nest-api.buqiyuan.site/api/',
-          target: 'http://invoice.dev.ekuaibao.com.cn/risk/',
+          target: 'http://127.0.0.1:880/report',
           // target: 'http://localhost:7001',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/risk/, ''),
+          rewrite: (path) => path.replace(/^\/report/, ''),
         },
         '/ws-api': {
           target: 'wss://nest-api.buqiyuan.site',

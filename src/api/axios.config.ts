@@ -1,7 +1,7 @@
 import Axios, { AxiosResponse } from 'axios';
 import qs from 'qs';
 
-export const baseURL = '/risk/activity';
+export const baseURL = '/report/activity';
 
 export const CONTENT_TYPE = 'Content-Type';
 

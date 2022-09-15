@@ -38,25 +38,25 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, reactive, ref } from 'vue';
-  import Qrcode from 'qrcode';
-  import logo from '@/assets/logo.png';
-  import { useMessage } from 'naive-ui';
+  import { defineComponent, onMounted, reactive, ref } from 'vue'
+  import Qrcode from 'qrcode'
+  import logo from '@/assets/logo.png'
+  import { useMessage } from 'naive-ui'
   interface QrcodeItem {
-    title: string;
-    url: string;
+    title: string
+    url: string
   }
   export default defineComponent({
     name: 'Qrcode',
     setup() {
-      const qrText = ref('');
-      const qrUrl = ref('');
-      const qrcodeList = reactive([] as Array<QrcodeItem>);
-      const message = useMessage();
+      const qrText = ref('')
+      const qrUrl = ref('')
+      const qrcodeList = reactive([] as Array<QrcodeItem>)
+      const message = useMessage()
       const generatorCode = (it: any) => {
         if (!qrText.value) {
-          message.error('请输入二维码文本内容');
-          return;
+          message.error('请输入二维码文本内容')
+          return
         }
         Qrcode.toDataURL(qrText.value, {
           width: 250,
@@ -69,26 +69,26 @@
           qrcodeList.push({
             title: it.title,
             url: res,
-          } as QrcodeItem);
-        });
-      };
+          } as QrcodeItem)
+        })
+      }
       const generatorCodeWithLogo = () => {
-        const canvas = document.getElementById('logoCanvas') as HTMLCanvasElement;
+        const canvas = document.getElementById('logoCanvas') as HTMLCanvasElement
         Qrcode.toCanvas(canvas, qrText.value, {
           width: 250,
         }).then(() => {
-          const context = canvas.getContext('2d');
-          const img = new Image();
-          const x = (canvas.getBoundingClientRect().width - 50) / 2;
-          img.src = logo;
+          const context = canvas.getContext('2d')
+          const img = new Image()
+          const x = (canvas.getBoundingClientRect().width - 50) / 2
+          img.src = logo
           img.onload = () => {
-            context?.drawImage(img, x, x, 50, 50);
-          };
-        });
-      };
+            context?.drawImage(img, x, x, 50, 50)
+          }
+        })
+      }
       onMounted(() => {
-        qrText.value = 'vue-admin-work-x';
-        [
+        qrText.value = 'vue-admin-work-x'
+        ;[
           {
             title: '普通样式',
             lightColor: '',
@@ -115,17 +115,17 @@
             lightColor: '#409eff',
             darkColor: '',
           },
-        ].forEach(generatorCode);
-        generatorCodeWithLogo();
-      });
+        ].forEach(generatorCode)
+        generatorCodeWithLogo()
+      })
       return {
         qrcodeList,
         qrText,
         logo,
         qrUrl,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

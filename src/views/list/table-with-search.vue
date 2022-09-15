@@ -39,17 +39,11 @@
 </template>
 
 <script lang="ts">
-  import { post } from '@/api/http';
-  import { getTableList } from '@/api/url';
-  import { renderTag } from '@/hooks/form';
-  import {
-    usePagination,
-    useRowKey,
-    useTable,
-    useTableColumn,
-    useTableHeight,
-  } from '@/hooks/table';
-  import { DataFormType, FormItem } from '@/types/components';
+  import { post } from '@/api/http'
+  import { getTableList } from '@/api/url'
+  import { renderTag } from '@/hooks/form'
+  import { usePagination, useRowKey, useTable, useTableColumn, useTableHeight } from '@/hooks/table'
+  import { DataFormType, FormItem } from '@/types/components'
   import {
     DataTableColumn,
     NAvatar,
@@ -62,8 +56,8 @@
     NTimePicker,
     SelectOption,
     useMessage,
-  } from 'naive-ui';
-  import { defineComponent, h, onMounted, ref } from 'vue';
+  } from 'naive-ui'
+  import { defineComponent, h, onMounted, ref } from 'vue'
   const conditionItems: Array<FormItem> = [
     {
       key: 'name',
@@ -73,10 +67,10 @@
         return h(NInput, {
           value: formItem.value.value,
           onUpdateValue: (val) => {
-            formItem.value.value = val;
+            formItem.value.value = val
           },
           placeholder: '请输入姓名',
-        });
+        })
       },
     },
     {
@@ -99,9 +93,9 @@
           value: formItem.value.value,
           placeholder: '请选择用户姓别',
           onUpdateValue: (val) => {
-            formItem.value.value = val;
+            formItem.value.value = val
           },
-        });
+        })
       },
     },
     {
@@ -114,10 +108,10 @@
           placeholder: '请选择日期',
           style: 'width: 100%',
           onUpdateValue: (val) => {
-            formItem.value.value = val;
+            formItem.value.value = val
           },
           type: 'date',
-        });
+        })
       },
     },
     {
@@ -131,9 +125,9 @@
           placeholder: '请选择时间',
           style: 'width: 100%',
           onUpdateValue: (val) => {
-            formItem.value.value = val;
+            formItem.value.value = val
           },
-        });
+        })
       },
     },
     {
@@ -158,7 +152,7 @@
             value: formItem.value.value,
             placeholder: '请选择用户姓别',
             onUpdateValue: (val) => {
-              formItem.value.value = val;
+              formItem.value.value = val
             },
           },
           {
@@ -175,26 +169,26 @@
                         key: it.value,
                         label: it.label,
                         value: it.value,
-                      });
-                    });
+                      })
+                    })
                   },
-                },
-              );
+                }
+              )
             },
-          },
-        );
+          }
+        )
       },
     },
-  ];
+  ]
   export default defineComponent({
     name: 'TableWithSearch',
     setup() {
-      const searchForm = ref<DataFormType | null>(null);
-      const pagination = usePagination(doRefresh);
-      pagination.pageSize = 20;
-      const table = useTable();
-      const message = useMessage();
-      const rowKey = useRowKey('id');
+      const searchForm = ref<DataFormType | null>(null)
+      const pagination = usePagination(doRefresh)
+      pagination.pageSize = 20
+      const table = useTable()
+      const message = useMessage()
+      const rowKey = useRowKey('id')
       const tableColumns = useTableColumn(
         [
           table.selectionColumn,
@@ -208,7 +202,7 @@
             key: 'gender',
             width: 80,
             render: (rowData) => {
-              return h('div', rowData.gender === 0 ? '男' : '女');
+              return h('div', rowData.gender === 0 ? '男' : '女')
             },
           },
           {
@@ -221,8 +215,8 @@
                   circle: true,
                   size: 'small',
                 },
-                { default: () => rowData.sUserName.substring(0, 1) },
-              );
+                { default: () => rowData.sUserName.substring(0, 1) }
+              )
             },
           },
           {
@@ -254,8 +248,8 @@
         ],
         {
           align: 'center',
-        } as DataTableColumn,
-      );
+        } as DataTableColumn
+      )
       function doRefresh() {
         post({
           url: getTableList,
@@ -263,27 +257,27 @@
             return {
               page: pagination.page,
               pageSize: pagination.pageSize,
-            };
+            }
           },
         })
           .then((res) => {
-            table.handleSuccess(res);
-            pagination.setTotalSize(res.totalSize || 10);
+            table.handleSuccess(res)
+            pagination.setTotalSize(res.totalSize || 10)
           })
-          .catch(console.log);
+          .catch(console.log)
       }
       function onSearch() {
         message.success(
-          '模拟查询成功，参数为：' + JSON.stringify(searchForm.value?.generatorParams()),
-        );
+          '模拟查询成功，参数为：' + JSON.stringify(searchForm.value?.generatorParams())
+        )
       }
       function onResetSearch() {
-        searchForm.value?.reset();
+        searchForm.value?.reset()
       }
       onMounted(async () => {
-        table.tableHeight.value = await useTableHeight();
-        doRefresh();
-      });
+        table.tableHeight.value = await useTableHeight()
+        doRefresh()
+      })
       return {
         ...table,
         rowKey,
@@ -293,9 +287,9 @@
         conditionItems,
         onSearch,
         onResetSearch,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

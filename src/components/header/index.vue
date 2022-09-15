@@ -16,20 +16,20 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import usePermissionStore from '@/store/modules/permission';
-  import { defineComponent } from 'vue';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import usePermissionStore from '@/store/modules/permission'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'VAWHeader',
     setup() {
-      const appConfig = useAppConfigStore();
-      const permissionStore = usePermissionStore();
+      const appConfig = useAppConfigStore()
+      const permissionStore = usePermissionStore()
       return {
         permissionStore,
         appConfig,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style scoped lang="scss">

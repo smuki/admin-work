@@ -5,33 +5,33 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { ThemeMode } from '@/store/types';
-  import { darkTheme } from 'naive-ui';
-  import { computed, defineComponent } from 'vue';
-  import LoginComponent from './LoginComponent.vue';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { ThemeMode } from '@/store/types'
+  import { darkTheme } from 'naive-ui'
+  import { computed, defineComponent } from 'vue'
+  import LoginComponent from './LoginComponent.vue'
   export default defineComponent({
     name: 'Login',
     components: { LoginComponent },
     setup() {
-      const appConfig = useAppConfigStore();
+      const appConfig = useAppConfigStore()
       const theme = computed(() => {
-        return appConfig.theme === ThemeMode.DARK ? darkTheme : null;
-      });
+        return appConfig.theme === ThemeMode.DARK ? darkTheme : null
+      })
       const themeOverrides = computed(() => {
         return {
           common: {
             primaryColor: appConfig.themeColor,
             primaryColorHover: appConfig.themeColor,
           },
-        };
-      });
+        }
+      })
       return {
         theme,
         themeOverrides,
-      };
+      }
     },
-  });
+  })
 </script>
 <style>
   @keyframes grow {

@@ -1,7 +1,7 @@
-import { createPinia } from 'pinia';
-import PersistPlugin from './plugin/persist';
+import { createPinia } from 'pinia'
+import PersistPlugin from './plugin/persist'
 
-const pinia = createPinia();
-pinia.use(PersistPlugin);
+const pinia = createPinia()
+pinia.use(PersistPlugin)
 
-export default pinia;
+export default pinia

@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { RefreshOutline as RefreshIcon } from '@vicons/ionicons5';
+  import { defineComponent, ref } from 'vue'
+  import { RefreshOutline as RefreshIcon } from '@vicons/ionicons5'
 
   export default defineComponent({
     name: 'TableConfig',
@@ -26,17 +26,17 @@
     emits: ['refresh', 'update-border'],
     setup(props, { emit }) {
       function doRefresh() {
-        emit('refresh');
+        emit('refresh')
       }
-      const border = ref(false);
+      const border = ref(false)
       function updateBorder() {
-        emit('update-border', border.value);
+        emit('update-border', border.value)
       }
       return {
         border,
         doRefresh,
         updateBorder,
-      };
+      }
     },
-  });
+  })
 </script>

@@ -1,4 +1,4 @@
-import { LAYOUT } from '@/store/keys';
+import { LAYOUT } from '@/store/keys'
 
 export const constantRoutes = [
   {
@@ -65,4 +65,4 @@ export const constantRoutes = [
       hidden: true,
     },
   },
-];
+]

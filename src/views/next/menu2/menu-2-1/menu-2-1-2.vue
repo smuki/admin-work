@@ -5,15 +5,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
     name: 'Menu212',
     setup() {
-      const content = ref('');
+      const content = ref('')
       return {
         content,
-      };
+      }
     },
-  });
+  })
 </script>

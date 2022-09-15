@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-  import { dispose, graphic } from 'echarts';
-  import useEcharts from '@/hooks/useEcharts';
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { dispose, graphic } from 'echarts'
+  import useEcharts from '@/hooks/useEcharts'
   export default defineComponent({
     name: 'DepartmentChart',
     setup() {
-      const loading = ref(true);
-      const departmentChart = ref<HTMLDivElement | null>(null);
+      const loading = ref(true)
+      const departmentChart = ref<HTMLDivElement | null>(null)
       const init = () => {
         const option = {
           tooltip: {
@@ -81,29 +81,29 @@
               ],
             },
           ],
-        };
+        }
         setTimeout(() => {
-          loading.value = false;
+          loading.value = false
           nextTick(() => {
-            const echartInstance = useEcharts(departmentChart.value as HTMLDivElement);
-            echartInstance.setOption(option);
-          });
-        }, 1000);
-      };
+            const echartInstance = useEcharts(departmentChart.value as HTMLDivElement)
+            echartInstance.setOption(option)
+          })
+        }, 1000)
+      }
       const updateChart = () => {
-        useEcharts(departmentChart.value as HTMLDivElement).resize();
-      };
-      onMounted(init);
+        useEcharts(departmentChart.value as HTMLDivElement).resize()
+      }
+      onMounted(init)
       onBeforeUnmount(() => {
-        dispose(departmentChart.value as HTMLDivElement);
-      });
+        dispose(departmentChart.value as HTMLDivElement)
+      })
       return {
         loading,
         departmentChart,
         updateChart,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

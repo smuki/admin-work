@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-  import useEcharts from '@/hooks/useEcharts';
-  import { defineComponent, onMounted, ref, toRef } from '@vue/runtime-core';
-  import { EChartsCoreOption } from 'echarts';
+  import useEcharts from '@/hooks/useEcharts'
+  import { defineComponent, onMounted, ref, toRef } from '@vue/runtime-core'
+  import { EChartsCoreOption } from 'echarts'
 
   export default defineComponent({
     name: 'LineChart',
@@ -20,18 +20,18 @@
       },
     },
     setup(prop) {
-      const eChartContainer = ref<HTMLDivElement | null>(null);
+      const eChartContainer = ref<HTMLDivElement | null>(null)
       onMounted(() => {
-        const options = toRef(prop, 'options');
-        const instance = useEcharts(eChartContainer.value as HTMLDivElement);
-        instance.setOption(options.value as EChartsCoreOption);
-        instance.resize();
-      });
+        const options = toRef(prop, 'options')
+        const instance = useEcharts(eChartContainer.value as HTMLDivElement)
+        instance.setOption(options.value as EChartsCoreOption)
+        instance.resize()
+      })
       return {
         eChartContainer,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style></style>

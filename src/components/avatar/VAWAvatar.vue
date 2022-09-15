@@ -17,18 +17,18 @@
 </template>
 
 <script lang="ts">
-  import { NIcon, useDialog } from 'naive-ui';
-  import { defineComponent, h } from 'vue';
-  import { Menu, LogInOutline, CaretDownSharp } from '@vicons/ionicons5';
-  import useUserStore from '@/store/modules/user';
-  import { useRouter } from 'vue-router';
+  import { NIcon, useDialog } from 'naive-ui'
+  import { defineComponent, h } from 'vue'
+  import { Menu, LogInOutline, CaretDownSharp } from '@vicons/ionicons5'
+  import useUserStore from '@/store/modules/user'
+  import { useRouter } from 'vue-router'
 
   export default defineComponent({
     name: 'VAWAvatar',
     components: { CaretDownSharp },
     setup() {
-      const userStore = useUserStore();
-      const router = useRouter();
+      const userStore = useUserStore()
+      const router = useRouter()
       const options = [
         {
           label: '个人中心',
@@ -46,11 +46,11 @@
               default: () => h(LogInOutline),
             }),
         },
-      ];
+      ]
       function personalCenter() {
-        router.push('/personal/info');
+        router.push('/personal/info')
       }
-      const dialog = useDialog();
+      const dialog = useDialog()
       function logout() {
         dialog.warning({
           title: '提示',
@@ -59,28 +59,28 @@
           negativeText: '再想想',
           onPositiveClick: () => {
             userStore.logout().then(() => {
-              window.location.reload();
-            });
+              window.location.reload()
+            })
           },
-        });
+        })
       }
       function handleSelect(key: string) {
         switch (key) {
           case 'personal-center':
-            personalCenter();
-            break;
+            personalCenter()
+            break
           case 'logout':
-            logout();
-            break;
+            logout()
+            break
         }
       }
       return {
         userStore,
         options,
         handleSelect,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

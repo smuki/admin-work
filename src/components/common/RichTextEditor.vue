@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted } from '@vue/runtime-core';
-  import Quill from 'quill';
-  import 'quill/dist/quill.snow.css';
+  import { defineComponent, onMounted } from '@vue/runtime-core'
+  import Quill from 'quill'
+  import 'quill/dist/quill.snow.css'
   export default defineComponent({
     name: 'RichTextEditor',
     props: {
@@ -15,7 +15,7 @@
       },
     },
     setup() {
-      let quill: Quill | null = null;
+      let quill: Quill | null = null
       const init = () => {
         const options = {
           modules: {
@@ -41,25 +41,25 @@
           },
           placeholder: '请输入文章内容…',
           theme: 'snow',
-        };
-        quill = new Quill(document.getElementById('richTextEditor') as Element, options);
-      };
-      onMounted(init);
+        }
+        quill = new Quill(document.getElementById('richTextEditor') as Element, options)
+      }
+      onMounted(init)
       const getHtmlContent = () => {
-        return (document.getElementById('richTextEditor')?.firstChild as any).innerHTML;
-      };
+        return (document.getElementById('richTextEditor')?.firstChild as any).innerHTML
+      }
       const getJsonContent = () => {
-        return JSON.stringify(quill?.getContents());
-      };
+        return JSON.stringify(quill?.getContents())
+      }
 
       const setContents = (content: any) => {
-        quill?.setContents(content);
-      };
+        quill?.setContents(content)
+      }
       return {
         getHtmlContent,
         getJsonContent,
         setContents,
-      };
+      }
     },
-  });
+  })
 </script>

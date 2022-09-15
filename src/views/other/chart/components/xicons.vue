@@ -18,31 +18,31 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref } from 'vue';
-  import * as AllIcons from '@vicons/ionicons5';
-  import { useMessage } from 'naive-ui';
+  import { defineComponent, reactive, ref } from 'vue'
+  import * as AllIcons from '@vicons/ionicons5'
+  import { useMessage } from 'naive-ui'
 
   export default defineComponent({
     name: 'XIcons',
     components: AllIcons,
     setup() {
-      const loading = ref(false);
-      const message = useMessage();
-      const iconArray = Object.keys(AllIcons);
+      const loading = ref(false)
+      const message = useMessage()
+      const iconArray = Object.keys(AllIcons)
       const onCopy = (item: string) => {
-        message.success('复制成功:' + item);
-      };
-      let index = 0;
-      const size = 50;
-      const tempIcon = reactive([] as string[]);
-      tempIcon.push(...iconArray.slice(index, size));
+        message.success('复制成功:' + item)
+      }
+      let index = 0
+      const size = 50
+      const tempIcon = reactive([] as string[])
+      tempIcon.push(...iconArray.slice(index, size))
       function onLoadMore() {
         if (tempIcon.length >= iconArray.length) {
-          message.success('没有更多了');
-          return;
+          message.success('没有更多了')
+          return
         }
-        index++;
-        tempIcon.push(...iconArray.slice(index * size, index * size + size));
+        index++
+        tempIcon.push(...iconArray.slice(index * size, index * size + size))
       }
       return {
         loading,
@@ -50,9 +50,9 @@
         tempIcon,
         onCopy,
         onLoadMore,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

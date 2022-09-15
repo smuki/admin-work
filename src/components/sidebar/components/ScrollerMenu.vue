@@ -19,13 +19,13 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { DeviceType } from '@/store/types';
-  import type { MenuOption } from 'naive-ui';
-  import { defineComponent, PropType, ref, shallowReactive, watch, watchEffect } from 'vue';
-  import { RouteRecordNormalized, useRoute, useRouter } from 'vue-router';
-  import { isExternal } from '@/utils';
-  import { transfromMenu } from '@/store/help';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { DeviceType } from '@/store/types'
+  import type { MenuOption } from 'naive-ui'
+  import { defineComponent, PropType, ref, shallowReactive, watch, watchEffect } from 'vue'
+  import { RouteRecordNormalized, useRoute, useRouter } from 'vue-router'
+  import { isExternal } from '@/utils'
+  import { transfromMenu } from '@/store/help'
 
   export default defineComponent({
     name: 'ScrollerMenu',
@@ -36,54 +36,54 @@
       },
     },
     setup(props) {
-      const appConfig = useAppConfigStore();
-      const menuOptions = shallowReactive([] as Array<MenuOption>);
-      const defaultPath = ref('');
-      const defaultExpandKeys = ref<Array<string>>([]);
-      const currentRoute = useRoute();
-      const router = useRouter();
-      defaultPath.value = currentRoute.fullPath;
-      handleExpandPath();
+      const appConfig = useAppConfigStore()
+      const menuOptions = shallowReactive([] as Array<MenuOption>)
+      const defaultPath = ref('')
+      const defaultExpandKeys = ref<Array<string>>([])
+      const currentRoute = useRoute()
+      const router = useRouter()
+      defaultPath.value = currentRoute.fullPath
+      handleExpandPath()
       function handleMenu(routes?: Array<RouteRecordNormalized>) {
-        menuOptions.length = 0;
-        const tempMenus = transfromMenu(routes || []);
-        menuOptions.push(...tempMenus);
+        menuOptions.length = 0
+        const tempMenus = transfromMenu(routes || [])
+        menuOptions.push(...tempMenus)
       }
       function handleExpandPath() {
-        const keys = defaultPath.value.split('/');
+        const keys = defaultPath.value.split('/')
         const results = keys
           .filter((it) => !!it)
           .reduce((pre, cur) => {
-            const lastItem = pre[pre.length - 1];
+            const lastItem = pre[pre.length - 1]
             if (!lastItem) {
-              pre.push('/' + cur);
+              pre.push('/' + cur)
             } else {
-              pre.push(lastItem + '/' + cur);
+              pre.push(lastItem + '/' + cur)
             }
-            return pre;
-          }, [] as string[]);
-        defaultExpandKeys.value = Array.from(new Set([...defaultExpandKeys.value, ...results]));
+            return pre
+          }, [] as string[])
+        defaultExpandKeys.value = Array.from(new Set([...defaultExpandKeys.value, ...results]))
       }
       function onMenuClick(key: string) {
-        if (isExternal(key)) return;
-        router.push(key);
+        if (isExternal(key)) return
+        router.push(key)
         if (appConfig.deviceType === DeviceType.MOBILE) {
-          appConfig.toggleCollapse(true);
+          appConfig.toggleCollapse(true)
         }
       }
       function onMenuExpandedKeysClick(keys: string[]) {
-        defaultExpandKeys.value = keys;
+        defaultExpandKeys.value = keys
       }
       watch(
         () => currentRoute.fullPath,
         (newVal) => {
-          defaultPath.value = newVal;
-          handleExpandPath();
-        },
-      );
+          defaultPath.value = newVal
+          handleExpandPath()
+        }
+      )
       watchEffect(() => {
-        handleMenu(props.routes);
-      });
+        handleMenu(props.routes)
+      })
       return {
         defaultPath,
         defaultExpandKeys,
@@ -91,9 +91,9 @@
         menuOptions,
         onMenuClick,
         onMenuExpandedKeysClick,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

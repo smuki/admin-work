@@ -3,17 +3,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { projectName } from '../../setting';
+  import { defineComponent } from 'vue'
+  import { projectName } from '../../setting'
 
   export default defineComponent({
     name: 'Footer',
     setup() {
       return {
         projectName,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

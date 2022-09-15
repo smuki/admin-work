@@ -51,27 +51,27 @@
 </template>
 
 <script lang="ts" setup>
-  import useAppInfo from '@/hooks/useAppInfo';
-  import { onMounted, reactive, ref } from 'vue';
-  import { Close } from '@vicons/ionicons5';
-  const { version, dependencies, devDependencies } = useAppInfo();
-  const showContact = ref(false);
-  const dependenciesList = reactive<Record<string, string>[]>([]);
-  const devDependenciesList = reactive<Record<string, string>[]>([]);
+  import useAppInfo from '@/hooks/useAppInfo'
+  import { onMounted, reactive, ref } from 'vue'
+  import { Close } from '@vicons/ionicons5'
+  const { version, dependencies, devDependencies } = useAppInfo()
+  const showContact = ref(false)
+  const dependenciesList = reactive<Record<string, string>[]>([])
+  const devDependenciesList = reactive<Record<string, string>[]>([])
   onMounted(() => {
-    const depValues = Object.values(dependencies);
+    const depValues = Object.values(dependencies)
     Object.keys(dependencies).map((it, index) => {
       dependenciesList.push({
         label: it,
         value: depValues[index],
-      });
-    });
-    const devDepValues = Object.values(devDependencies);
+      })
+    })
+    const devDepValues = Object.values(devDependencies)
     Object.keys(devDependencies).map((it, index) => {
       devDependenciesList.push({
         label: it,
         value: devDepValues[index],
-      });
-    });
-  });
+      })
+    })
+  })
 </script>

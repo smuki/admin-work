@@ -20,15 +20,15 @@
 </template>
 
 <script lang="ts">
-  import useEcharts from '@/hooks/useEcharts';
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-  import { dispose, graphic } from 'echarts';
+  import useEcharts from '@/hooks/useEcharts'
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { dispose, graphic } from 'echarts'
 
   export default defineComponent({
     name: 'StudentChart',
     setup() {
-      const loading = ref(true);
-      const studentChart = ref<HTMLDivElement | null>(null);
+      const loading = ref(true)
+      const studentChart = ref<HTMLDivElement | null>(null)
       const init = () => {
         const option = {
           grid: {
@@ -76,28 +76,28 @@
               },
             },
           ],
-        };
+        }
         setTimeout(() => {
-          loading.value = false;
+          loading.value = false
           nextTick(() => {
-            useEcharts(studentChart.value as HTMLDivElement).setOption(option);
-          });
-        }, 1000);
-      };
+            useEcharts(studentChart.value as HTMLDivElement).setOption(option)
+          })
+        }, 1000)
+      }
       const updateChart = () => {
-        useEcharts(studentChart.value as HTMLDivElement).resize();
-      };
-      onMounted(init);
+        useEcharts(studentChart.value as HTMLDivElement).resize()
+      }
+      onMounted(init)
       onBeforeUnmount(() => {
-        dispose(studentChart.value as HTMLDivElement);
-      });
+        dispose(studentChart.value as HTMLDivElement)
+      })
       return {
         loading,
         updateChart,
         studentChart,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

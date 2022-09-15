@@ -1,4 +1,4 @@
-import { LAYOUT } from '@/store/keys';
+import { LAYOUT } from '@/store/keys'
 
 export const asyncRoutes = [
   {
@@ -36,4 +36,4 @@ export const asyncRoutes = [
       },
     ],
   },
-];
+]

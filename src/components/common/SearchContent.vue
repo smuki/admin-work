@@ -12,26 +12,26 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, ref } from 'vue'
   export default defineComponent({
     name: 'SearchContent',
     setup() {
-      const show = ref(false);
-      const content = ref('');
+      const show = ref(false)
+      const content = ref('')
       function onClose() {
-        show.value = false;
-        content.value = '';
+        show.value = false
+        content.value = ''
       }
       function onShow() {
-        show.value = true;
+        show.value = true
       }
       function onSearch() {
         if (!content.value) {
-          return;
+          return
         }
-        content.value = '';
-        show.value = false;
-        window.open('https://www.baidu.com/s?wd=' + content.value);
+        content.value = ''
+        show.value = false
+        window.open('https://www.baidu.com/s?wd=' + content.value)
       }
       return {
         show,
@@ -39,9 +39,9 @@
         onClose,
         onShow,
         onSearch,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

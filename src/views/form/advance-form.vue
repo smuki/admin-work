@@ -156,20 +156,20 @@
 </template>
 
 <script lang="ts">
-  import { FormRules, NForm, useMessage } from 'naive-ui';
-  import { defineComponent, ref } from 'vue';
+  import { FormRules, NForm, useMessage } from 'naive-ui'
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
     name: 'AdvanceForm',
     setup() {
-      const verifyForm = ref<typeof NForm | null>(null);
+      const verifyForm = ref<typeof NForm | null>(null)
       const baseInfoModel = ref({
         name: null,
         isOnLine: null,
         joinType: null,
         address: null,
         remark: null,
-      });
+      })
       const rules = {
         name: {
           required: true,
@@ -191,27 +191,27 @@
           message: '请输入学校地址',
           trigger: 'blur',
         },
-      } as FormRules;
-      const message = useMessage();
+      } as FormRules
+      const message = useMessage()
       function onVerifyForm() {
         verifyForm.value?.validate((errors: any) => {
           if (!errors) {
-            message.success('验证成功');
+            message.success('验证成功')
           } else {
-            message.error('验证失败');
+            message.error('验证失败')
           }
-        });
+        })
       }
-      const cols = ref(2);
+      const cols = ref(2)
       return {
         verifyForm,
         baseInfoModel,
         rules,
         onVerifyForm,
         cols,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

@@ -22,13 +22,13 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { CheckmarkCircle } from '@vicons/ionicons5';
+  import { defineComponent } from 'vue'
+  import { CheckmarkCircle } from '@vicons/ionicons5'
 
   export default defineComponent({
     name: 'Success',
     components: { CheckmarkCircle },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

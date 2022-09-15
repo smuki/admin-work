@@ -26,37 +26,37 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, h, onMounted, ref, Ref, unref } from 'vue';
-  import { post } from '@/api/http';
-  import { getMenuList } from '@/api/url';
+  import { defineComponent, h, onMounted, ref, Ref, unref } from 'vue'
+  import { post } from '@/api/http'
+  import { getMenuList } from '@/api/url'
   import {
     TableActionModel,
     useRenderAction,
     useRowKey,
     useTable,
     useTableColumn,
-  } from '@/hooks/table';
-  import { NIcon, useDialog, useMessage } from 'naive-ui';
-  import { TableColumn } from 'naive-ui/lib/data-table/src/interface';
-  import SvgIcon from '@/components/svg-icon/index.vue';
-  import IconSelector from '@/components/common/IconSelector.vue';
-  import { DataFormType, ModalDialogType, FormItem } from '@/types/components';
-  import { renderInput, renderSwitch, renderTreeSelect } from '@/hooks/form';
-  import { isExternal, transformTreeSelect } from '@/utils';
-  import { findRouteByUrl } from '@/store/help';
-  import usePermissionStore from '@/store/modules/permission';
+  } from '@/hooks/table'
+  import { NIcon, useDialog, useMessage } from 'naive-ui'
+  import { TableColumn } from 'naive-ui/lib/data-table/src/interface'
+  import SvgIcon from '@/components/svg-icon/index.vue'
+  import IconSelector from '@/components/common/IconSelector.vue'
+  import { DataFormType, ModalDialogType, FormItem } from '@/types/components'
+  import { renderInput, renderSwitch, renderTreeSelect } from '@/hooks/form'
+  import { isExternal, transformTreeSelect } from '@/utils'
+  import { findRouteByUrl } from '@/store/help'
+  import usePermissionStore from '@/store/modules/permission'
   export default defineComponent({
     name: 'Menu',
     setup() {
-      let actionModel = 'add';
-      let tempItem: { menuUrl: string } | null = null;
-      const table = useTable();
-      const naiveDialog = useDialog();
-      const message = useMessage();
-      const permissionStore = usePermissionStore();
-      const modalDialog = ref<ModalDialogType | null>(null);
-      const dataForm = ref<DataFormType | null>(null);
-      const rowKey = useRowKey('menuUrl');
+      let actionModel = 'add'
+      let tempItem: { menuUrl: string } | null = null
+      const table = useTable()
+      const naiveDialog = useDialog()
+      const message = useMessage()
+      const permissionStore = usePermissionStore()
+      const modalDialog = ref<ModalDialogType | null>(null)
+      const dataForm = ref<DataFormType | null>(null)
+      const rowKey = useRowKey('menuUrl')
       const tableColumns = useTableColumn(
         [
           {
@@ -89,33 +89,33 @@
                               h('use', {
                                 href: '#icon-menu',
                               }),
-                            ];
+                            ]
                           },
-                        },
-                      );
+                        }
+                      )
                     },
-                  });
+                  })
             },
           },
           {
             title: '是否缓存',
             key: 'cacheable',
             render: (rowData) => {
-              return h('div', null, { default: () => (rowData.cacheable ? '是' : '否') });
+              return h('div', null, { default: () => (rowData.cacheable ? '是' : '否') })
             },
           },
           {
             title: '是否隐藏',
             key: 'hidden',
             render: (rowData) => {
-              return h('div', null, { default: () => (rowData.hidden ? '是' : '否') });
+              return h('div', null, { default: () => (rowData.hidden ? '是' : '否') })
             },
           },
           {
             title: '是否固定标题栏',
             key: 'affix',
             render: (rowData) => {
-              return h('div', null, { default: () => (rowData.affix ? '是' : '否') });
+              return h('div', null, { default: () => (rowData.affix ? '是' : '否') })
             },
           },
           {
@@ -132,14 +132,14 @@
                   type: 'error',
                   onClick: onDeleteItem.bind(null, rowData),
                 },
-              ] as TableActionModel[]);
+              ] as TableActionModel[])
             },
           },
         ],
         {
           align: 'center',
-        } as TableColumn,
-      );
+        } as TableColumn
+      )
       const itemFormOptions = [
         {
           label: '上级菜单',
@@ -147,10 +147,10 @@
           value: ref(null),
           validator: (formItem, message) => {
             if (!formItem.value.value) {
-              message.error('请选择上级菜单');
-              return false;
+              message.error('请选择上级菜单')
+              return false
             }
-            return true;
+            return true
           },
           render: (formItem) =>
             renderTreeSelect(
@@ -158,7 +158,7 @@
               transformTreeSelect(unref(table.dataList)!, 'menuName', 'menuUrl'),
               {
                 showPath: true,
-              },
+              }
             ),
         },
         {
@@ -183,8 +183,8 @@
               disabled: (formItem.disabled as Ref<boolean>).value,
             }),
           reset: (formItem) => {
-            formItem.value.value = null;
-            (formItem.disabled as Ref<boolean>).value = false;
+            formItem.value.value = null
+            ;(formItem.disabled as Ref<boolean>).value = false
           },
         },
         {
@@ -204,9 +204,9 @@
             return h(IconSelector, {
               defaultIcon: formItem.value.value,
               onUpdateIcon: (newIcon: any) => {
-                formItem.value.value = newIcon.name;
+                formItem.value.value = newIcon.name
               },
-            });
+            })
           },
         },
         {
@@ -227,59 +227,59 @@
           value: ref(true),
           render: (formItem) => renderSwitch(formItem.value),
         },
-      ] as Array<FormItem>;
+      ] as Array<FormItem>
       function doRefresh() {
         post({
           url: getMenuList,
           data: {},
         })
           .then(table.handleSuccess)
-          .catch(console.log);
+          .catch(console.log)
       }
       function onAddItem() {
-        actionModel = 'add';
+        actionModel = 'add'
         modalDialog.value?.show().then(() => {
-          dataForm.value?.reset();
-        });
+          dataForm.value?.reset()
+        })
       }
       function onUpdateItem(item: any) {
-        actionModel = 'edit';
-        tempItem = item;
+        actionModel = 'edit'
+        tempItem = item
         itemFormOptions.forEach((it) => {
-          it.value.value = item[it.key] || null;
+          it.value.value = item[it.key] || null
           if (it.key === 'menuUrl' && it.disabled) {
             if (isExternal(item.menuUrl)) {
-              it.value.value = '';
+              it.value.value = ''
             }
-            (it.disabled as Ref<boolean>).value = true;
+            ;(it.disabled as Ref<boolean>).value = true
           }
-        });
-        const external = itemFormOptions.find((it) => it.key === 'redirect');
+        })
+        const external = itemFormOptions.find((it) => it.key === 'redirect')
         if (isExternal(item.menuUrl)) {
-          external!.value.value = item.menuUrl;
+          external!.value.value = item.menuUrl
         }
-        modalDialog.value?.show();
+        modalDialog.value?.show()
       }
       function onConfirm() {
         if (actionModel === 'add') {
           if (dataForm.value?.validator()) {
             message.success(
-              '模拟创建菜单成功, 参数为:' + JSON.stringify(dataForm.value?.generatorParams()),
-            );
+              '模拟创建菜单成功, 参数为:' + JSON.stringify(dataForm.value?.generatorParams())
+            )
           }
         } else {
           if (dataForm.value?.validator()) {
-            const params = dataForm.value?.generatorParams();
+            const params = dataForm.value?.generatorParams()
             if (tempItem) {
               const tempRoute = findRouteByUrl(
                 permissionStore.getPermissionSideBar,
-                tempItem.menuUrl,
-              );
+                tempItem.menuUrl
+              )
               if (tempRoute && tempRoute.meta && tempRoute.meta.badge) {
-                (tempRoute.meta as any).badge = (params as any).badge || '';
+                ;(tempRoute.meta as any).badge = (params as any).badge || ''
               }
             }
-            message.success('模拟修改菜单成功, 参数为:' + JSON.stringify(params));
+            message.success('模拟修改菜单成功, 参数为:' + JSON.stringify(params))
           }
         }
       }
@@ -289,11 +289,11 @@
           content: '是否要删除此数据？',
           positiveText: '删除',
           onPositiveClick: () => {
-            message.success('模拟删除成功，参数为：' + JSON.stringify(item));
+            message.success('模拟删除成功，参数为：' + JSON.stringify(item))
           },
-        });
+        })
       }
-      onMounted(doRefresh);
+      onMounted(doRefresh)
       return {
         rowKey,
         modalDialog,
@@ -304,9 +304,9 @@
         onAddItem,
         onDeleteItem,
         onConfirm,
-      };
+      }
     },
-  });
+  })
 </script>
 <style lang="scss" scoped>
   .icon-wrapper {

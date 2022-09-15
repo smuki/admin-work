@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { Trash as TrashIcon } from '@vicons/ionicons5';
+  import { defineComponent } from 'vue'
+  import { Trash as TrashIcon } from '@vicons/ionicons5'
 
   export default defineComponent({
     name: 'DeleteButton',
@@ -21,11 +21,11 @@
     emits: ['delete'],
     setup(props, { emit }) {
       function onDelete() {
-        emit('delete');
+        emit('delete')
       }
       return {
         onDelete,
-      };
+      }
     },
-  });
+  })
 </script>

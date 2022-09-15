@@ -77,20 +77,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  const provinceValue = ref('11');
-  const pcaValue = ref('110101');
-  const pcasValue = ref('370102003');
-  const currentItem1 = ref('');
-  const currentItem2 = ref('');
-  const currentItem3 = ref('');
+  import { ref } from 'vue'
+  const provinceValue = ref('11')
+  const pcaValue = ref('110101')
+  const pcasValue = ref('370102003')
+  const currentItem1 = ref('')
+  const currentItem2 = ref('')
+  const currentItem3 = ref('')
   function onSelectItem1(item: any) {
-    currentItem1.value = item;
+    currentItem1.value = item
   }
   function onSelectItem2(item: any) {
-    currentItem2.value = item;
+    currentItem2.value = item
   }
   function onSelectItem3(item: any) {
-    currentItem3.value = item;
+    currentItem3.value = item
   }
 </script>

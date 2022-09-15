@@ -37,59 +37,59 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { darkTheme, zhCN } from 'naive-ui';
-  import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue';
-  import { DeviceType, ThemeMode } from '@/store/types';
-  import useAxios from '@/hooks/useAxios';
-  import CustomRequestInterceptor from '@/api/interceptors/CustomRequestInterceptor';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { darkTheme, zhCN } from 'naive-ui'
+  import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+  import { DeviceType, ThemeMode } from '@/store/types'
+  import useAxios from '@/hooks/useAxios'
+  import CustomRequestInterceptor from '@/api/interceptors/CustomRequestInterceptor'
   export default defineComponent({
     name: 'Layout',
     setup() {
-      const appConfig = useAppConfigStore();
-      const axios = useAxios();
+      const appConfig = useAppConfigStore()
+      const axios = useAxios()
       axios.interceptors.request.use((config) => {
-        return CustomRequestInterceptor(config);
-      });
+        return CustomRequestInterceptor(config)
+      })
       const theme = computed(() => {
-        return appConfig.theme === ThemeMode.DARK ? darkTheme : null;
-      });
+        return appConfig.theme === ThemeMode.DARK ? darkTheme : null
+      })
       const themeOverrides = computed(() => {
         return {
           common: {
             primaryColor: appConfig.themeColor,
             primaryColorHover: appConfig.themeColor,
           },
-        };
-      });
+        }
+      })
       const layoutMode = computed(() => {
-        return appConfig.getLayoutMode;
-      });
+        return appConfig.getLayoutMode
+      })
       onMounted(() => {
-        handleScreenResize();
-        window.addEventListener('resize', handleScreenResize);
-      });
+        handleScreenResize()
+        window.addEventListener('resize', handleScreenResize)
+      })
       onBeforeUnmount(() => {
-        window.removeEventListener('resize', handleScreenResize);
-      });
+        window.removeEventListener('resize', handleScreenResize)
+      })
       function handleScreenResize() {
-        const width = document.body.clientWidth;
+        const width = document.body.clientWidth
         if (width <= 768) {
-          appConfig.changeDevice(DeviceType.MOBILE);
-          appConfig.toggleCollapse(true);
+          appConfig.changeDevice(DeviceType.MOBILE)
+          appConfig.toggleCollapse(true)
         } else if (width < 992 && width > 768) {
-          appConfig.changeDevice(DeviceType.PAD);
-          appConfig.toggleCollapse(true);
+          appConfig.changeDevice(DeviceType.PAD)
+          appConfig.toggleCollapse(true)
         } else if (width < 1200 && width >= 992) {
-          appConfig.changeDevice(DeviceType.PC);
-          appConfig.toggleCollapse(false);
+          appConfig.changeDevice(DeviceType.PC)
+          appConfig.toggleCollapse(false)
         } else {
-          appConfig.changeDevice(DeviceType.PC);
-          appConfig.toggleCollapse(false);
+          appConfig.changeDevice(DeviceType.PC)
+          appConfig.toggleCollapse(false)
         }
       }
       function closeMenu() {
-        appConfig.toggleCollapse(true);
+        appConfig.toggleCollapse(true)
       }
       return {
         appConfig,
@@ -98,9 +98,9 @@
         layoutMode,
         zhCN,
         closeMenu,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style scoped lang="scss">

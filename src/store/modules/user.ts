@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
-import { UserState } from '../types';
-import store from '../pinia';
+import { defineStore } from 'pinia'
+import { UserState } from '../types'
+import store from '../pinia'
 
-import Avatar from '@/assets/img_avatar.gif';
+import Avatar from '@/assets/img_avatar.gif'
 
-const defaultAvatar = Avatar;
+const defaultAvatar = Avatar
 
 const useUserStore = defineStore('user-info', {
   state: () => {
@@ -13,32 +13,32 @@ const useUserStore = defineStore('user-info', {
       sToken: '',
       sUserName: '',
       sAvatar: defaultAvatar,
-    };
+    }
   },
   actions: {
     saveUser(userInfo: UserState) {
-      console.log(userInfo);
+      console.log(userInfo)
       return new Promise<UserState>((resolve) => {
-        this.sUserId = userInfo.sUserId;
-        this.sToken = userInfo.sToken;
-        this.sUserName = userInfo.sUserName;
-        this.sAvatar = userInfo.sAvatar || defaultAvatar;
-        resolve(userInfo);
-      });
+        this.sUserId = userInfo.sUserId
+        this.sToken = userInfo.sToken
+        this.sUserName = userInfo.sUserName
+        this.sAvatar = userInfo.sAvatar || defaultAvatar
+        resolve(userInfo)
+      })
     },
     isTokenExpire() {
-      return !this.sToken;
+      return !this.sToken
     },
     changeNickName(newNickName: string) {
-      this.sUserName = newNickName;
+      this.sUserName = newNickName
     },
     logout() {
       return new Promise<void>((resolve) => {
-        this.$reset();
-        localStorage.clear();
-        sessionStorage.clear();
-        resolve();
-      });
+        this.$reset()
+        localStorage.clear()
+        sessionStorage.clear()
+        resolve()
+      })
     },
   },
   presist: {
@@ -48,10 +48,10 @@ const useUserStore = defineStore('user-info', {
       exclude: ['sUserName'],
     },
   },
-});
+})
 
-export default useUserStore;
+export default useUserStore
 
 export function useUserStoreContext() {
-  return useUserStore(store);
+  return useUserStore(store)
 }

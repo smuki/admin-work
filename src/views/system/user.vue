@@ -58,9 +58,9 @@
 </template>
 
 <script lang="ts">
-  import { post } from '@/api/http';
-  import { getTableList } from '@/api/url';
-  import { renderTag } from '@/hooks/form';
+  import { post } from '@/api/http'
+  import { getTableList } from '@/api/url'
+  import { renderTag } from '@/hooks/form'
   import {
     TableActionModel,
     usePagination,
@@ -69,18 +69,18 @@
     useTable,
     useTableColumn,
     useTableHeight,
-  } from '@/hooks/table';
-  import { DataTableColumn, NAvatar, useDialog, useMessage } from 'naive-ui';
-  import { defineComponent, h, onMounted, ref, shallowReactive, watch } from 'vue';
+  } from '@/hooks/table'
+  import { DataTableColumn, NAvatar, useDialog, useMessage } from 'naive-ui'
+  import { defineComponent, h, onMounted, ref, shallowReactive, watch } from 'vue'
   export default defineComponent({
     name: 'UserList',
     setup() {
-      const table = useTable();
-      const rowKey = useRowKey('id');
-      const naiveDialog = useDialog();
-      const message = useMessage();
-      const pagination = usePagination(doRefresh);
-      const checkedRowKeys = [] as Array<any>;
+      const table = useTable()
+      const rowKey = useRowKey('id')
+      const naiveDialog = useDialog()
+      const message = useMessage()
+      const pagination = usePagination(doRefresh)
+      const checkedRowKeys = [] as Array<any>
       const departmentData = [
         {
           label: '东部地区',
@@ -170,7 +170,7 @@
             },
           ],
         },
-      ];
+      ]
       const tableColumns = useTableColumn(
         [
           table.selectionColumn,
@@ -184,7 +184,7 @@
             key: 'gender',
             width: 80,
             render: (rowData) => {
-              return h('div', rowData.gender === 0 ? '男' : '女');
+              return h('div', rowData.gender === 0 ? '男' : '女')
             },
           },
           {
@@ -197,8 +197,8 @@
                   circle: true,
                   size: 'small',
                 },
-                { default: () => rowData.sUserName.substring(0, 1) },
-              );
+                { default: () => rowData.sUserName.substring(0, 1) }
+              )
             },
           },
           {
@@ -234,15 +234,15 @@
                   type: 'error',
                   onClick: onDeleteItem.bind(null, rowData),
                 },
-              ] as TableActionModel[]);
+              ] as TableActionModel[])
             },
           },
         ],
         {
           align: 'center',
-        } as DataTableColumn,
-      );
-      const expandAllFlag = ref(false);
+        } as DataTableColumn
+      )
+      const expandAllFlag = ref(false)
       function doRefresh() {
         post({
           url: getTableList,
@@ -250,14 +250,14 @@
             return {
               page: pagination.page,
               pageSize: pagination.pageSize,
-            };
+            }
           },
         })
           .then((res) => {
-            table.handleSuccess(res);
-            pagination.setTotalSize((res as any).totalSize);
+            table.handleSuccess(res)
+            pagination.setTotalSize((res as any).totalSize)
           })
-          .catch(console.log);
+          .catch(console.log)
       }
       function onDeleteItems() {
         naiveDialog.warning({
@@ -265,9 +265,9 @@
           content: '确定要删除此数据吗？',
           positiveText: '确定',
           onPositiveClick: () => {
-            message.success('数据模拟删除成功，参数为：' + JSON.stringify(checkedRowKeys));
+            message.success('数据模拟删除成功，参数为：' + JSON.stringify(checkedRowKeys))
           },
-        });
+        })
       }
       function onDeleteItem(item: any) {
         naiveDialog.warning({
@@ -275,34 +275,34 @@
           content: '确定要删除此数据吗？',
           positiveText: '确定',
           onPositiveClick: () => {
-            table.dataList.value!.splice(table.dataList.value!.indexOf(item), 1);
+            table.dataList.value!.splice(table.dataList.value!.indexOf(item), 1)
           },
-        });
+        })
       }
       function onRowCheck(rowKeys: Array<any>) {
-        checkedRowKeys.length = 0;
-        checkedRowKeys.push(...rowKeys);
+        checkedRowKeys.length = 0
+        checkedRowKeys.push(...rowKeys)
       }
       function onUpdateExpandedKeys(keys: any) {
-        getExpandedKeys.length = 0;
-        getExpandedKeys.push(...keys);
+        getExpandedKeys.length = 0
+        getExpandedKeys.push(...keys)
       }
       function onCheckedKeys(keys: any) {
-        message.success('选中的值为--->' + JSON.stringify(keys));
+        message.success('选中的值为--->' + JSON.stringify(keys))
       }
-      const getExpandedKeys = shallowReactive([] as Array<number>);
+      const getExpandedKeys = shallowReactive([] as Array<number>)
       watch(
         () => expandAllFlag.value,
         (newVal) => {
           newVal
             ? getExpandedKeys.push(...departmentData.map((it) => it.key))
-            : (getExpandedKeys.length = 0);
-        },
-      );
+            : (getExpandedKeys.length = 0)
+        }
+      )
       onMounted(async () => {
-        table.tableHeight.value = await useTableHeight();
-        doRefresh();
-      });
+        table.tableHeight.value = await useTableHeight()
+        doRefresh()
+      })
       return {
         ...table,
         rowKey,
@@ -317,9 +317,9 @@
         getExpandedKeys,
         onUpdateExpandedKeys,
         onCheckedKeys,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

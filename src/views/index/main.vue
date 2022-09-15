@@ -56,15 +56,15 @@
 </template>
 
 <script lang="ts">
-  import DataItem from './components/DataItem.vue';
-  import OrderChart from './components/chart/OrderChart.vue';
-  import SalesChart from './components/chart/SalesChart.vue';
-  import StudentChart from './components/chart/StudentChart.vue';
-  import EnrollmentChannelsChart from './components/chart/EnrollmentChannelsChart.vue';
-  import FullYearSalesChart from './components/chart/FullYearSalesChart.vue';
-  import DepartmentChart from './components/chart/DepartmentChart.vue';
-  import { computed, defineComponent, ref, watch } from 'vue';
-  import useAppConfigStore from '@/store/modules/app-config';
+  import DataItem from './components/DataItem.vue'
+  import OrderChart from './components/chart/OrderChart.vue'
+  import SalesChart from './components/chart/SalesChart.vue'
+  import StudentChart from './components/chart/StudentChart.vue'
+  import EnrollmentChannelsChart from './components/chart/EnrollmentChannelsChart.vue'
+  import FullYearSalesChart from './components/chart/FullYearSalesChart.vue'
+  import DepartmentChart from './components/chart/DepartmentChart.vue'
+  import { computed, defineComponent, ref, watch } from 'vue'
+  import useAppConfigStore from '@/store/modules/app-config'
   export default defineComponent({
     name: 'Home',
     components: {
@@ -77,29 +77,29 @@
       DepartmentChart,
     },
     setup() {
-      const appConfigStore = useAppConfigStore();
-      const mOrderChart = ref<InstanceType<typeof OrderChart>>();
-      const salesChart = ref<InstanceType<typeof SalesChart>>();
-      const enrollmentChannelsChart = ref<InstanceType<typeof EnrollmentChannelsChart>>();
-      const studentChart = ref<InstanceType<typeof StudentChart>>();
-      const fullYearSalesChart = ref<InstanceType<typeof FullYearSalesChart>>();
-      const departmentChart = ref<InstanceType<typeof DepartmentChart>>();
+      const appConfigStore = useAppConfigStore()
+      const mOrderChart = ref<InstanceType<typeof OrderChart>>()
+      const salesChart = ref<InstanceType<typeof SalesChart>>()
+      const enrollmentChannelsChart = ref<InstanceType<typeof EnrollmentChannelsChart>>()
+      const studentChart = ref<InstanceType<typeof StudentChart>>()
+      const fullYearSalesChart = ref<InstanceType<typeof FullYearSalesChart>>()
+      const departmentChart = ref<InstanceType<typeof DepartmentChart>>()
       const onResize = () => {
         setTimeout(() => {
-          mOrderChart.value?.updateChart();
-          salesChart.value?.updateChart();
-          enrollmentChannelsChart.value?.updateChart();
-          studentChart.value?.updateChart();
-          fullYearSalesChart.value?.updateChart();
-          departmentChart.value?.updateChart();
-        }, 500);
-      };
+          mOrderChart.value?.updateChart()
+          salesChart.value?.updateChart()
+          enrollmentChannelsChart.value?.updateChart()
+          studentChart.value?.updateChart()
+          fullYearSalesChart.value?.updateChart()
+          departmentChart.value?.updateChart()
+        }, 500)
+      }
       const collapse = computed(() => {
-        return appConfigStore.isCollapse;
-      });
+        return appConfigStore.isCollapse
+      })
       watch(collapse, () => {
-        onResize();
-      });
+        onResize()
+      })
       return {
         collapse,
         mOrderChart,
@@ -152,9 +152,9 @@
             },
           },
         ],
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

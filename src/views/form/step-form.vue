@@ -26,10 +26,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from '@vue/runtime-core';
-  import AccountInfo from './components/AccountInfo.vue';
-  import PasswordInfo from './components/PasswordInfo.vue';
-  import ResultInfo from './components/ResultInfo.vue';
+  import { defineComponent } from '@vue/runtime-core'
+  import AccountInfo from './components/AccountInfo.vue'
+  import PasswordInfo from './components/PasswordInfo.vue'
+  import ResultInfo from './components/ResultInfo.vue'
   export default defineComponent({
     name: 'StepForm',
     components: { AccountInfo, PasswordInfo, ResultInfo },
@@ -37,17 +37,17 @@
       return {
         activeStep: 1,
         accountInfo: {},
-      };
+      }
     },
     methods: {
       next(accountInfo: any) {
         if (this.activeStep === 1) {
-          this.accountInfo = accountInfo;
-          this.activeStep += 1;
+          this.accountInfo = accountInfo
+          this.activeStep += 1
         }
       },
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

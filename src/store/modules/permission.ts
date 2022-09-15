@@ -1,36 +1,36 @@
-import { RouteRecordRaw } from 'vue-router';
-import { defineStore } from 'pinia';
-import useUserStore from './user';
-import router from '@/router';
-import { baseAddress, getMenuListByRoleId } from '@/api/url';
-import { post } from '@/api/http';
-import defaultRoutes from '@/router/routes/default-routes';
-import { findRootPathRoute, generatorRoutes, mapTwoLevelRouter } from '../help';
-import { constantRoutes } from '@/router/routes/constants';
-import { adminRoutes } from '@/store/modules/menu';
+import { RouteRecordRaw } from 'vue-router'
+import { defineStore } from 'pinia'
+import useUserStore from './user'
+import router from '@/router'
+import { baseAddress, getMenuListByRoleId } from '@/api/url'
+import { post } from '@/api/http'
+import defaultRoutes from '@/router/routes/default-routes'
+import { findRootPathRoute, generatorRoutes, mapTwoLevelRouter } from '../help'
+import { constantRoutes } from '@/router/routes/constants'
+import { adminRoutes } from '@/store/modules/menu'
 
 const usePermissionStore = defineStore('permission-route', {
   state: () => {
     return {
       permissionRoutes: [] as RouteRecordRaw[],
-    };
+    }
   },
   getters: {
     getPermissionSideBar(state) {
       return state.permissionRoutes.filter((it) => {
-        return it.meta && !it.meta.hidden;
-      });
+        return it.meta && !it.meta.hidden
+      })
     },
     getPermissionSplitTabs(state) {
       return state.permissionRoutes.filter((it) => {
-        return it.meta && !it.meta.hidden && it.children && it.children.length > 0;
-      });
+        return it.meta && !it.meta.hidden && it.children && it.children.length > 0
+      })
     },
   },
   actions: {
     async getRoutes(data: { sUserId: string }) {
       try {
-        return generatorRoutes(adminRoutes);
+        return generatorRoutes(adminRoutes)
         /*
         if (getMenuListByRoleId) {
           const res = await post({
@@ -46,21 +46,21 @@ const usePermissionStore = defineStore('permission-route', {
         */
       } catch (error) {
         console.log(
-          '路由加载失败了，请清空一下Cookie和localStorage，重新登录；如果已经采用真实接口的，请确保菜单接口地址真实可用并且返回的数据格式和mock中的一样',
-        );
-        return [];
+          '路由加载失败了，请清空一下Cookie和localStorage，重新登录；如果已经采用真实接口的，请确保菜单接口地址真实可用并且返回的数据格式和mock中的一样'
+        )
+        return []
       }
     },
     async initPermissionRoute() {
-      const userStore = useUserStore();
+      const userStore = useUserStore()
       // 加载路由
       const accessRoutes = await this.getRoutes({
         sUserId: userStore.sUserId,
-      });
-      const mapRoutes = mapTwoLevelRouter(accessRoutes);
+      })
+      const mapRoutes = mapTwoLevelRouter(accessRoutes)
       mapRoutes.forEach((it: any) => {
-        router.addRoute(it);
-      });
+        router.addRoute(it)
+      })
       // 配置 `/` 路由的默认跳转地址
       router.addRoute({
         path: '/',
@@ -68,7 +68,7 @@ const usePermissionStore = defineStore('permission-route', {
         meta: {
           hidden: true,
         },
-      });
+      })
       // 这个路由一定要放在最后
       router.addRoute({
         path: '/:pathMatch(.*)*',
@@ -76,16 +76,16 @@ const usePermissionStore = defineStore('permission-route', {
         meta: {
           hidden: true,
         },
-      });
-      this.permissionRoutes = [...constantRoutes, ...accessRoutes];
+      })
+      this.permissionRoutes = [...constantRoutes, ...accessRoutes]
     },
     isEmptyPermissionRoute() {
-      return !this.permissionRoutes || this.permissionRoutes.length === 0;
+      return !this.permissionRoutes || this.permissionRoutes.length === 0
     },
     reset() {
-      this.$reset();
+      this.$reset()
     },
   },
-});
+})
 
-export default usePermissionStore;
+export default usePermissionStore

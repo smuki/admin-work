@@ -30,22 +30,22 @@
 </template>
 
 <script lang="ts">
-  import { post } from '@/api/http';
-  import { getTableList } from '@/api/url';
-  import { renderTag } from '@/hooks/form';
-  import { usePagination, useRowKey, useTable, useTableColumn } from '@/hooks/table';
-  import { TablePropsType } from '@/types/components';
-  import { sortColumns } from '@/utils';
-  import { DataTableColumn, NAvatar, useDialog, useMessage } from 'naive-ui';
-  import { defineComponent, h, onMounted, reactive } from 'vue';
+  import { post } from '@/api/http'
+  import { getTableList } from '@/api/url'
+  import { renderTag } from '@/hooks/form'
+  import { usePagination, useRowKey, useTable, useTableColumn } from '@/hooks/table'
+  import { TablePropsType } from '@/types/components'
+  import { sortColumns } from '@/utils'
+  import { DataTableColumn, NAvatar, useDialog, useMessage } from 'naive-ui'
+  import { defineComponent, h, onMounted, reactive } from 'vue'
   export default defineComponent({
     name: 'TableCustom',
     setup() {
-      const table = useTable();
-      const pagination = usePagination(doRefresh);
-      const navieDialog = useDialog();
-      const message = useMessage();
-      const rowKey = useRowKey('id');
+      const table = useTable()
+      const pagination = usePagination(doRefresh)
+      const navieDialog = useDialog()
+      const message = useMessage()
+      const rowKey = useRowKey('id')
       const tableColumns = reactive(
         useTableColumn(
           [
@@ -60,7 +60,7 @@
               key: 'gender',
               width: 80,
               render: (rowData) => {
-                return h('div', rowData.gender === 0 ? '男' : '女');
+                return h('div', rowData.gender === 0 ? '男' : '女')
               },
             },
             {
@@ -73,8 +73,8 @@
                     circle: true,
                     size: 'small',
                   },
-                  { default: () => rowData.sUserName.substring(0, 1) },
-                );
+                  { default: () => rowData.sUserName.substring(0, 1) }
+                )
               },
             },
             {
@@ -105,9 +105,9 @@
           ],
           {
             align: 'center',
-          } as DataTableColumn,
-        ),
-      );
+          } as DataTableColumn
+        )
+      )
       function doRefresh() {
         post({
           url: getTableList,
@@ -115,14 +115,14 @@
             return {
               page: pagination.page,
               pageSize: pagination.pageSize,
-            };
+            }
           },
         })
           .then((res) => {
-            table.handleSuccess(res);
-            pagination.setTotalSize(res.totalSize);
+            table.handleSuccess(res)
+            pagination.setTotalSize(res.totalSize)
           })
-          .catch(console.log);
+          .catch(console.log)
       }
       function onDeleteItem() {
         if (table.selectRows.value!.length !== 0) {
@@ -134,21 +134,21 @@
                 '模拟删除成功，参数为：' +
                   JSON.stringify({
                     ids: table.selectRows.value!.join(','),
-                  }),
-              );
+                  })
+              )
             },
-          });
+          })
         } else {
-          message.error('请选择要删除的数据项');
+          message.error('请选择要删除的数据项')
         }
       }
       function onUpdateTable(newColumns: Array<TablePropsType>) {
-        sortColumns(tableColumns, newColumns);
+        sortColumns(tableColumns, newColumns)
       }
       function onUpdateBorder(isBordered: boolean) {
-        table.bordered.value = isBordered;
+        table.bordered.value = isBordered
       }
-      onMounted(doRefresh);
+      onMounted(doRefresh)
       return {
         ...table,
         rowKey,
@@ -158,9 +158,9 @@
         onDeleteItem,
         doRefresh,
         onUpdateBorder,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { defineComponent } from 'vue';
-  import { projectName } from '../../setting';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { defineComponent } from 'vue'
+  import { projectName } from '../../setting'
   export default defineComponent({
     name: 'Logo',
     props: {
@@ -31,13 +31,13 @@
       },
     },
     setup() {
-      const appConfig = useAppConfigStore();
+      const appConfig = useAppConfigStore()
       return {
         appConfig,
         projectName,
-      };
+      }
     },
-  });
+  })
 </script>
 <style lang="scss" scoped>
   .logo-wrapper {

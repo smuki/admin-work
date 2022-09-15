@@ -1,11 +1,11 @@
-import vue from '@vitejs/plugin-vue';
-import viteSvgIcons from 'vite-plugin-svg-icons';
-import path from 'path';
-import vitePluginCompression from 'vite-plugin-compression';
-import ViteComponents from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import vue from '@vitejs/plugin-vue'
+import viteSvgIcons from 'vite-plugin-svg-icons'
+import path from 'path'
+import vitePluginCompression from 'vite-plugin-compression'
+import ViteComponents from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default () => {
   return {
@@ -59,5 +59,5 @@ export default () => {
         },
       },
     },
-  };
-};
+  }
+}

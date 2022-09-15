@@ -43,13 +43,13 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, onMounted, ref, shallowReactive, watch } from 'vue';
-  import { RouteLocationNormalizedLoaded, RouteRecordRaw, useRoute, useRouter } from 'vue-router';
-  import { isExternal } from '@/utils';
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { SideTheme, SplitTab, ThemeMode } from '@/store/types';
-  import usePermissionStore from '@/store/modules/permission';
-  import { transformSplitTabMenu } from '@/store/help';
+  import { computed, defineComponent, onMounted, ref, shallowReactive, watch } from 'vue'
+  import { RouteLocationNormalizedLoaded, RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+  import { isExternal } from '@/utils'
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { SideTheme, SplitTab, ThemeMode } from '@/store/types'
+  import usePermissionStore from '@/store/modules/permission'
+  import { transformSplitTabMenu } from '@/store/help'
 
   export default defineComponent({
     name: 'TabSplitSideBar',
@@ -60,48 +60,48 @@
       },
     },
     setup() {
-      const appConfig = useAppConfigStore();
-      const permissionStore = usePermissionStore();
-      const tabs = shallowReactive<SplitTab[]>([]);
-      const routes = shallowReactive<RouteRecordRaw[]>([]);
-      const route = useRoute();
-      const router = useRouter();
+      const appConfig = useAppConfigStore()
+      const permissionStore = usePermissionStore()
+      const tabs = shallowReactive<SplitTab[]>([])
+      const routes = shallowReactive<RouteRecordRaw[]>([])
+      const route = useRoute()
+      const router = useRouter()
       watch(
         () => route.fullPath,
         () => {
-          doChangeTab(route);
-        },
-      );
+          doChangeTab(route)
+        }
+      )
       onMounted(() => {
-        tabs.length = 0;
-        tabs.push(...transformSplitTabMenu(permissionStore.getPermissionSplitTabs));
-        doChangeTab(route);
-      });
+        tabs.length = 0
+        tabs.push(...transformSplitTabMenu(permissionStore.getPermissionSplitTabs))
+        doChangeTab(route)
+      })
       function doChangeTab(route: RouteLocationNormalizedLoaded) {
-        const matchedRoutes = route.matched;
+        const matchedRoutes = route.matched
         if (matchedRoutes && matchedRoutes.length > 0) {
           tabs.forEach((it) => {
             if (it.fullPath === matchedRoutes[0].path) {
-              it.checked.value = true;
+              it.checked.value = true
               if (it.children) {
-                routes.length = 0;
-                routes.push(...(it.children as Array<RouteRecordRaw>));
+                routes.length = 0
+                routes.push(...(it.children as Array<RouteRecordRaw>))
               }
             } else {
-              it.checked.value = false;
+              it.checked.value = false
             }
-          });
+          })
         }
       }
       function changeTab(item: SplitTab) {
         tabs.forEach((it) => {
-          it.checked.value = it.fullPath === item.fullPath;
-        });
-        findPath(item);
+          it.checked.value = it.fullPath === item.fullPath
+        })
+        findPath(item)
       }
       function findPath(item: SplitTab) {
         if (item.children && item.children.length > 0) {
-          const firstItem = item.children[0];
+          const firstItem = item.children[0]
           if (firstItem.children && firstItem.children.length > 0) {
             findPath({
               label: firstItem.meta?.title,
@@ -110,28 +110,28 @@
               fullPath: firstItem.path,
               children: firstItem.children,
               checked: ref(false),
-            } as SplitTab);
+            } as SplitTab)
           } else {
             if (isExternal(firstItem.path as string)) {
-              routes.length = 0;
-              routes.push(...item.children);
-              window.open(firstItem.path);
+              routes.length = 0
+              routes.push(...item.children)
+              window.open(firstItem.path)
             } else {
               router.push(firstItem.path || '/').then((error) => {
                 if (error) {
                   if (firstItem.path === route.path || firstItem.path === route.fullPath) {
-                    routes.length = 0;
-                    item.children && routes.push(...item.children);
+                    routes.length = 0
+                    item.children && routes.push(...item.children)
                   }
                 }
-              });
+              })
             }
           }
         }
       }
       const themeOverThemes = computed(() => {
         if (appConfig.theme === ThemeMode.DARK) {
-          return {};
+          return {}
         }
         if (appConfig.sideTheme === SideTheme.DARK)
           return {
@@ -143,13 +143,13 @@
             Menu: {
               itemColorActive: 'rgba(24, 160, 88, 0.4)',
             },
-          };
+          }
         if (appConfig.sideTheme === SideTheme.WHITE)
           return {
             common: {
               cardColor: '#ffffff',
             },
-          };
+          }
         if (appConfig.sideTheme === SideTheme.IMAGE)
           return {
             common: {
@@ -162,25 +162,25 @@
               itemTextColorHover: '#f5f5f5',
               itemIconColorHover: '#f5f5f5',
             },
-          };
-        return {};
-      });
+          }
+        return {}
+      })
       const contentWrapperStyle = computed(() => {
         return `--select-text-color: ${
           appConfig.theme === 'light' || appConfig.sideTheme === 'white'
             ? '#fff'
             : 'var(--text-color)'
-        }`;
-      });
+        }`
+      })
       const bgColor = computed(() => {
         if (appConfig.theme === ThemeMode.DARK) {
-          return '#000000';
+          return '#000000'
         }
-        if (appConfig.sideTheme === SideTheme.DARK) return '#000000';
-        if (appConfig.sideTheme === SideTheme.WHITE) return '#f5f5f5';
-        if (appConfig.sideTheme === SideTheme.IMAGE) return 'rgba(255,255,255, 0.1)';
-        return '#ffffff';
-      });
+        if (appConfig.sideTheme === SideTheme.DARK) return '#000000'
+        if (appConfig.sideTheme === SideTheme.WHITE) return '#f5f5f5'
+        if (appConfig.sideTheme === SideTheme.IMAGE) return 'rgba(255,255,255, 0.1)'
+        return '#ffffff'
+      })
       return {
         appConfig,
         tabs,
@@ -190,9 +190,9 @@
         bgColor,
         contentWrapperStyle,
         themeOverThemes,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style scoped lang="scss">

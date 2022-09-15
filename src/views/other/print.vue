@@ -40,9 +40,9 @@
 </template>
 
 <script lang="ts">
-  import printJS from 'print-js';
-  import imagePath from '@/assets/logo.png';
-  import { defineComponent } from 'vue';
+  import printJS from 'print-js'
+  import imagePath from '@/assets/logo.png'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'Print',
     setup() {
@@ -51,14 +51,14 @@
           printable: imagePath,
           type: 'image',
           showModal: false,
-        });
+        })
       }
       function printHtml() {
         printJS({
           printable: 'htmlWrapper',
           type: 'html',
           targetStyles: ['*'],
-        });
+        })
       }
       return {
         printImage,
@@ -81,9 +81,9 @@
             gender: '女',
           },
         ],
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

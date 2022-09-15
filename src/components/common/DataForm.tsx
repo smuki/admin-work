@@ -1,6 +1,6 @@
-import { FormItem } from '../../types/components';
-import { defineComponent, h, PropType, ref, toRef } from 'vue';
-import { FormProps, NForm, NFormItem, NFormItemGridItem, NGrid, useMessage } from 'naive-ui';
+import { FormItem } from '../../types/components'
+import { defineComponent, h, PropType, ref, toRef } from 'vue'
+import { FormProps, NForm, NFormItem, NFormItemGridItem, NGrid, useMessage } from 'naive-ui'
 
 function renderItem(formItem: FormItem) {
   return function () {
@@ -13,14 +13,14 @@ function renderItem(formItem: FormItem) {
               {
                 class: 'ml-2 text-red-500 align-top',
               },
-              '*',
+              '*'
             ),
           ]
-        : formItem.render(formItem);
+        : formItem.render(formItem)
     } else {
-      return '';
+      return ''
     }
-  };
+  }
 }
 
 export default defineComponent({
@@ -36,11 +36,11 @@ export default defineComponent({
       validator: (value: string) => {
         if (!['form-item', 'grid-item'].includes(value)) {
           console.error(
-            'preset value must be `form-item` or `grid-item`, the default value is `form-item`',
-          );
-          return false;
+            'preset value must be `form-item` or `grid-item`, the default value is `form-item`'
+          )
+          return false
         }
-        return true;
+        return true
       },
     },
     options: {
@@ -49,52 +49,52 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const dataForm = ref<typeof NForm | null>(null);
-    const options = toRef(props, 'options');
-    const message = useMessage();
+    const dataForm = ref<typeof NForm | null>(null)
+    const options = toRef(props, 'options')
+    const message = useMessage()
     function reset() {
-      if (!options.value) return;
+      if (!options.value) return
       options.value.forEach((it: FormItem) => {
         if (it.reset) {
-          it.reset(it);
+          it.reset(it)
         } else {
-          it.value.value = null;
+          it.value.value = null
         }
-      });
+      })
     }
     function generatorParams() {
-      if (!options.value) return;
+      if (!options.value) return
       return options.value.reduce((pre: any, cur: FormItem) => {
-        pre[cur.key] = cur.value.value;
-        return pre;
-      }, {});
+        pre[cur.key] = cur.value.value
+        return pre
+      }, {})
     }
     function validator() {
-      if (!options.value) return;
+      if (!options.value) return
       return options.value.every((it: FormItem) => {
         if (it.required) {
           if (it.validator) {
-            return it.validator(it, message);
+            return it.validator(it, message)
           }
           if (it.value.value) {
-            return true;
+            return true
           }
-          message.error(it.label + '不能为空');
-          return false;
+          message.error(it.label + '不能为空')
+          return false
         }
-        return true;
-      });
+        return true
+      })
     }
     return {
       dataForm,
       reset,
       validator,
       generatorParams,
-    };
+    }
   },
   render() {
     if (!this.options) {
-      throw new Error('prop options must be not null');
+      throw new Error('prop options must be not null')
     }
     return h(
       NForm,
@@ -124,27 +124,26 @@ export default defineComponent({
                         },
                         {
                           default: renderItem(it),
-                        },
-                      );
-                    });
+                        }
+                      )
+                    })
                   },
-                },
+                }
               )
             : this.options?.map((it) => {
                 return h(
                   NFormItem,
                   {
-                    disabled: it.disabled,
-                    label: it.label + '...xxx',
+                    label: it.label,
                     path: it.path || (it.key as string),
                   },
                   {
                     default: renderItem(it),
-                  },
-                );
-              });
+                  }
+                )
+              })
         },
-      },
-    );
+      }
+    )
   },
-});
+})

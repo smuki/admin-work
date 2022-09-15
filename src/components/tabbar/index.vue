@@ -92,12 +92,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, h } from 'vue';
-  import { NIcon, NScrollbar } from 'naive-ui';
-  import { Close, ChevronBack, Refresh, ArrowBack, ArrowForward, Menu } from '@vicons/ionicons5';
-  import { mapActions, mapState } from 'pinia';
-  import useVisitedRouteStore from '@/store/modules/visited-routes';
-  import { RouteRecordRaw } from 'vue-router';
+  import { defineComponent, h } from 'vue'
+  import { NIcon, NScrollbar } from 'naive-ui'
+  import { Close, ChevronBack, Refresh, ArrowBack, ArrowForward, Menu } from '@vicons/ionicons5'
+  import { mapActions, mapState } from 'pinia'
+  import useVisitedRouteStore from '@/store/modules/visited-routes'
+  import { RouteRecordRaw } from 'vue-router'
   export default defineComponent({
     name: 'TabBar',
     components: { Close, ChevronBack, Refresh, ArrowBack, ArrowForward, Menu },
@@ -121,7 +121,7 @@
             icon() {
               return h(NIcon, null, {
                 default: () => h(Refresh),
-              });
+              })
             },
           },
           {
@@ -130,21 +130,21 @@
             icon() {
               return h(NIcon, null, {
                 default: () => h(Close),
-              });
+              })
             },
           },
         ],
-      };
+      }
     },
     computed: {
       ...mapState(useVisitedRouteStore, ['getVisitedRoutes']),
     },
     watch: {
       $route(newVal) {
-        this.currentTab = newVal.fullPath || '';
+        this.currentTab = newVal.fullPath || ''
         setTimeout(() => {
-          const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>;
-          const el = document.querySelector(`[data="${this.currentTab}"]`) as HTMLElement;
+          const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>
+          const el = document.querySelector(`[data="${this.currentTab}"]`) as HTMLElement
           el &&
             scrollbar.scrollTo(
               {
@@ -152,15 +152,15 @@
                 debounce: true,
                 behavior: 'smooth',
               } as any,
-              0,
-            );
-        }, 0);
+              0
+            )
+        }, 0)
       },
       showContextMenu(val) {
         if (val) {
-          document.body.addEventListener('click', this.closeMenu);
+          document.body.addEventListener('click', this.closeMenu)
         } else {
-          document.body.removeEventListener('click', this.closeMenu);
+          document.body.removeEventListener('click', this.closeMenu)
         }
       },
     },
@@ -173,117 +173,117 @@
         'closeAllVisitedView',
       ]),
       itemClick(item: RouteRecordRaw) {
-        this.handleTabClick(item.path || item.path || '/');
+        this.handleTabClick(item.path || item.path || '/')
       },
       handleTabClick(path: string) {
-        this.$router.push(path);
+        this.$router.push(path)
       },
       isAffix(route: RouteRecordRaw) {
-        return route.meta && route.meta.affix;
+        return route.meta && route.meta.affix
       },
       onContextMenu(item: RouteRecordRaw, e: MouseEvent) {
-        const { clientX } = e;
-        const { x } = this.$el.getBoundingClientRect();
-        e.preventDefault();
-        this.selectRoute = item;
+        const { clientX } = e
+        const { x } = this.$el.getBoundingClientRect()
+        e.preventDefault()
+        this.selectRoute = item
         if (this.selectRoute) {
-          this.showLeftMenu = this.isLeftLast(item.path || '/');
-          this.showRightMenu = this.isRightLast(item.path || '/');
-          const screenWidth = document.body.clientWidth;
+          this.showLeftMenu = this.isLeftLast(item.path || '/')
+          this.showRightMenu = this.isRightLast(item.path || '/')
+          const screenWidth = document.body.clientWidth
           this.contextMenuStyle.left =
-            (clientX + 130 > screenWidth ? clientX - 130 - x - 15 : clientX - x + 15) + 'px';
-          this.contextMenuStyle.top = '25px';
-          this.showContextMenu = true;
+            (clientX + 130 > screenWidth ? clientX - 130 - x - 15 : clientX - x + 15) + 'px'
+          this.contextMenuStyle.top = '25px'
+          this.showContextMenu = true
         }
       },
       removeTab(item: RouteRecordRaw) {
         this.removeVisitedRoute(item).then((lastPath) => {
-          this.$router.push(lastPath);
-        });
+          this.$router.push(lastPath)
+        })
       },
       // context menu actions
       isLeftLast(tempRoute: string) {
-        return this.getVisitedRoutes.findIndex((it) => it.path === tempRoute) === 0;
+        return this.getVisitedRoutes.findIndex((it) => it.path === tempRoute) === 0
       },
       isRightLast(tempRoute: string) {
         return (
           this.getVisitedRoutes.findIndex((it) => it.path === tempRoute) ===
           this.getVisitedRoutes.length - 1
-        );
+        )
       },
       onDropDownSelect(key: string) {
         switch (key) {
           case 'refresh':
-            this.refreshRoute();
-            break;
+            this.refreshRoute()
+            break
           case 'close':
-            this.closeAll();
-            break;
+            this.closeAll()
+            break
         }
       },
       refreshRoute() {
-        this.$router.replace({ path: '/redirect' + this.$route.path });
+        this.$router.replace({ path: '/redirect' + this.$route.path })
       },
       closeLeft() {
-        if (!this.selectRoute) return;
+        if (!this.selectRoute) return
         this.closeLeftVisitedView(this.selectRoute as RouteRecordRaw).then(() => {
           if (this.$route.fullPath !== (this.selectRoute as RouteRecordRaw).path) {
-            this.$router.push(this.findLastRoutePath());
+            this.$router.push(this.findLastRoutePath())
           }
-        });
+        })
       },
       closeRight() {
-        if (!this.selectRoute) return;
+        if (!this.selectRoute) return
         this.closeRightVisitedView(this.selectRoute as RouteRecordRaw).then(() => {
           if (this.$route.path !== (this.selectRoute as RouteRecordRaw).path) {
-            this.$router.push(this.findLastRoutePath());
+            this.$router.push(this.findLastRoutePath())
           }
-        });
+        })
       },
       closeAll() {
         this.closeAllVisitedView().then(() => {
-          this.$router.push(this.findLastRoutePath());
-        });
+          this.$router.push(this.findLastRoutePath())
+        })
       },
       closeMenu() {
-        this.showContextMenu = false;
+        this.showContextMenu = false
       },
       leftArrowClick() {
-        const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>;
-        const scrollX = scrollbar.$el?.scrollLeft || 0;
+        const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>
+        const scrollX = scrollbar.$el?.scrollLeft || 0
         scrollbar.scrollTo(
           {
             left: Math.max(0, scrollX - 200),
             debounce: true,
             behavior: 'smooth',
           } as any,
-          0,
-        );
-        this.isDisabledArrow();
+          0
+        )
+        this.isDisabledArrow()
       },
       rightArrowClick() {
-        const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>;
-        const scrollX = scrollbar.$el?.scrollLeft || 0;
+        const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>
+        const scrollX = scrollbar.$el?.scrollLeft || 0
         scrollbar.scrollTo(
           {
             left: scrollX + 200,
             debounce: false,
             behavior: 'smooth',
           } as any,
-          0,
-        );
-        this.isDisabledArrow();
+          0
+        )
+        this.isDisabledArrow()
       },
       isDisabledArrow() {
         setTimeout(() => {
-          const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>;
-          const { scrollLeft, scrollWidth, clientWidth } = scrollbar.$el as HTMLElement;
-          this.leftArrowDisabled = scrollLeft === 0;
-          this.rightArrowDisabled = scrollLeft === scrollWidth - clientWidth;
-        }, 100);
+          const scrollbar = this.$refs.scrollbar as InstanceType<typeof NScrollbar>
+          const { scrollLeft, scrollWidth, clientWidth } = scrollbar.$el as HTMLElement
+          this.leftArrowDisabled = scrollLeft === 0
+          this.rightArrowDisabled = scrollLeft === scrollWidth - clientWidth
+        }, 100)
       },
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

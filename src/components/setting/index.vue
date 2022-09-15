@@ -114,19 +114,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, reactive, ref, watch } from 'vue';
-  import { ModalDialogType } from '@/types/components';
-  import LeftBg from '@/assets/bg_img.webp';
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { PageAnim } from '@/store/types';
+  import { defineComponent, onMounted, reactive, ref, watch } from 'vue'
+  import { ModalDialogType } from '@/types/components'
+  import LeftBg from '@/assets/bg_img.webp'
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { PageAnim } from '@/store/types'
   export default defineComponent({
     name: 'Setting',
     setup() {
-      const appInfoDialog = ref<ModalDialogType | null>();
-      const opened = ref(false);
-      const appConfig = useAppConfigStore();
-      const showContact = ref(false);
-      const menuWidth = ref(appConfig.sideWidth);
+      const appInfoDialog = ref<ModalDialogType | null>()
+      const opened = ref(false)
+      const appConfig = useAppConfigStore()
+      const showContact = ref(false)
+      const menuWidth = ref(appConfig.sideWidth)
       const themeList = reactive([
         {
           leftBg: '#ffffff',
@@ -144,7 +144,7 @@
           themeId: 'dark',
           tipText: '暗黑',
         },
-      ]);
+      ])
       const sideExampleList = reactive([
         {
           leftBg: '#000000',
@@ -167,7 +167,7 @@
           checked: false,
           themeId: 'image',
         },
-      ]);
+      ])
       const layoutExampleList = reactive([
         {
           leftBg: '#000000',
@@ -195,7 +195,7 @@
           class: 'extra-class-1',
           tipText: '分栏',
         },
-      ]);
+      ])
       const primartyColorList = reactive([
         {
           name: 'cyan',
@@ -287,7 +287,7 @@
           value: '#9727bf',
           checked: false,
         },
-      ]);
+      ])
       const animOptions = [
         {
           label: '渐隐渐现',
@@ -305,65 +305,65 @@
           label: '缩放效果',
           value: 'scale',
         },
-      ];
+      ]
       onMounted(() => {
         themeList.forEach((it) => {
-          it.checked = appConfig.theme === it.themeId;
-        });
+          it.checked = appConfig.theme === it.themeId
+        })
         sideExampleList.forEach((it) => {
-          it.checked = appConfig.sideTheme === it.themeId;
-        });
+          it.checked = appConfig.sideTheme === it.themeId
+        })
         layoutExampleList.forEach((it) => {
-          it.checked = appConfig.layoutMode === it.layoutId;
-        });
+          it.checked = appConfig.layoutMode === it.layoutId
+        })
         primartyColorList.forEach((it) => {
-          it.checked = appConfig.themeColor === it.value;
-        });
-      });
+          it.checked = appConfig.themeColor === it.value
+        })
+      })
       function openDrawer() {
-        opened.value = true;
+        opened.value = true
       }
       async function themeClick(item: any) {
         themeList.forEach((it) => {
-          it.checked = it === item;
-        });
-        await appConfig.changeTheme(item.themeId);
+          it.checked = it === item
+        })
+        await appConfig.changeTheme(item.themeId)
         if (item.themeId === 'dark') {
-          exampleClick(sideExampleList[0]);
+          exampleClick(sideExampleList[0])
         } else {
-          exampleClick(sideExampleList[1]);
+          exampleClick(sideExampleList[1])
         }
       }
       function exampleClick(item: any) {
         sideExampleList.forEach((it) => {
-          it.checked = it === item;
-        });
-        appConfig.changeSideBarTheme(item.themeId);
+          it.checked = it === item
+        })
+        appConfig.changeSideBarTheme(item.themeId)
       }
       function layoutExampleClick(item: any) {
         layoutExampleList.forEach((it) => {
-          it.checked = it === item;
-        });
-        appConfig.changeLayoutMode(item.layoutId);
+          it.checked = it === item
+        })
+        appConfig.changeLayoutMode(item.layoutId)
       }
       function colorClick(item: any) {
         primartyColorList.forEach((it) => {
-          it.checked = it === item;
-        });
-        appConfig.changePrimaryColor(item.value);
+          it.checked = it === item
+        })
+        appConfig.changePrimaryColor(item.value)
       }
       function openAppInfo() {
-        appInfoDialog.value?.toggle();
+        appInfoDialog.value?.toggle()
       }
       function onAnimUpdate(val: PageAnim) {
-        appConfig.changePageAnim(val);
+        appConfig.changePageAnim(val)
       }
       watch(
         () => menuWidth.value,
         (newVal) => {
-          appConfig.changeSideWith(newVal);
-        },
-      );
+          appConfig.changeSideWith(newVal)
+        }
+      )
       return {
         appInfoDialog,
         appConfig,
@@ -382,9 +382,9 @@
         openAppInfo,
         animOptions,
         menuWidth,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

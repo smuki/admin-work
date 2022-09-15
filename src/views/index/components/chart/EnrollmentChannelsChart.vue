@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-  import useEcharts from '@/hooks/useEcharts';
-  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-  import { dispose } from 'echarts';
+  import useEcharts from '@/hooks/useEcharts'
+  import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { dispose } from 'echarts'
   export default defineComponent({
     name: 'EnrollmentChannelsChart',
     setup() {
-      const loading = ref(true);
-      const channelsChart = ref<HTMLDivElement | null>(null);
+      const loading = ref(true)
+      const channelsChart = ref<HTMLDivElement | null>(null)
       const init = () => {
         const option = {
           grid: {
@@ -73,28 +73,28 @@
               ],
             },
           ],
-        };
+        }
         setTimeout(() => {
-          loading.value = false;
+          loading.value = false
           nextTick(() => {
-            useEcharts(channelsChart.value as HTMLDivElement).setOption(option);
-          });
-        }, 1000);
-      };
+            useEcharts(channelsChart.value as HTMLDivElement).setOption(option)
+          })
+        }, 1000)
+      }
       const updateChart = () => {
-        useEcharts(channelsChart.value as HTMLDivElement).resize();
-      };
-      onMounted(init);
+        useEcharts(channelsChart.value as HTMLDivElement).resize()
+      }
+      onMounted(init)
       onBeforeUnmount(() => {
-        dispose(channelsChart.value as HTMLDivElement);
-      });
+        dispose(channelsChart.value as HTMLDivElement)
+      })
       return {
         loading,
         channelsChart,
         updateChart,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

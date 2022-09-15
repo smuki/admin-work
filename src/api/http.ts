@@ -1,41 +1,41 @@
-import { AxiosResponse } from 'axios';
-import { App } from '@vue/runtime-core';
-import request from './axios.config';
+import { AxiosResponse } from 'axios'
+import { App } from '@vue/runtime-core'
+import request from './axios.config'
 
 export interface HttpOption {
-  url: string;
-  data?: any;
-  method?: string;
-  headers?: any;
-  beforeRequest?: () => void;
-  afterRequest?: () => void;
+  url: string
+  data?: any
+  method?: string
+  headers?: any
+  beforeRequest?: () => void
+  afterRequest?: () => void
 }
 
 export interface Response<T = any> {
-  totalSize: number | 0;
-  sCode: string;
-  msg: string;
-  data: T;
+  totalSize: number | 0
+  sCode: string
+  msg: string
+  data: T
 }
 
 function http<T = any>({ url, data, method, headers, beforeRequest, afterRequest }: HttpOption) {
   const successHandler = (res: AxiosResponse<Response<T>>) => {
     if (res.data.sCode === 'SUCCESS') {
-      console.log(res.data);
-      return res.data;
+      console.log(res.data)
+      return res.data
     }
-    throw new Error(res.data.msg || '请求失败，未知异常');
-  };
+    throw new Error(res.data.msg || '请求失败，未知异常')
+  }
   const failHandler = (error: Response<Error>) => {
-    afterRequest && afterRequest();
-    throw new Error(error.msg || '请求失败，未知异常');
-  };
-  beforeRequest && beforeRequest();
-  method = method || 'GET';
-  const params = Object.assign(typeof data === 'function' ? data() : data || {}, {});
+    afterRequest && afterRequest()
+    throw new Error(error.msg || '请求失败，未知异常')
+  }
+  beforeRequest && beforeRequest()
+  method = method || 'GET'
+  const params = Object.assign(typeof data === 'function' ? data() : data || {}, {})
   return method === 'GET'
     ? request.get(url, { params }).then(successHandler, failHandler)
-    : request.post(url, params, { headers: headers }).then(successHandler, failHandler);
+    : request.post(url, params, { headers: headers }).then(successHandler, failHandler)
 }
 
 export function get<T = any>({
@@ -51,7 +51,7 @@ export function get<T = any>({
     data,
     beforeRequest,
     afterRequest,
-  });
+  })
 }
 
 export function post<T = any>({
@@ -69,27 +69,27 @@ export function post<T = any>({
     headers,
     beforeRequest,
     afterRequest,
-  });
+  })
 }
 
 function install(app: App): void {
-  app.config.globalProperties.$http = http;
+  app.config.globalProperties.$http = http
 
-  app.config.globalProperties.$get = get;
+  app.config.globalProperties.$get = get
 
-  app.config.globalProperties.$post = post;
+  app.config.globalProperties.$post = post
 }
 
 export default {
   install,
   get,
   post,
-};
+}
 
 declare module '@vue/runtime-core' {
   // 为 `this.$` 提供类型声明
   interface ComponentCustomProperties {
-    $get: <T>(options: HttpOption) => Promise<Response<T>>;
-    $post: <T>(options: HttpOption) => Promise<Response<T>>;
+    $get: <T>(options: HttpOption) => Promise<Response<T>>
+    $post: <T>(options: HttpOption) => Promise<Response<T>>
   }
 }

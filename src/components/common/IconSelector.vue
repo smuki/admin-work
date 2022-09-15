@@ -41,8 +41,8 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, shallowReactive, toRef } from 'vue';
-  import Iconfonts from '@/icons/iconfont/iconfont.json';
+  import { computed, defineComponent, ref, shallowReactive, toRef } from 'vue'
+  import Iconfonts from '@/icons/iconfont/iconfont.json'
   export default defineComponent({
     name: 'IconSelector',
     props: {
@@ -51,26 +51,26 @@
     },
     emits: ['selected'],
     setup(props, { emit }) {
-      const defaultIcon = toRef(props, 'defaultIcon');
-      const pageSize = 40;
-      const icons = shallowReactive(Iconfonts.glyphs.slice(0, 40));
-      const currentPage = ref(1);
-      const itemCount = computed(() => Iconfonts.glyphs.length);
-      const selectItem = ref({ font_class: '', name: defaultIcon.value || '选择图标' });
+      const defaultIcon = toRef(props, 'defaultIcon')
+      const pageSize = 40
+      const icons = shallowReactive(Iconfonts.glyphs.slice(0, 40))
+      const currentPage = ref(1)
+      const itemCount = computed(() => Iconfonts.glyphs.length)
+      const selectItem = ref({ font_class: '', name: defaultIcon.value || '选择图标' })
       function onUpdatePage(page: number) {
-        currentPage.value = page;
-        icons.length = 0;
-        const start = (currentPage.value - 1) * pageSize;
-        icons.push(...Iconfonts.glyphs.slice(start, start + pageSize));
+        currentPage.value = page
+        icons.length = 0
+        const start = (currentPage.value - 1) * pageSize
+        icons.push(...Iconfonts.glyphs.slice(start, start + pageSize))
       }
       // eslint-disable-next-line vue/no-setup-props-destructure
-      const { onUpdateIcon } = props;
+      const { onUpdateIcon } = props
       function onIconClick(item: any) {
-        selectItem.value = item;
+        selectItem.value = item
         if (onUpdateIcon) {
-          onUpdateIcon(item);
+          onUpdateIcon(item)
         } else {
-          emit('selected', item);
+          emit('selected', item)
         }
       }
       return {
@@ -81,9 +81,9 @@
         itemCount,
         onUpdatePage,
         onIconClick,
-      };
+      }
     },
-  });
+  })
 </script>
 <style lang="scss" scoped>
   .grid-wrapper {

@@ -13,32 +13,32 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive } from 'vue';
-  import Iconfonts from '@/icons/iconfont/iconfont.json';
-  import { useMessage } from 'naive-ui';
+  import { defineComponent, reactive } from 'vue'
+  import Iconfonts from '@/icons/iconfont/iconfont.json'
+  import { useMessage } from 'naive-ui'
   interface IconItem {
-    font_class: string;
-    icon_id: string;
-    name: string;
-    unicode: string;
-    unicode_decimal: number;
+    font_class: string
+    icon_id: string
+    name: string
+    unicode: string
+    unicode_decimal: number
   }
 
   export default defineComponent({
     name: 'IconFont',
     setup() {
-      const message = useMessage();
-      const icons = reactive([] as Array<IconItem>);
-      icons.push(...Iconfonts.glyphs);
+      const message = useMessage()
+      const icons = reactive([] as Array<IconItem>)
+      icons.push(...Iconfonts.glyphs)
       const onCopy = (item: IconItem) => {
-        message.success('复制成功:' + JSON.stringify(item));
-      };
+        message.success('复制成功:' + JSON.stringify(item))
+      }
       return {
         icons,
         onCopy,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

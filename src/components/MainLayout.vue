@@ -38,11 +38,11 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { ThemeMode } from '@/store/types';
-  import { useLoadingBar } from 'naive-ui';
-  import { computed, defineComponent, onMounted, ref } from 'vue';
-  import { useRouter } from 'vue-router';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { ThemeMode } from '@/store/types'
+  import { useLoadingBar } from 'naive-ui'
+  import { computed, defineComponent, onMounted, ref } from 'vue'
+  import { useRouter } from 'vue-router'
   export default defineComponent({
     name: 'MainLayout',
     props: {
@@ -52,38 +52,36 @@
       },
     },
     setup() {
-      const appConfig = useAppConfigStore();
-      const listenTo1 = ref<HTMLElement | null>(null);
-      const listenTo2 = ref<HTMLElement | null>(null);
+      const appConfig = useAppConfigStore()
+      const listenTo1 = ref<HTMLElement | null>(null)
+      const listenTo2 = ref<HTMLElement | null>(null)
       const mainClass = computed(() => {
-        return appConfig.theme === ThemeMode.DARK
-          ? 'main-base-dark-theme'
-          : 'main-base-light-theme';
-      });
+        return appConfig.theme === ThemeMode.DARK ? 'main-base-dark-theme' : 'main-base-light-theme'
+      })
       const layoutMode = computed(() => {
-        return appConfig.getLayoutMode;
-      });
-      const router = useRouter();
-      const loadingBar = useLoadingBar();
+        return appConfig.getLayoutMode
+      })
+      const router = useRouter()
+      const loadingBar = useLoadingBar()
       router.beforeEach(() => {
-        loadingBar?.start();
-      });
+        loadingBar?.start()
+      })
       router.afterEach(() => {
-        loadingBar?.finish();
-      });
+        loadingBar?.finish()
+      })
       onMounted(() => {
-        listenTo1.value = document.querySelector('.main-base-style');
-        listenTo2.value = document.querySelector('.vaw-main-layout-container');
-      });
+        listenTo1.value = document.querySelector('.main-base-style')
+        listenTo2.value = document.querySelector('.vaw-main-layout-container')
+      })
       return {
         appConfig,
         mainClass,
         layoutMode,
         listenTo1,
         listenTo2,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

@@ -55,8 +55,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, nextTick, onMounted, ref } from 'vue';
-  import { FunnelOutline as FilterIcon } from '@vicons/ionicons5';
+  import { defineComponent, nextTick, onMounted, ref } from 'vue'
+  import { FunnelOutline as FilterIcon } from '@vicons/ionicons5'
 
   export default defineComponent({
     name: 'TableHeader',
@@ -77,26 +77,26 @@
     },
     emits: ['search', 'reset-search'],
     setup(props, { emit }) {
-      const showSearchContent = ref(false);
-      const target = ref<HTMLElement | null>(null);
+      const showSearchContent = ref(false)
+      const target = ref<HTMLElement | null>(null)
       onMounted(() => {
         nextTick(() => {
-          target.value = document.getElementById('tableHeaderContainer');
-        });
-      });
+          target.value = document.getElementById('tableHeaderContainer')
+        })
+      })
       function doSearch() {
-        showSearchContent.value = false;
-        emit('search');
+        showSearchContent.value = false
+        emit('search')
       }
       function doResetSearch() {
-        emit('reset-search');
+        emit('reset-search')
       }
       return {
         showSearchContent,
         target,
         doSearch,
         doResetSearch,
-      };
+      }
     },
-  });
+  })
 </script>

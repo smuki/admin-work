@@ -5,9 +5,9 @@ import {
   PageAnim,
   SideTheme,
   ThemeMode,
-} from '@/store/types';
+} from '@/store/types'
 
-export const projectName = '集成中台';
+export const projectName = '集成中台'
 
 export default {
   theme: ThemeMode.LIGHT,
@@ -25,4 +25,4 @@ export default {
     isShowRefresh: true,
     isShowFullScreen: true,
   },
-} as AppConfigState;
+} as AppConfigState

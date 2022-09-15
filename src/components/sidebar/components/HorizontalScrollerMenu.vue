@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-  import useAppConfigStore from '@/store/modules/app-config';
-  import { DeviceType } from '@/store/types';
-  import type { MenuOption } from 'naive-ui';
-  import { defineComponent, PropType, ref, shallowReactive, watch, watchEffect } from 'vue';
-  import { RouteRecordRaw, useRoute, useRouter } from 'vue-router';
-  import { isExternal } from '@/utils';
-  import { transfromMenu } from '@/store/help';
+  import useAppConfigStore from '@/store/modules/app-config'
+  import { DeviceType } from '@/store/types'
+  import type { MenuOption } from 'naive-ui'
+  import { defineComponent, PropType, ref, shallowReactive, watch, watchEffect } from 'vue'
+  import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+  import { isExternal } from '@/utils'
+  import { transfromMenu } from '@/store/help'
 
   export default defineComponent({
     name: 'HorizontalScrollerMenu',
@@ -28,40 +28,40 @@
       },
     },
     setup(props) {
-      const appConfig = useAppConfigStore();
-      const menuOptions = shallowReactive<Array<MenuOption>>([]);
-      const defaultPath = ref('');
-      const currentRoute = useRoute();
-      const router = useRouter();
-      defaultPath.value = currentRoute.fullPath;
+      const appConfig = useAppConfigStore()
+      const menuOptions = shallowReactive<Array<MenuOption>>([])
+      const defaultPath = ref('')
+      const currentRoute = useRoute()
+      const router = useRouter()
+      defaultPath.value = currentRoute.fullPath
       function handleMenu(routes?: Array<RouteRecordRaw>) {
-        menuOptions.length = 0;
-        const tempMenus = transfromMenu(routes || []);
-        menuOptions.push(...tempMenus);
+        menuOptions.length = 0
+        const tempMenus = transfromMenu(routes || [])
+        menuOptions.push(...tempMenus)
       }
       function onMenuClick(key: string) {
-        if (isExternal(key)) return;
-        router.push(key);
+        if (isExternal(key)) return
+        router.push(key)
         if (appConfig.deviceType === DeviceType.MOBILE) {
-          appConfig.toggleCollapse(true);
+          appConfig.toggleCollapse(true)
         }
       }
       watch(
         () => currentRoute.fullPath,
         (newVal) => {
-          defaultPath.value = newVal;
-        },
-      );
+          defaultPath.value = newVal
+        }
+      )
       watchEffect(() => {
-        handleMenu(props.routes);
-      });
+        handleMenu(props.routes)
+      })
       return {
         defaultPath,
         menuOptions,
         onMenuClick,
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

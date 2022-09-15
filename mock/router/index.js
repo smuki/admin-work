@@ -1,5 +1,5 @@
-import { getMenuList } from '@/api/url';
-import Mock from 'mockjs';
+import { getMenuList } from '@/api/url'
+import Mock from 'mockjs'
 
 export const adminRoutes = [
   {
@@ -327,7 +327,7 @@ export const adminRoutes = [
       },
     ],
   },
-];
+]
 export const editorRoutes = [
   {
     menuUrl: '/list',
@@ -583,8 +583,8 @@ export const editorRoutes = [
       },
     ],
   },
-];
+]
 
 Mock.mock(RegExp(getMenuList), 'post', function () {
-  return Mock.mock({ code: 200, data: adminRoutes, msg: '获取菜单列表成功' });
-});
+  return Mock.mock({ code: 200, data: adminRoutes, msg: '获取菜单列表成功' })
+})

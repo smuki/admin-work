@@ -83,16 +83,16 @@
 </template>
 
 <script lang="ts">
-  import ProjectItem from './components/ProjectItem.vue';
-  import TodoItem from './components/TodoItem.vue';
-  import { computed, defineComponent } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { random } from 'lodash';
-  import useUserStore from '@/store/modules/user';
-  import { DeviceType } from '@/store/types';
-  import useAppConfigStore from '@/store/modules/app-config';
-  const COLORS = ['#67C23A', '#E6A23C', '#F56C6C', '#409EFF'];
-  const date = new Date();
+  import ProjectItem from './components/ProjectItem.vue'
+  import TodoItem from './components/TodoItem.vue'
+  import { computed, defineComponent } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { random } from 'lodash'
+  import useUserStore from '@/store/modules/user'
+  import { DeviceType } from '@/store/types'
+  import useAppConfigStore from '@/store/modules/app-config'
+  const COLORS = ['#67C23A', '#E6A23C', '#F56C6C', '#409EFF']
+  const date = new Date()
   export default defineComponent({
     name: 'WorkPlace',
     components: {
@@ -100,7 +100,7 @@
       TodoItem,
     },
     setup() {
-      const appConfigStore = useAppConfigStore();
+      const appConfigStore = useAppConfigStore()
       const waitingItmes = [
         {
           name: 'lyj',
@@ -127,10 +127,10 @@
           content: '给领导安排机票，酒店住宿等问题',
           time: '03-31',
         },
-      ];
+      ]
       const isMobileScreen = computed(() => {
-        return appConfigStore.deviceType === DeviceType.MOBILE;
-      });
+        return appConfigStore.deviceType === DeviceType.MOBILE
+      })
       const dataSource = [
         {
           key: '1',
@@ -180,13 +180,13 @@
           progress: 50,
           status: '进行中',
         },
-      ];
-      const userStore = useUserStore();
-      const sAvatar = computed(() => userStore.sAvatar);
-      const router = useRouter();
+      ]
+      const userStore = useUserStore()
+      const sAvatar = computed(() => userStore.sAvatar)
+      const router = useRouter()
       const fastActionClick = ({ path = '/' }) => {
-        router.push(path);
-      };
+        router.push(path)
+      }
       return {
         isMobileScreen,
         waitingItmes,
@@ -292,9 +292,9 @@
             key: 'status',
           },
         ],
-      };
+      }
     },
-  });
+  })
 </script>
 
 <style lang="scss" scoped>

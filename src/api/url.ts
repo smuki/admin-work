@@ -10,7 +10,7 @@ export const updateUserInfo = '/updateUser'
 
 export const addUserInfo = '/addUser'
 
-export const getMenuListByRoleId = '/ADM04017B'
+export const getMenuListByRoleId = '/ADM08003A'
 
 export const getAllMenuByRoleId = '/getAllMenuByRoleId'
 

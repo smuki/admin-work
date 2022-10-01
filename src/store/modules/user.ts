@@ -19,10 +19,10 @@ const useUserStore = defineStore('user-info', {
     saveUser(userInfo: UserState) {
       console.log(userInfo)
       return new Promise<UserState>((resolve) => {
-        this.userId = userInfo.userId
-        this.token = userInfo.token
-        this.userName = userInfo.userName
-        this.avatar = userInfo.avatar || defaultAvatar
+        this.userId = userInfo.UserId
+        this.token = userInfo.Token
+        this.userName = userInfo.UserName
+        this.avatar = userInfo.Avatar || defaultAvatar
         resolve(userInfo)
       })
     },

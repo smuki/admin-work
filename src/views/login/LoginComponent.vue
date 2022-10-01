@@ -162,9 +162,9 @@
         })
           .then((data: Response) => {
             console.log('data.............')
-            console.log(data)
+            console.log(data.entity)
 
-            userStore.saveUser(data as UserState).then(() => {
+            userStore.saveUser(data.entity as UserState).then(() => {
               console.log(router.getRoutes())
               router
                 .replace({

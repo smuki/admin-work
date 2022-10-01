@@ -172,19 +172,19 @@
           table.indexColumn,
           {
             title: '角色编码',
-            key: 'sRole',
+            key: 'Role',
           },
           {
             title: '角色名称',
-            key: 'sName',
+            key: 'Name',
           },
           {
             title: '角色描述',
-            key: 'sDescription',
+            key: 'Description',
           },
           {
             title: '创建日期',
-            key: 'dAddDate',
+            key: 'CreatedTime',
           },
           {
             title: '操作',
@@ -217,7 +217,7 @@
       const defaultExpandedKeys = shallowReactive([] as Array<string>)
       function doRefresh() {
         post<any>({
-          url: '/ADM01301A/list',
+          url: '/ADM08000B/list',
           data: {},
         })
           .then((res) => {
@@ -233,7 +233,7 @@
             const propName = item[key]
 
             if (propName) {
-              if (it.key === 'sRole') {
+              if (it.key === 'Role') {
                 it.disabled = false
               }
             }
@@ -273,7 +273,7 @@
             let formArray = {}
             formArray.sRole = data.sRole
             post<any>({
-              url: '/ADM01301A/xdelete',
+              url: '/ADM08000B/xdelete',
               data: formArray,
             })
               .then((res) => {

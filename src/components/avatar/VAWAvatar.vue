@@ -3,10 +3,10 @@
     <n-dropdown trigger="hover" :options="options" size="large" @select="handleSelect">
       <div class="action-wrapper">
         <div class="avatar">
-          <n-avatar circle size="small" :src="userStore.sAvatar" />
+          <n-avatar circle size="small" :src="userStore.avatar" />
         </div>
         <span class="nick-name">
-          {{ userStore.sUserName }}
+          {{ userStore.userName }}
           <n-icon class="tip">
             <CaretDownSharp />
           </n-icon>

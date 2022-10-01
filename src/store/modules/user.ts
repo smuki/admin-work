@@ -9,28 +9,28 @@ const defaultAvatar = Avatar
 const useUserStore = defineStore('user-info', {
   state: () => {
     return {
-      sUserId: '',
-      sToken: '',
-      sUserName: '',
-      sAvatar: defaultAvatar,
+      userId: '',
+      token: '',
+      userName: '',
+      avatar: defaultAvatar,
     }
   },
   actions: {
     saveUser(userInfo: UserState) {
       console.log(userInfo)
       return new Promise<UserState>((resolve) => {
-        this.sUserId = userInfo.sUserId
-        this.sToken = userInfo.sToken
-        this.sUserName = userInfo.sUserName
-        this.sAvatar = userInfo.sAvatar || defaultAvatar
+        this.userId = userInfo.userId
+        this.token = userInfo.token
+        this.userName = userInfo.userName
+        this.avatar = userInfo.avatar || defaultAvatar
         resolve(userInfo)
       })
     },
     isTokenExpire() {
-      return !this.sToken
+      return !this.token
     },
     changeNickName(newNickName: string) {
-      this.sUserName = newNickName
+      this.userName = newNickName
     },
     logout() {
       return new Promise<void>((resolve) => {

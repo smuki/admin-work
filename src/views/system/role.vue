@@ -52,16 +52,16 @@
   import { defineComponent, h, nextTick, onMounted, ref, shallowReactive } from 'vue'
 
   interface RoleModeType {
-    sName: string
-    sRole: string
-    sDescription: string
-    dAddDate: string
+    Name: string
+    Role: string
+    Description: string
+    CreatedTime: string
   }
 
   const formItems = [
     {
       label: '角色编号',
-      key: 'sRole',
+      key: 'Role',
       value: ref(null),
       maxLength: 20,
       validator: (formItem, message) => {
@@ -91,7 +91,7 @@
     {
       label: '角色名称',
       type: 'input',
-      key: 'sName',
+      key: 'Name',
       value: ref(null),
       validator: (formItem, message) => {
         if (!formItem.value.value) {
@@ -112,7 +112,7 @@
     },
     {
       label: '角色描述',
-      key: 'sDescription',
+      key: 'Description',
       value: ref(null),
       maxLength: 50,
       inputType: 'text',

@@ -156,8 +156,8 @@
         post({
           url: login,
           data: {
-            sUserId: username.value,
-            sHash: password.value,
+            UserId: username.value,
+            Hash: password.value,
           },
         })
           .then((data: Response) => {

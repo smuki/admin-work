@@ -24,7 +24,7 @@ export function getComponent(it: OriginRoute) {
 
 export function getFilePath(it: OriginRoute) {
   if (!it.localFilePath) {
-    it.localFilePath = it.menuUrl
+    it.localFilePath = it.path
   }
   it.localFilePath = resolve('/', it.localFilePath)
   return '/src/views' + it.localFilePath + '.vue'
@@ -49,11 +49,11 @@ export function filterRoutesFromLocalRoutes(
   path = '/'
 ) {
   const filterRoute = localRoutes.find((it) => {
-    return resolve(path, it.path) === route.menuUrl
+    return resolve(path, it.path) === route.path
   })
   if (filterRoute) {
     filterRoute.meta = {
-      title: route.menuName,
+      title: route.title,
       affix: !!route.affix,
       cacheable: !!route.cacheable,
       icon: route.icon || 'menu',
@@ -93,6 +93,7 @@ export function getNameByUrl(menuUrl: string) {
 
 export function generatorRoutes(res: Array<OriginRoute>) {
   const tempRoutes: Array<RouteRecordRaw> = []
+  console.log(res)
   res.forEach((it) => {
     const isMenuFlag = isMenu(it)
     const localRoute = isMenuFlag ? filterRoutesFromLocalRoutes(it, asyncRoutes) : null
@@ -100,22 +101,22 @@ export function generatorRoutes(res: Array<OriginRoute>) {
       tempRoutes.push(localRoute as RouteRecordRaw)
     } else {
       const route: RouteRecordRaw = {
-        path: it.outLink && isExternal(it.outLink) ? it.outLink : it.menuUrl,
-        name: it.routeName || getNameByUrl(it.menuUrl),
+        path: it.outLink && isExternal(it.outLink) ? it.outLink : it.path,
+        name: it.routeName || getNameByUrl(it.path),
         component: isMenuFlag ? LAYOUT : getComponent(it),
         meta: {
-          hidden: !!it.bHidden,
-          title: it.sName,
+          hidden: !!it.hidden,
+          title: it.title,
           affix: !!it.affix,
           cacheable: !!it.cacheable,
-          icon: it.sIcon || 'menu',
+          icon: it.icon || 'menu',
           iconPrefix: it.iconPrefix || 'iconfont',
           badge: it.badge,
           isRootPath: !!it.isRootPath,
           isSingle: !!it.isSingle,
         },
       }
-      if (it.children) {
+      if (it.children && it.children.length > 0) {
         route.children = generatorRoutes(it.children)
       }
       tempRoutes.push(route)

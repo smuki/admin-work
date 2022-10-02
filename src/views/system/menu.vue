@@ -5,9 +5,11 @@
         <TableHeader :show-filter="false">
           <template #top-right>
             <AddButton @add="onAddItem" />
+            [{{ rowKey }}]
           </template>
         </TableHeader>
       </template>
+
       <template #default>
         <n-data-table
           :loading="tableLoading"
@@ -49,14 +51,14 @@
     name: 'Menu',
     setup() {
       let actionModel = 'add'
-      let tempItem: { menuUrl: string } | null = null
+      let tempItem: { path: string } | null = null
       const table = useTable()
       const naiveDialog = useDialog()
       const message = useMessage()
       const permissionStore = usePermissionStore()
       const modalDialog = ref<ModalDialogType | null>(null)
       const dataForm = ref<DataFormType | null>(null)
-      const rowKey = useRowKey('menuUrl')
+      const rowKey = useRowKey('path')
       const tableColumns = useTableColumn(
         [
           {
@@ -143,7 +145,7 @@
       const itemFormOptions = [
         {
           label: '上级菜单',
-          key: 'parentPath',
+          key: 'parent',
           value: ref(null),
           validator: (formItem, message) => {
             if (!formItem.value.value) {
@@ -155,7 +157,7 @@
           render: (formItem) =>
             renderTreeSelect(
               formItem.value,
-              transformTreeSelect(unref(table.dataList)!, 'menuName', 'menuUrl'),
+              transformTreeSelect(unref(table.dataList)!, 'title', 'path'),
               {
                 showPath: true,
               }
@@ -247,16 +249,16 @@
         tempItem = item
         itemFormOptions.forEach((it) => {
           it.value.value = item[it.key] || null
-          if (it.key === 'menuUrl' && it.disabled) {
-            if (isExternal(item.menuUrl)) {
+          if (it.key === 'path' && it.disabled) {
+            if (isExternal(item.path)) {
               it.value.value = ''
             }
             ;(it.disabled as Ref<boolean>).value = true
           }
         })
         const external = itemFormOptions.find((it) => it.key === 'redirect')
-        if (isExternal(item.menuUrl)) {
-          external!.value.value = item.menuUrl
+        if (isExternal(item.path)) {
+          external!.value.value = item.path
         }
         modalDialog.value?.show()
       }
@@ -271,10 +273,7 @@
           if (dataForm.value?.validator()) {
             const params = dataForm.value?.generatorParams()
             if (tempItem) {
-              const tempRoute = findRouteByUrl(
-                permissionStore.getPermissionSideBar,
-                tempItem.menuUrl
-              )
+              const tempRoute = findRouteByUrl(permissionStore.getPermissionSideBar, tempItem.path)
               if (tempRoute && tempRoute.meta && tempRoute.meta.badge) {
                 ;(tempRoute.meta as any).badge = (params as any).badge || ''
               }

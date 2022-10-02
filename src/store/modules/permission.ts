@@ -34,7 +34,7 @@ const usePermissionStore = defineStore('permission-route', {
             url: getMenuListByRoleId,
             data,
           })
-          return generatorRoutes(res.routes)
+          return generatorRoutes(res.items)
         } else {
           return generatorRoutes(defaultRoutes)
         }

@@ -61,11 +61,11 @@
         [
           {
             title: '菜单名称',
-            key: 'menuName',
+            key: 'title',
           },
           {
             title: '菜单地址',
-            key: 'menuUrl',
+            key: 'path',
           },
           {
             title: '菜单图标',
@@ -163,7 +163,7 @@
         },
         {
           label: '菜单名称',
-          key: 'menuName',
+          key: 'title',
           required: true,
           value: ref(null),
           render: (formItem) =>
@@ -173,7 +173,7 @@
         },
         {
           label: '菜单地址',
-          key: 'menuUrl',
+          key: 'path',
           required: true,
           value: ref(null),
           disabled: ref(false),

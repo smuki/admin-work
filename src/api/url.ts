@@ -22,7 +22,7 @@ export const addDepartment = '/addDepartment'
 
 export const getRoleList = '/getRoleList'
 
-export const getMenuList = '/getMenuList'
+export const getMenuList = '/ADM08003A'
 
 export const getParentMenuList = '/getParentMenuList'
 

@@ -261,7 +261,7 @@ export default {
             console.log("1----------------")
 
             this.schema=res.specification.components;
-
+            this.formProps=res.specification.configs;
           })
           .catch(console.log)
       },

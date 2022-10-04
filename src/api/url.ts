@@ -12,6 +12,8 @@ export const addUserInfo = '/addUser'
 
 export const getMenuListByRoleId = '/ADM08003A'
 
+export const getSpecification = '/ADM08004A'
+
 export const getAllMenuByRoleId = '/getAllMenuByRoleId'
 
 export const deleteUserById = '/deleteUserById'

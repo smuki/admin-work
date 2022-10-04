@@ -16,12 +16,8 @@
               @change="handleDataChange"
               @cancel="handleCancel"
               @submit="handleSubmit"
-              @validation-failed="handleValidationFailed"
-          >
+              @validation-failed="handleValidationFailed">
           </VueNaiveForm>
-          
-          labelPosition=[{{trueFormProps.labelPosition}}]
-          {{formData}}
 
   </div>
 </template>

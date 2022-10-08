@@ -1,4 +1,4 @@
-@import "demo-common/css/variable.css";
+@import "@/styles/variable.css";
 
 :root {
     --color-skeleton-bg: var(--background-color-base);

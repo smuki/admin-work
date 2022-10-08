@@ -37,7 +37,7 @@
 
 <script>
 import Draggable from 'vuedraggable';
-import * as arrayMethods from 'demo-common/utils/array';
+import * as arrayMethods from '@/utils/array';
 import { generateEditorItem } from '../common/editorData';
 
 // 避免循环依赖导致undefined

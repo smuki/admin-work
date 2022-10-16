@@ -63,6 +63,7 @@
 </script>
 
 <style module>
+  @import '@/styles/variable.css';
   .box {
     padding: 10px;
   }

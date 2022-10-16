@@ -1,17 +1,96 @@
 <template>
   <div :class="$style.container">
-    <div :class="$style.toolBarWrap">
-      <div :class="$style.toolsBar">
-        <EditorToolBar
-          :drag-group="dragOptions.group"
-          :config-tools="configTools"
-          @onFilter="$message.error('该组件添加数目已达上限！')"
-        />
-        toolbar...
+    <div
+      :class="{
+        [$style.contentWrap]: true,
+        [$style.closeToolbar]: closeToolbar,
+      }"
+    >
+      <div :class="$style.toolBarWrap">
+        <div :class="$style.toolsBar">
+          <EditorToolBar
+            :drag-group="dragOptions.group"
+            :config-tools="configTools"
+            @onFilter="$message.error('该组件添加数目已达上限！')"
+          />
+          toolbar...
+        </div>
+        <span :class="$style.leftCaret" @click="closeToolbar = !closeToolbar">
+          <i class="el-icon-caret-right"></i>
+        </span>
       </div>
-      <span :class="$style.leftCaret" @click="closeToolbar = !closeToolbar">
-        <i class="el-icon-caret-right"></i>
-      </span>
+
+      <div :class="[$style.contentBox]">
+        <n-form
+          style="height: 100%"
+          :model="rootFormData"
+          v-bind="formProps"
+          class="genFromComponent"
+          :class="{
+            layoutColumn: !formProps.inline,
+            [`layoutColumn-${formProps.layoutColumn}`]: !formProps.inline,
+            formInlineFooter: formProps.inlineFooter,
+            formInline: formProps.inline,
+            // [`genFromComponent_${schema.id}Form`]: !!schema.id,
+          }"
+        >
+          <NestedEditor
+            :child-component-list="componentList"
+            :drag-options="dragOptions"
+            :form-data="rootFormData"
+            :form-props="formProps"
+          >
+            <n-form-item
+              v-if="componentList.length > 0 && formFooter.show"
+              :style="{
+                display: formProps.inline && formProps.inlineFooter ? 'inline-block' : 'block',
+              }"
+              class="formFooter_item w100 formFooter_item-editor"
+            >
+              <el-button @click="$emit('onCancel')">{{ formFooter.cancelBtn }}</el-button>
+              <el-button type="primary" @click="$emit('onSubmit')">
+                {{ formFooter.okBtn }}
+              </el-button>
+            </n-form-item>
+          </NestedEditor>
+        </n-form>
+        <div v-if="componentList.length === 0" :class="$style.tipBox">
+          <p>拖拽左侧栏的组件进行添加</p>
+        </div>
+      </div>
+
+      <div :class="$style.rightForm">
+        <n-tabs v-model="activeName">
+          <n-tab-pane v-if="curEditorItem" label="组件配置" name="compConfig">
+            <VueJsonFrom
+              v-model="curEditorItem.componentValue"
+              :class="$style.configForm"
+              :schema="curEditorItem.componentPack.propsSchema"
+              :form-props="{
+                labelPosition: 'right',
+                labelWidth: '110px',
+              }"
+              :form-footer="{
+                show: false,
+              }"
+            />
+          </n-tab-pane>
+          <n-tab-pane label="表单配置" name="formConfig">
+            <VueJsonFrom
+              v-model="formConfig"
+              :class="$style.configForm"
+              :schema="FormConfSchema"
+              :form-props="{
+                labelPosition: 'right',
+                labelWidth: '110px',
+              }"
+              :form-footer="{
+                show: false,
+              }"
+            />
+          </n-tab-pane>
+        </n-tabs>
+      </div>
     </div>
   </div>
 </template>
@@ -101,6 +180,11 @@
     data() {
       return {
         configTools,
+        componentList: [],
+        activeName: 'formConfig',
+        curEditorItem: null, // 选中的formItem
+        formConfig: {},
+
         //typeItems,
         formProps: {
           labelPosition: 'top',

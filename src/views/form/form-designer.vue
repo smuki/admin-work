@@ -8,6 +8,7 @@
     >
       <div :class="$style.toolBarWrap">
         <div :class="$style.toolsBar">
+          {{ closeToolbar }}
           <EditorToolBar
             :drag-group="dragOptions.group"
             :config-tools="configTools"
@@ -16,7 +17,7 @@
           toolbar...
         </div>
         <span :class="$style.leftCaret" @click="closeToolbar = !closeToolbar">
-          <i class="el-icon-caret-right"></i>
+          <i class="n-icon-caret-right"></i>
         </span>
       </div>
 
@@ -47,10 +48,10 @@
               }"
               class="formFooter_item w100 formFooter_item-editor"
             >
-              <el-button @click="$emit('onCancel')">{{ formFooter.cancelBtn }}</el-button>
-              <el-button type="primary" @click="$emit('onSubmit')">
+              <n-button @click="$emit('onCancel')">{{ formFooter.cancelBtn }}</n-button>
+              <n-button type="primary" @click="$emit('onSubmit')">
                 {{ formFooter.okBtn }}
-              </el-button>
+              </n-button>
             </n-form-item>
           </NestedEditor>
         </n-form>
@@ -61,7 +62,7 @@
 
       <div :class="$style.rightForm">
         <n-tabs v-model="activeName">
-          <n-tab-pane v-if="curEditorItem" label="组件配置" name="compConfig">
+          <n-tab-pane v-if="curEditorItem" tab="组件配置" name="compConfig">
             <VueJsonFrom
               v-model="curEditorItem.componentValue"
               :class="$style.configForm"
@@ -75,7 +76,7 @@
               }"
             />
           </n-tab-pane>
-          <n-tab-pane label="表单配置" name="formConfig">
+          <n-tab-pane tab="表单配置" name="formConfig">
             <VueJsonFrom
               v-model="formConfig"
               :class="$style.configForm"
@@ -179,6 +180,7 @@
     },
     data() {
       return {
+        closeToolbar: false,
         configTools,
         componentList: [],
         activeName: 'formConfig',

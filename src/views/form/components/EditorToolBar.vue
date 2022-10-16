@@ -24,7 +24,7 @@
                 [element.btnClass]: element.btnClass,
               }"
             >
-              <span>{{ element.btnClass }}{{ element.title }}</span>
+              <span>{{ element.title }}</span>
             </div>
           </div>
         </draggable>
@@ -88,7 +88,7 @@
   .listItem {
     position: relative;
     margin-top: 10px;
-    width: 47%;
+    /*width: 47%;*/
     max-width: 120px; /* 避免拖动ghost样式异常 */
     height: 36px;
     line-height: 36px;

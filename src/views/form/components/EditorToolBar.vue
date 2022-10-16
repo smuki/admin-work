@@ -3,24 +3,30 @@
     <div v-for="(group, index) in configTools" :key="index" :class="$style.group">
       <template v-if="!group.hidden">
         <h3 :class="$style.groupName"> {{ group.groupName }}({{ group.componentList.length }}) </h3>
+
         <draggable
           v-model="group.componentList"
           :class="$style.groupList"
           :sort="false"
           :filter="`.${$style.disabled}`"
           :group="{ name: dragGroup, pull: 'clone', put: false }"
+          :clone="cloneDog"
+          @filter="$emit('onFilter')"
+          @start="$emit('onDragStart')"
+          @end="$emit('onDragEnd')"
         >
-          <template #item="{ element }">
+          <div v-for="(element, cIndex) in group.componentList" :key="element.title">
             <div
+              :key="cIndex"
               :class="{
                 [$style.listItem]: true,
                 draggableToolItem: true,
                 [element.btnClass]: element.btnClass,
               }"
             >
-              <span>{{ element.title }}</span>
+              <span>{{ element.btnClass }}{{ element.title }}</span>
             </div>
-          </template>
+          </div>
         </draggable>
       </template>
     </div>
@@ -28,14 +34,14 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
+  import { VueDraggableNext } from 'vue-draggable-next'
 
   import { generateEditorItem } from '../common/editorData'
 
   export default {
     name: 'EditorToolBar',
     components: {
-      Draggable,
+      draggable: VueDraggableNext,
     },
     props: {
       configTools: {

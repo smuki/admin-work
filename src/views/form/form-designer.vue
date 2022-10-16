@@ -20,7 +20,7 @@
         </span>
       </div>
 
-      <div :class="[$style.contentBox]">
+      <div v-if="false" :class="[$style.contentBox]">
         <n-form
           style="height: 100%"
           :model="rootFormData"

@@ -21,7 +21,18 @@
         </span>
       </div>
 
-      <div v-if="false" :class="[$style.contentBox]">
+      <div :class="[$style.contentBox]">
+        <draggable
+          :sort="false"
+          :filter="`.${$style.disabled}`"
+          :group="{ name: dragGroup, pull: 'clone', put: false }"
+          :clone="cloneDog"
+          @filter="$emit('onFilter')"
+          @start="$emit('onDragStart')"
+          @end="$emit('onDragEnd')"
+        >
+          <div>喜喜喜喜喜喜喜喜喜喜 </div>
+        </draggable>
         <n-form
           style="height: 100%"
           :model="rootFormData"
@@ -35,12 +46,25 @@
             // [`genFromComponent_${schema.id}Form`]: !!schema.id,
           }"
         >
-          <NestedEditor
+          <draggable
+            :class="$style.groupList"
+            :sort="false"
+            :filter="`.${$style.disabled}`"
+            :group="{ name: dragGroup, pull: 'clone', put: false }"
+            :clone="cloneDog"
+            @filter="$emit('onFilter')"
+            @start="$emit('onDragStart')"
+            @end="$emit('onDragEnd')"
+          >
+            <div> asdflajsdf卢卡斯打发士大夫 </div>
+          </draggable>
+          <Nesteder
             :child-component-list="componentList"
             :drag-options="dragOptions"
             :form-data="rootFormData"
             :form-props="formProps"
           >
+            [[]....]]...===== ..{{ componentList }}..
             <n-form-item
               v-if="componentList.length > 0 && formFooter.show"
               :style="{
@@ -53,11 +77,13 @@
                 {{ formFooter.okBtn }}
               </n-button>
             </n-form-item>
-          </NestedEditor>
+          </Nesteder>
         </n-form>
-        <div v-if="componentList.length === 0" :class="$style.tipBox">
-          <p>拖拽左侧栏的组件进行添加</p>
-        </div>
+        <draggable>
+          <div v-if="componentList.length === 0" :class="$style.tipBox">
+            <p>拖拽左侧栏的组件进行添加</p>
+          </div>
+        </draggable>
       </div>
 
       <div :class="$style.rightForm">
@@ -101,7 +127,9 @@
   import { getSpecification } from '@/api/url'
   import { post } from '@/api/http'
   import EditorToolBar from './components/EditorToolBar.vue'
+  import Nesteder from './components/Nesteder.vue'
   import configTools from './config/tools'
+  import { VueDraggableNext } from 'vue-draggable-next'
 
   let installedNaive = false
   const VueNaiveForm = defineAsyncComponent(async () => {
@@ -175,6 +203,9 @@
     name: 'Demo',
     components: {
       EditorToolBar,
+      Nesteder,
+      draggable: VueDraggableNext,
+
       //VueNaiveForm,
       //EditorHeader
     },

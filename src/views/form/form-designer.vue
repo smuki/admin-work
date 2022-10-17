@@ -22,17 +22,6 @@
       </div>
 
       <div :class="[$style.contentBox]">
-        <draggable
-          :sort="false"
-          :filter="`.${$style.disabled}`"
-          :group="{ name: dragGroup, pull: 'clone', put: false }"
-          :clone="cloneDog"
-          @filter="$emit('onFilter')"
-          @start="$emit('onDragStart')"
-          @end="$emit('onDragEnd')"
-        >
-          <div>喜喜喜喜喜喜喜喜喜喜 </div>
-        </draggable>
         <n-form
           style="height: 100%"
           :model="rootFormData"
@@ -46,18 +35,6 @@
             // [`genFromComponent_${schema.id}Form`]: !!schema.id,
           }"
         >
-          <draggable
-            :class="$style.groupList"
-            :sort="false"
-            :filter="`.${$style.disabled}`"
-            :group="{ name: dragGroup, pull: 'clone', put: false }"
-            :clone="cloneDog"
-            @filter="$emit('onFilter')"
-            @start="$emit('onDragStart')"
-            @end="$emit('onDragEnd')"
-          >
-            <div> asdflajsdf卢卡斯打发士大夫 </div>
-          </draggable>
           <Nesteder
             :child-component-list="componentList"
             :drag-options="dragOptions"

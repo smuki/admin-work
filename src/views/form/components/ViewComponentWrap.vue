@@ -44,7 +44,7 @@
     </div>
     <SchemaField v-bind="attrs" />
 
-    <NestedEditor
+    <Nesteder
       v-if="showNestedEditor(editorItem)"
       :child-component-list="editorItem.childList"
       :drag-options="dragOptions"
@@ -59,14 +59,14 @@
   import getDefaultFormState from '@/utils/schema/getDefaultFormState'
 
   import emitter from '@/utils/emitter.js'
-  //import NestedEditor from '@/components/form3/NestedEditor';
+  import Nesteder from './Nesteder'
   import { editorItem2SchemaFieldProps } from '@/components/form3/editorData'
 
   export default {
     name: 'ViewComponentWrap',
     components: {
       SchemaField,
-      //      NestedEditor
+      Nesteder,
     },
     mixins: [emitter],
     props: {

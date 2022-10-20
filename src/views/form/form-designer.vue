@@ -63,10 +63,10 @@
         </draggable>
       </div>
 
-      <div :class="$style.rightForm">
+      <div  v-if="false" :class="$style.rightForm">
         <n-tabs v-model="activeName">
           <n-tab-pane v-if="curEditorItem" tab="组件配置" name="compConfig">
-            <VueJsonFrom
+            <VueNaiveForm
               v-model="curEditorItem.componentValue"
               :class="$style.configForm"
               :schema="curEditorItem.componentPack.propsSchema"
@@ -80,7 +80,7 @@
             />
           </n-tab-pane>
           <n-tab-pane tab="表单配置" name="formConfig">
-            <VueJsonFrom
+            <VueNaiveForm
               v-model="formConfig"
               :class="$style.configForm"
               :schema="FormConfSchema"
@@ -104,7 +104,8 @@
   import { getSpecification } from '@/api/url'
   import { post } from '@/api/http'
   import EditorToolBar from './components/EditorToolBar.vue'
-  import Nesteder from './components/Nesteder.vue'
+  import Nesteder from '@/views/form/components/Nesteder.vue'
+  
   import configTools from './config/tools'
   import { VueDraggableNext } from 'vue-draggable-next'
 
@@ -182,8 +183,7 @@
       EditorToolBar,
       Nesteder,
       draggable: VueDraggableNext,
-
-      //VueNaiveForm,
+      VueNaiveForm,
       //EditorHeader
     },
     data() {

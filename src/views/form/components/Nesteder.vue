@@ -54,7 +54,7 @@
     name: 'Nesteder',
     components: {
       draggable: VueDraggableNext,
-      //      ViewComponentWrap,
+      ViewComponentWrap,
     },
     props: {
       dragOptions: {

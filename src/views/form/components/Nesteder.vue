@@ -48,7 +48,7 @@
   import { generateEditorItem } from '@/components/form3/editorData'
 
   // 避免循环依赖导致undefined
-  const ViewComponentWrap = () => import('@/components/form3/ViewComponentWrap')
+  const ViewComponentWrap = () => import('@/views/form/components/ViewComponentWrap')
 
   export default {
     name: 'Nesteder',

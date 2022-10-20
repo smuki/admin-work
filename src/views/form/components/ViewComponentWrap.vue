@@ -59,7 +59,7 @@
   import getDefaultFormState from '@/utils/schema/getDefaultFormState'
 
   import emitter from '@/utils/emitter.js'
-  import Nesteder from './Nesteder'
+  import Nesteder from '@/views/form/components/Nesteder'
   import { editorItem2SchemaFieldProps } from '@/components/form3/editorData'
 
   export default {

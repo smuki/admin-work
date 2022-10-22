@@ -7,6 +7,7 @@
     :class="[$style.dragArea, $style.formItemWrap]"
     @change="handleDragChange"
   >
+  length={{childComponentList.length}}
     <div
       v-for="item in childComponentList"
       :key="item.id"
@@ -24,6 +25,7 @@
           : {}
       "
     >
+    
       <ViewComponentWrap
         :form-data="formData"
         :editor-item="item"
@@ -32,9 +34,10 @@
         :form-props="formProps"
         @onOperate="handleItemOperate"
       >
-        asdfsdf
+
       </ViewComponentWrap>
-      asdfljasdfaslfkjasdfasdlfkjasdfasdflkjasdf
+      {{item.title}}
+
     </div>
     <template #footer>
       <slot></slot>
@@ -232,7 +235,7 @@
   .dragArea {
     width: 100%;
     box-sizing: border-box;
-    font-size: 0;
+    /*font-size: 0;*/
     background-color: #f5f5f5;
     height: 100%;
     padding: 15px;

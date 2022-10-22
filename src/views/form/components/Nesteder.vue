@@ -102,6 +102,8 @@
       },
       // 操作单个组件
       handleItemOperate({ item, command }) {
+        console.log(item)
+        console.log(command)
         const strategyMap = {
           moveUp(target, arrayItem) {
             return arrayMethods.moveUp(target, arrayItem)

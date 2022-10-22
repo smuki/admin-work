@@ -508,8 +508,8 @@
 
   :root {
     --site-top-height: 80px;
-    --tool-bar-width: 280px;
-    --right-form-width: 380px;
+    --tool-bar-width: 240px;
+    --right-form-width: 280px;
     --drag-area-width: auto;
   }
   /*预览模式 同步样式重置*/

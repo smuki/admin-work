@@ -49,7 +49,7 @@
   import { VueDraggableNext } from 'vue-draggable-next'
   import * as arrayMethods from '@/utils/array'
   import { generateEditorItem } from '@/components/form3/editorData'
-
+  import { defineAsyncComponent } from 'vue';
   // 避免循环依赖导致undefined
   const ViewComponentWrap2 = () => import('./ViewComponentWrap.vue')
 
@@ -57,7 +57,7 @@
     name: 'Nesteder',
     components: {
       draggable: VueDraggableNext,
-      ViewComponentWrap:() => import('./ViewComponentWrap.vue'),
+      ViewComponentWrap:defineAsyncComponent(() => import('./ViewComponentWrap.vue')),
     },
     props: {
       dragOptions: {

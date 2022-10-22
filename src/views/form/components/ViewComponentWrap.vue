@@ -7,11 +7,7 @@
     }"
     @click="handleClickView"
   >
-  ################
-  ################
-  ################
-  ################
-  ################
+
     <span :class="$style.formProperty"> {{ attrs.curNodePath }}</span>
     <div v-if="editorItem.isEdit" :class="$style.editBar">
       <button
@@ -47,7 +43,7 @@
         @click="$emit('onOperate', { item: editorItem, command: 'remove' })"
       ></button>
     </div>
-    <SchemaField v-bind="attrs" />
+    <SchemaField v-if="false" v-bind="attrs" />
 
     <Nesteder
       v-if="showNestedEditor(editorItem)"

@@ -1,13 +1,13 @@
 <template>
+
+
   <draggable
     ref="draggable"
-    :sort="false"
     :list="childComponentList"
     v-bind="dragOptions"
     :class="[$style.dragArea, $style.formItemWrap]"
     @change="handleDragChange"
   >
-  length={{childComponentList.length}}
     <div
       v-for="item in childComponentList"
       :key="item.id"
@@ -25,6 +25,7 @@
           : {}
       "
     >
+    
       <ViewComponentWrap
         :form-data="formData"
         :editor-item="item"

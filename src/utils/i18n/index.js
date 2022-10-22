@@ -6,14 +6,14 @@
 // 也可以自己使用官方的语言包
 // https://github.com/epoberezkin/ajv-i18n/tree/master/localize
 
-import localizeZh from './localize/zh';
+import localizeZh from './localize/zh'
 
 export default {
-    $$currentLocalizeFn: localizeZh,
-    getCurrentLocalize() {
-        return this.$$currentLocalizeFn;
-    },
-    useLocal(fn) {
-        this.$$currentLocalizeFn = fn;
-    }
-};
+  $$currentLocalizeFn: localizeZh,
+  getCurrentLocalize() {
+    return this.$$currentLocalizeFn
+  },
+  useLocal(fn) {
+    this.$$currentLocalizeFn = fn
+  },
+}

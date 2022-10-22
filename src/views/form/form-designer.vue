@@ -63,7 +63,7 @@
         </draggable>
       </div>
 
-      <div  v-if="false" :class="$style.rightForm">
+      <div v-if="false" :class="$style.rightForm">
         <n-tabs v-model="activeName">
           <n-tab-pane v-if="curEditorItem" tab="组件配置" name="compConfig">
             <VueNaiveForm
@@ -105,7 +105,7 @@
   import { post } from '@/api/http'
   import EditorToolBar from './components/EditorToolBar.vue'
   import Nesteder from '@/views/form/components/Nesteder.vue'
-  
+
   import configTools from './config/tools'
   import { VueDraggableNext } from 'vue-draggable-next'
 

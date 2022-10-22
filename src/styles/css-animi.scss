@@ -1,6 +1,6 @@
 @mixin absolute() {
   position: absolute;
-  content: "";
+  content: '';
   background-color: rgb(24, 144, 255);
   transition: transform 0.5s ease 0s;
 }
@@ -66,7 +66,7 @@
   @include transfrom1();
   transform-origin: bottom;
 }
-.strike-through::before{
+.strike-through::before {
   @include absolute();
   height: 2px;
   top: 50%;
@@ -75,11 +75,11 @@
   transform: scaleX(0);
   transform-origin: left;
 }
-.strike-through:hover::before{
+.strike-through:hover::before {
   transform: scaleX(1);
   transition: transform 0.5s ease 0s;
 }
-.under-line-1::before{
+.under-line-1::before {
   @include absolute();
   height: 2px;
   left: 0;
@@ -88,7 +88,7 @@
   transform: scaleX(0);
   transform-origin: left;
 }
-.under-line-2::before{
+.under-line-2::before {
   @include absolute();
   height: 2px;
   left: 0;
@@ -97,11 +97,11 @@
   transform: scaleX(1);
   transform-origin: left;
 }
-.under-line-2:hover::before{
+.under-line-2:hover::before {
   transform: scaleX(0);
   transition: transform 0.5s ease 0s;
 }
-.under-line-3::before{
+.under-line-3::before {
   @include absolute();
   height: 2px;
   left: 0;
@@ -110,11 +110,12 @@
   transform: scaleX(0);
   transform-origin: center;
 }
-.under-line-1:hover::before,.under-line-3:hover::before{
+.under-line-1:hover::before,
+.under-line-3:hover::before {
   transform: scaleX(1);
   transition: transform 0.5s ease 0s;
 }
-.over-line-1::before{
+.over-line-1::before {
   @include absolute();
   height: 2px;
   left: 0;
@@ -123,11 +124,11 @@
   transform: scaleX(0);
   transform-origin: center;
 }
-.over-line-1:hover::before{
+.over-line-1:hover::before {
   transform: scaleX(1);
   transition: transform 0.5s ease 0s;
 }
-.over-line-2::before{
+.over-line-2::before {
   @include absolute();
   height: 2px;
   left: 0;
@@ -136,11 +137,11 @@
   transform: scaleX(0);
   transform-origin: left;
 }
-.over-line-2:hover::before{
+.over-line-2:hover::before {
   transform: scaleX(1);
   transition: transform 0.5s ease 0s;
 }
-.highlight-1::before{
+.highlight-1::before {
   @include absolute();
   left: 0;
   right: 0;
@@ -150,12 +151,12 @@
   transform-origin: right;
   z-index: -1;
 }
-.highlight-1:hover::before{
+.highlight-1:hover::before {
   transform: scaleX(1);
   transition: transform 0.5s ease 0s;
   transform-origin: left;
 }
-.highlight-2::before{
+.highlight-2::before {
   @include absolute();
   left: 0;
   right: 0;
@@ -165,7 +166,7 @@
   transform-origin: bottom;
   z-index: -1;
 }
-.highlight-2:hover::before{
+.highlight-2:hover::before {
   transform: scaleY(1);
   transition: transform 0.5s ease 0s;
 }
@@ -174,35 +175,38 @@
   z-index: -1;
   width: 1em;
   height: 1em;
-  content: "";
+  content: '';
   background-color: #1890ff;
   border-radius: 50%;
-  transition: transform .45s ease-in-out;
-  transform: translate3d(-50%,-50%,0) scale3d(0,0,0);
+  transition: transform 0.45s ease-in-out;
+  transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
   transform-origin: center;
 }
-.bubble-1::before{
+.bubble-1::before {
   @include bubble-transform();
   top: 100%;
   left: 100%;
 }
-.bubble-2::before{
+.bubble-2::before {
   @include bubble-transform();
   top: 100%;
   right: 100%;
 }
-.bubble-3::before{
+.bubble-3::before {
   @include bubble-transform();
   right: 100%;
   bottom: 100%;
 }
-.bubble-4::before{
+.bubble-4::before {
   @include bubble-transform();
   left: 100%;
   bottom: 100%;
 }
-.bubble-4:hover::before, .bubble-3:hover::before, .bubble-2:hover::before, .bubble-1:hover::before{
-  transition: transform .45s ease-in-out;
-  transform: translate3d(-50%,-50%,0) scale3d(15,15,15);
+.bubble-4:hover::before,
+.bubble-3:hover::before,
+.bubble-2:hover::before,
+.bubble-1:hover::before {
+  transition: transform 0.45s ease-in-out;
+  transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
   transform-origin: center;
 }

@@ -7,6 +7,11 @@
     }"
     @click="handleClickView"
   >
+  ################
+  ################
+  ################
+  ################
+  ################
     <span :class="$style.formProperty"> {{ attrs.curNodePath }}</span>
     <div v-if="editorItem.isEdit" :class="$style.editBar">
       <button
@@ -56,10 +61,10 @@
 
 <script>
   import { SchemaField, globalOptions } from '@/vue3-form-naive'
-  import getDefaultFormState from '@/utils/schema/getDefaultFormState'
+  //import getDefaultFormState from '@/utils/schema/getDefaultFormState'
 
   import emitter from '@/utils/emitter.js'
-  import Nesteder from '@/views/form/components/Nesteder'
+  import Nesteder from '@/views/form/components/Nesteder.vue'
   import { editorItem2SchemaFieldProps } from '@/components/form3/editorData'
 
   export default {

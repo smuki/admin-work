@@ -37,7 +37,7 @@
 
       </ViewComponentWrap>
       {{item.title}}
-
+[{{ViewComponentWrap}}]
     </div>
     <template #footer>
       <slot></slot>
@@ -51,13 +51,13 @@
   import { generateEditorItem } from '@/components/form3/editorData'
 
   // 避免循环依赖导致undefined
-  const ViewComponentWrap = () => import('./ViewComponentWrap.vue')
+  const ViewComponentWrap2 = () => import('./ViewComponentWrap.vue')
 
   export default {
     name: 'Nesteder',
     components: {
       draggable: VueDraggableNext,
-      ViewComponentWrap,
+      ViewComponentWrap:() => import('./ViewComponentWrap.vue'),
     },
     props: {
       dragOptions: {
@@ -82,7 +82,16 @@
         this.computedComponentToolBarStatus()
       },
     },
-    created() {},
+    created() {
+      console.log("....................")
+      console.log("....................")
+      console.log("....................")
+      console.log("....................")
+      console.log("....................")
+      console.log("....................")
+      console.log("....................")
+      console.log(ViewComponentWrap2)
+    },
     methods: {
       showNestedEditor(editorItem) {
         return editorItem.childList && !editorItem.componentPack.viewSchema.format

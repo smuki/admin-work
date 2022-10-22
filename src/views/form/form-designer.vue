@@ -41,7 +41,6 @@
             :form-data="rootFormData"
             :form-props="formProps"
           >
-            [[]....]]...===== ..{{ componentList }}..
             <n-form-item
               v-if="componentList.length > 0 && formFooter.show"
               :style="{
@@ -63,7 +62,7 @@
         </draggable>
       </div>
 
-      <div v-if="false" :class="$style.rightForm">
+      <div :class="$style.rightForm">
         <n-tabs v-model="activeName">
           <n-tab-pane v-if="curEditorItem" tab="组件配置" name="compConfig">
             <VueNaiveForm

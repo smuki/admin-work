@@ -25,7 +25,6 @@
           : {}
       "
     >
-    
       <ViewComponentWrap
         :form-data="formData"
         :editor-item="item"
@@ -37,7 +36,6 @@
 
       </ViewComponentWrap>
       {{item.title}}
-[{{ViewComponentWrap}}]
     </div>
     <template #footer>
       <slot></slot>
@@ -51,7 +49,7 @@
   import { generateEditorItem } from '@/components/form3/editorData'
   import { defineAsyncComponent } from 'vue';
   // 避免循环依赖导致undefined
-  const ViewComponentWrap2 = () => import('./ViewComponentWrap.vue')
+  //const ViewComponentWrap2 = () => import('./ViewComponentWrap.vue')
 
   export default {
     name: 'Nesteder',

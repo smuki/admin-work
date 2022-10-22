@@ -35,7 +35,6 @@
       >
 
       </ViewComponentWrap>
-      {{item.title}}
     </div>
     <template #footer>
       <slot></slot>
@@ -81,14 +80,7 @@
       },
     },
     created() {
-      console.log("....................")
-      console.log("....................")
-      console.log("....................")
-      console.log("....................")
-      console.log("....................")
-      console.log("....................")
-      console.log("....................")
-      console.log(ViewComponentWrap2)
+
     },
     methods: {
       showNestedEditor(editorItem) {

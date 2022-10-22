@@ -3,17 +3,18 @@
  * NumberField 复用StringField
  */
 
-import { h } from 'vue';
-import vueProps from '../props';
-import StringField from '../StringField';
+import { h } from 'vue'
+import vueProps from '../props'
+import StringField from '../StringField'
 
 export default {
-    name: 'NumberField',
-    props: vueProps,
-    setup(props, { attrs }) {
-        return () => h(StringField, {
-            ...props,
-            ...attrs
-        });
-    }
-};
+  name: 'NumberField',
+  props: vueProps,
+  setup(props, { attrs }) {
+    return () =>
+      h(StringField, {
+        ...props,
+        ...attrs,
+      })
+  },
+}

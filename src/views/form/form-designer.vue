@@ -521,7 +521,7 @@
 </script>
 
 <style module lang="postcss">
-  @import 'demo-common/css/variable.css';
+  @import '@/styles/variable.css';
 
   .btns {
     display: flex;

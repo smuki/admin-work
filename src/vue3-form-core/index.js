@@ -29,6 +29,7 @@ export default function createForm(globalOptions = {}) {
     props: vueProps,
     emits: ['update:modelValue', 'change', 'cancel', 'submit', 'validation-failed', 'form-mounted'],
     setup(props, { slots, emit }) {
+      //debugger
       // global components
       const internalInstance = getCurrentInstance()
       if (!Form.installed && globalOptions.WIDGET_MAP.widgetComponents) {
@@ -183,7 +184,51 @@ export default function createForm(globalOptions = {}) {
             ...props.formProps,
           },
         }
+        //debugger
+        console.log("#############################globalOptions.COMPONENT_MAP.form");
+        console.log("#############################globalOptions.COMPONENT_MAP.form");
+        console.log("#############################globalOptions.COMPONENT_MAP.form");
+        console.log("#############################globalOptions.COMPONENT_MAP.form");
+        console.log(globalOptions.COMPONENT_MAP.form);
 
+        console.log("resolveComponent(globalOptions.COMPONENT_MAP.form)");
+        console.log(resolveComponent(globalOptions.COMPONENT_MAP.form));
+
+        console.log({
+          default: () => [h(SchemaField, schemaProps), getDefaultSlot()],
+        });
+console.log( h(
+  resolveComponent(globalOptions.COMPONENT_MAP.form),
+  {
+    class: {
+      genFromComponent: true,
+      formInlineFooter: inlineFooter,
+      formInline: inline,
+      [`genFromComponent_${props.schema.id}Form`]: !!props.schema.id,
+      layoutColumn: !inline,
+      [`layoutColumn-${layoutColumn}`]: !inline,
+    },
+    setFormRef: (form) => {
+      formRef = form
+      internalInstance.ctx.$$uiFormRef = formRef
+
+      emit('form-mounted', form, {
+        formData: rootFormData.value,
+      })
+    },
+    // 阻止form默认submit
+    onSubmit(e) {
+      e.preventDefault()
+    },
+    model: rootFormData,
+    labelPosition,
+    inline,
+    ...uiFormProps,
+  },
+  {
+    default: () => [h(SchemaField, schemaProps), getDefaultSlot()],
+  }
+))
         return h(
           resolveComponent(globalOptions.COMPONENT_MAP.form),
           {

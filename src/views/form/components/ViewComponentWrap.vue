@@ -42,6 +42,7 @@
         @click="$emit('onOperate', { item: editorItem, command: 'remove' })"
       ></button>
     </div>
+    
     <SchemaField v-if="false" v-bind="attrs" />
 
     <Nesteder
@@ -94,13 +95,13 @@
     },
     setup() {
       const aaaStore = useProvideStore()
-      const fnxxxx = async (v) => {
+      const fnEmitter = async (v) => {
         console.log(aaaStore)
         await aaaStore.setValue(v);
       };
 
       return {
-        fnxxxx,
+        fnEmitter,
         abcdef:aaaStore.state
       }
 		},   
@@ -161,7 +162,7 @@
 
       setCurEditorItem(editorItem) {
 
-        this.fnxxxx(editorItem);
+        this.fnEmitter(editorItem);
 
       },
     },

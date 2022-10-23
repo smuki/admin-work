@@ -61,6 +61,7 @@
   import emitter from '@/utils/emitter.js'
   import Nesteder from '@/views/form/components/Nesteder.vue'
   import { editorItem2SchemaFieldProps } from '@/components/form3/editorData'
+  import { useProvideStore } from "@/store/provide/useLoginUser";
 
   export default {
     name: 'ViewComponentWrap',
@@ -91,6 +92,18 @@
         default: null,
       },
     },
+    setup() {
+      const aaaStore = useProvideStore()
+      const fnxxxx = async (v) => {
+        console.log(aaaStore)
+        await aaaStore.setValue(v);
+      };
+
+      return {
+        fnxxxx,
+        abcdef:aaaStore.state
+      }
+		},   
     computed: {
       attrs() {
         return {
@@ -147,9 +160,9 @@
       },
 
       setCurEditorItem(editorItem) {
-        this.dispatch('Editor', 'onSetCurEditorItem', {
-          editorItem,
-        })
+
+        this.fnxxxx(editorItem);
+
       },
     },
   }

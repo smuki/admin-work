@@ -6,6 +6,7 @@
         [$style.closeToolbar]: closeToolbar,
       }"
     >
+    {{info}}
       <div :class="$style.toolBarWrap">
         <div :class="$style.toolsBar">
           {{ closeToolbar }}
@@ -40,6 +41,7 @@
             :drag-options="dragOptions"
             :form-data="rootFormData"
             :form-props="formProps"
+            @SetCurEditorItem="onSetCurEditorItem"
           >
             <n-form-item
               v-if="componentList.length > 0 && formFooter.show"
@@ -63,8 +65,9 @@
       </div>
 
       <div :class="$style.rightForm">
+        
         <n-tabs v-model="activeName">
-          <n-tab-pane v-if="curEditorItem" tab="组件配置" name="compConfig">
+          <n-tab-pane v-if="curEditorItem && curEditorItem.componentPack" tab="组件配置" name="compConfig">
             <VueNaiveForm
               v-model="curEditorItem.componentValue"
               :class="$style.configForm"
@@ -99,11 +102,13 @@
 </template>
 
 <script>
-  import { defineAsyncComponent, getCurrentInstance, h } from 'vue'
+  import { defineAsyncComponent, getCurrentInstance,watch, ref, h } from 'vue'
   import { getSpecification } from '@/api/url'
   import { post } from '@/api/http'
   import EditorToolBar from './components/EditorToolBar.vue'
   import Nesteder from '@/views/form/components/Nesteder.vue'
+  import useCacheStore from '@/store/modules/cache'
+  import { useProvideStore } from "@/store/provide/useLoginUser";
 
   import configTools from './config/tools'
   import { VueDraggableNext } from 'vue-draggable-next'
@@ -185,13 +190,53 @@
       VueNaiveForm,
       //EditorHeader
     },
+    setup() {
+      const curEditorItem = ref({}); // 选中的formItem
+      const activeName = ref("");
+
+      const cacheStore = useCacheStore()
+      const aaaStore = useProvideStore()
+      const fnxxxx = async (v) => {
+        console.log(aaaStore)
+        await aaaStore.setValue(v);
+      };
+
+      watch(aaaStore.state, (newValue, oldValue) => {
+      // v1 是改变以后的新值
+      // v2 是改变前的值
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("// v2 是改变前的值")
+      console.log("newValue")
+      console.log(newValue)
+      console.log("oldValue")
+      console.log(oldValue)
+        if (newValue){
+      activeName.value = newValue ? 'compConfig' : 'formConfig';
+      curEditorItem.value=newValue.value;
+        }
+      console.log("// v2 activeName="+activeName)
+
+      // 要点：侦听普通函数可以获取修改前后的值，被侦听的数据必须是响应式的
+    })
+
+      return {
+        cacheStore,
+        fnxxxx,
+        curEditorItem,
+        activeName,
+        abcdef:aaaStore.state
+      }
+		},    
     data() {
       return {
         closeToolbar: false,
         configTools,
         componentList: [],
-        activeName: 'formConfig',
-        curEditorItem: null, // 选中的formItem
         formConfig: {},
 
         //typeItems,
@@ -327,11 +372,30 @@
       $route() {
         this.initData()
       },
+      abcdef(o,n){
+        console.log("-------------------")
+        console.log("-------------------")
+        console.log("-------------------")
+        console.log("-------------------")
+        console.log("-------------------")
+        console.log("-------------------")
+
+        console.log(o,n)
+      }
     },
     created() {
       this.initData()
+       // this.$on('onSetCurEditorItem', ({ editorItem }) => {
+         //   this.activeName = editorItem ? 'compConfig' : 'formConfig';
+        //    this.curEditorItem = editorItem;
+        //});
     },
     methods: {
+      onSetCurEditorItem(editorItem) {
+        debugger
+         this.activeName = editorItem ? 'compConfig' : 'formConfig';
+        this.curEditorItem = editorItem;
+      },
       getDefaultSchemaMap() {
         return {
           //schema: {},

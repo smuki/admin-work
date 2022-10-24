@@ -62,7 +62,7 @@
   import emitter from '@/utils/emitter.js'
   import Nesteder from '@/views/form/components/Nesteder.vue'
   import { editorItem2SchemaFieldProps } from '@/components/form3/editorData'
-  import { useProvideStore } from "@/store/provide/useLoginUser";
+  import { useProvideStore } from "@/store/provide/useProvideStore";
 
   export default {
     name: 'ViewComponentWrap',

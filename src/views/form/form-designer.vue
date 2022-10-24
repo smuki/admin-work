@@ -108,7 +108,7 @@
   import EditorToolBar from './components/EditorToolBar.vue'
   import Nesteder from '@/views/form/components/Nesteder.vue'
   import useCacheStore from '@/store/modules/cache'
-  import { useProvideStore } from "@/store/provide/useLoginUser";
+  import { useProvideStore } from "@/store/provide/useProvideStore";
 
   import configTools from './config/tools'
   import { VueDraggableNext } from 'vue-draggable-next'

@@ -1,4 +1,4 @@
-import {provideStore as provideLoginUserStore} from './useLoginUser';
+import {provideStore as provideLoginUserStore} from './useProvideStore';
 
 
 export default function provideStore(app){

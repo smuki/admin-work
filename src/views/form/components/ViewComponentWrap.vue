@@ -7,7 +7,7 @@
     }"
     @click="handleClickView"
   >
-    <span :class="$style.formProperty"> {{ attrs.curNodePath }}</span>
+    <span :class="$style.formProperty"> name: {{ attrs.curNodePath }}</span>
     <div v-if="editorItem.isEdit" :class="$style.editBar">
       <button
         :disabled="editorItem.toolBar.moveUpDisabled"
@@ -196,9 +196,9 @@
     }
 
     &.active {
-      border: 1px dashed transparent;
+      border: 1px var(--color-primary) dashed transparent;
       &:after {
-        box-shadow: 0 0 2px 1px var(--color-primary) inset;
+        box-shadow: 0 0 0px 0px var(--color-primary) inset;
       }
     }
   }
